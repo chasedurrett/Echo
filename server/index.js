@@ -8,6 +8,7 @@ const app = express();
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
 const authCtrl = require('./authController');
+const userCtrl = require('./userController');
 
 app.use(express.json());
 app.use(cors());
@@ -29,9 +30,9 @@ app.post('/auth/login', authCtrl.login);
 app.delete('/auth/logout', authCtrl.logout);
 app.delete('/auth/users/:userId', authCtrl.delete);
 
- // User Endpoints 
-//  - app.get('/api/users')
-//  - app.get('/api/users/:userId')
+// User Endpoints 
+app.get('/api/users', userCtrl.getAllUsers);
+app.get('/api/users/:userId', userCtrl.getUser);
 //  - app.get('/api/users/:userId/followers/:followerId')
 //  - app.get('/api/users/:userId/followers/:followerId')
 //  - app.post('/api/users/:userId/followers', body)

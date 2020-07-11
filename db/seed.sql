@@ -7,3 +7,9 @@ create table users (
   cake_day timestamp,
   password text
 )
+
+create table followers (
+  id serial primary key,
+  user_id int references users(user_id),
+  following int references users(user_id)
+)
