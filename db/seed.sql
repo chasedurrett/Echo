@@ -4,6 +4,6 @@ create table users (
   user_email varchar(60),
   user_img text,
   user_banner text,
-  cake_day timestamp default now(),
+  cake_day timestamp,
   password text
 )

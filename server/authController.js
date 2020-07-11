@@ -1,4 +1,6 @@
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const moment = require('moment-timezone');
+moment.tz.setDefault('Etc/UTC');
 
 module.exports = {
 
@@ -15,7 +17,9 @@ module.exports = {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt)
 
-        const newUser = await db.register(user_email, username, hash)
+        const unix_date = moment().unix()
+
+        const newUser = await db.register(user_email, username, hash, unix_date)
 
         req.session.user = {
             user_id: newUser[0].user_id,
@@ -59,4 +63,21 @@ module.exports = {
         req.session.destroy();
         res.sendStatus(200);
     },
+
+    delete: async (req, res) => {
+        const db = req.app.get('db');
+        const {userId} = req.params;
+
+        const deleteUser = await db.delete_user(userId);
+
+        res.status(200).send('successful deleted user')
+    },
+
+    currentUser: (req, res) => {
+        if (req.session.user) {
+          res.status(200).send(req.session.user)
+        } else {
+          res.sendStatus(404)
+        }
+    }
 }

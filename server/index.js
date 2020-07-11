@@ -21,12 +21,22 @@ app.use(
     })
 )
 
-// auth endpoints
-// app.get('/auth/users/:userId', )
+// Auth Endpoints
+// app.get('/auth/users/:userId')
+app.get('/auth/users/current', authCtrl.currentUser);
 app.post('/auth/register', authCtrl.register);
 app.post('/auth/login', authCtrl.login);
 app.delete('/auth/logout', authCtrl.logout);
-// app.delete('/auth/users/:userId')
+app.delete('/auth/users/:userId', authCtrl.delete);
+
+ // User Endpoints 
+//  - app.get('/api/users')
+//  - app.get('/api/users/:userId')
+//  - app.get('/api/users/:userId/followers/:followerId')
+//  - app.get('/api/users/:userId/followers/:followerId')
+//  - app.post('/api/users/:userId/followers', body)
+//  - app.put('/api/users/:userId', body)
+//  - app.delete('/api/users/:userId/followers/:followerId')
 
 
 massive({
