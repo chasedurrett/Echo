@@ -35,9 +35,9 @@ app.get('/api/users', userCtrl.getAllUsers);
 app.get('/api/users/:userId', userCtrl.getUser);
 //  - app.get('/api/users/:userId/followers/:followerId')
 //  - app.get('/api/users/:userId/followers/:followerId')
- app.post('/api/users/:userId/followers', userCtrl.addFollower);
+// - app.post('/api/users/:userId/followers', userCtrl.addFollower);
 //  - app.put('/api/users/:userId', body)
-//  - app.delete('/api/users/:userId/followers/:followerId')
+// - app.delete('/api/users/:userId/followers/:followerId')
 
 
 massive({
