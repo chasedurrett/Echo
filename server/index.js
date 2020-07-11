@@ -5,7 +5,9 @@ const session = require('express-session');
 const cors = require('cors');
 
 const app = express();
-const {SERVER_PORT, SESSION_SECRET} = process.env;
+const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
+
+const authCtrl = require('./authController');
 
 app.use(express.json());
 app.use(cors());
@@ -20,18 +22,21 @@ app.use(
 )
 
 // auth endpoints
+// app.get('/auth/users/:userId', )
+app.post('/auth/register', authCtrl.register);
+// app.post('/auth/login', body)
+// app.delete('/auth/logout')
+// app.delete('/auth/users/:userId')
 
 
-
-
-// massive({
-//     connectionString: CONNECTION_STRING,
-//     ssl: {rejectUnauthorized: false}
-// })
-// .then(db => {
-//     app.set('db', db)
-//     console.log('db connected')
-// })
-// .catch(err => console.log(err))
+massive({
+    connectionString: CONNECTION_STRING,
+    ssl: {rejectUnauthorized: false}
+})
+.then(db => {
+    app.set('db', db)
+    console.log('db connected')
+})
+.catch(err => console.log(err))
 
 app.listen(SERVER_PORT, console.log(`listening on ${SERVER_PORT}`));
