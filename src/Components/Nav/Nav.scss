@@ -11,11 +11,49 @@ nav.Nav {
     position: fixed;
     align-items: center;
     border-bottom: 2px solid black;
-    padding: 0 20px;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.no-user-toolbar{
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.logo-search-cont{
+    width: 70%;
 }
 
 .logo-container{
     padding: 8px 8px 8px 0;
+    margin-left: 4px;
+    width: 20%;
+}
+
+.search-bar-cont{
+    width: 80%;
+}
+
+.search-bar-cont > input {
+    border-radius: $btn-border-radius;
+    background: #f6f7f8;
+    height: 36px;
+    outline: none;
+    padding: 0 16px 0 40px;
+    border: 1px solid black;
+}
+
+.search-bar-cont > input:hover {
+    border: 1px solid $reddit-blue;
+}
+
+
+.login-signup-btns-cont{
+    width: 30%;
 }
 
 .btn-style{
@@ -25,7 +63,6 @@ nav.Nav {
     font-weight: bold;
     text-decoration: none;
     line-height: 24px;
-    margin: 0 2px;
 }
 
 .btn-style:hover{
@@ -43,28 +80,10 @@ nav.Nav {
     background: $reddit-blue;
     color: white;
     border: none;
+    margin-right: 4px;
 }
 
-.flex-row{
-    display: flex;
-    flex-direction: row;
-}
 
-.search-bar-cont > input {
-    border-radius: $btn-border-radius;
-    background: #f6f7f8;
-    height: 36px;
-    outline: none;
-    padding: 0 16px 0 40px;
-    border: 1px solid black;
-}
 
-.search-bar-cont > input:hover {
-    border: 1px solid $reddit-blue;
-}
 
-.no-user-toolbar{
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
+
