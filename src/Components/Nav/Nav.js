@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Nav.scss';
+import FiSearch from 'react-icons/fi';
 
 function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
     // const [ subforumMenuOpen, setSubforumMenuOpen ] = useState(false)
@@ -62,7 +63,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
                     </div>
 
                     <div className='search-bar-cont'>
-                        <input type='search' placeholder="Search"></input>
+                        <input type='search' placeholder='Search'></input>
                     </div>
 
                 </div>

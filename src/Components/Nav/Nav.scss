@@ -14,12 +14,18 @@ nav.Nav {
     padding: 0 20px;
 }
 
+.logo-container{
+    padding: 8px 8px 8px 0;
+}
+
 .btn-style{
     border-radius: $btn-border-radius;
     padding: 3px 16px;
     outline: none;
     font-weight: bold;
     text-decoration: none;
+    line-height: 24px;
+    margin: 0 2px;
 }
 
 .btn-style:hover{
@@ -55,4 +61,10 @@ nav.Nav {
 
 .search-bar-cont > input:hover {
     border: 1px solid $reddit-blue;
+}
+
+.no-user-toolbar{
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
