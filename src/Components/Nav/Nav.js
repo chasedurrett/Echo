@@ -17,7 +17,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
 
             <div className="user-nav">
 
-                <div className="logo-sub-search-cont">
+                <div className="logo-sub-search-cont flex-row">
 
                     <div className="logo-container">
                         <img src={logo} alt=""/>
@@ -25,16 +25,16 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
                     </div>
 
                     <div className="subforum-menu-cont">
-                
+
                     </div>
 
-                    <div className="user-search-cont">
-
+                    <div className="search-bar-cont">
+                        <input type='search'></input>
                     </div>
 
                 </div>
                 
-                <div className="user-toolbar">
+                <div className="user-toolbar flex-row">
 
                     <div className="icons-cont">
 
@@ -52,20 +52,24 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
 
                 :
 
-            <div className="no-user-toolbar">
+            <div className="no-user-toolbar flex-row">
 
-                <div className="logo-search-cont">
+                <div className="logo-search-cont flex-row">
 
                     <div className="logo-container">
                         <img src={logo} alt=""/>
                         <span>Echo</span>
                     </div>
 
+                    <div className='search-bar-cont'>
+                        <input type='search'></input>
+                    </div>
+
                 </div>
 
-                <div className="login-signup-btns-cont">
-                    <button className='login-btn'>Log In</button>
-                    <button>Signup</button>
+                <div className="login-signup-btns-cont flex-row">
+                    <button className='login-btn btn-style'>LOG IN</button>
+                    <button className='signup-btn btn-style'>SIGN UP</button>
                 </div>
 
             </div>

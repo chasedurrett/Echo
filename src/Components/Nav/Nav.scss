@@ -13,20 +13,31 @@ nav.Nav {
     border-bottom: 2px solid black;
 }
 
-.login-btn{
+.btn-style{
     border-radius: $btn-border-radius;
-    background: none;
+    padding: 3px 16px;
     outline: none;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.login-btn{
+    background: none;
     border: 1px solid $reddit-blue;
-    padding: 3px 16px
+    color: $reddit-blue;
 }
 
-.no-user-toolbar {
+.signup-btn{
+    background: $reddit-blue;
+    color: white;
+    border: none;
+}
+
+.flex-row{
     display: flex;
     flex-direction: row;
 }
 
-.user-toolbar {
-    display: flex;
-    flex-direction: row;
+.login-signup-btns-cont{
+    
 }
