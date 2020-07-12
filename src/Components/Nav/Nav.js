@@ -21,7 +21,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
 
                     <div className="logo-container">
                         <img src={logo} alt=""/>
-                        <h1>Echo</h1>
+                        Echo
                     </div>
 
                     <div className="subforum-menu-cont">
@@ -58,7 +58,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
 
                     <div className="logo-container">
                         <img src={logo} alt=""/>
-                        <h1>Echo</h1>
+                        <span>Echo</span>
                     </div>
 
                 </div>
