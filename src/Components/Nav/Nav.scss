@@ -11,6 +11,7 @@ nav.Nav {
     position: fixed;
     align-items: center;
     border-bottom: 2px solid black;
+    padding: 0 20px;
 }
 
 .btn-style{
@@ -19,6 +20,11 @@ nav.Nav {
     outline: none;
     font-weight: bold;
     text-decoration: none;
+}
+
+.btn-style:hover{
+    cursor: pointer;
+    opacity: .6
 }
 
 .login-btn{
@@ -38,19 +44,15 @@ nav.Nav {
     flex-direction: row;
 }
 
-.login-signup-btns-cont{
-    
-}
-
 .search-bar-cont > input {
     border-radius: $btn-border-radius;
     background: #f6f7f8;
     height: 36px;
     outline: none;
     padding: 0 16px 0 40px;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 .search-bar-cont > input:hover {
-    border: 2px solid $reddit-blue;
+    border: 1px solid $reddit-blue;
 }
