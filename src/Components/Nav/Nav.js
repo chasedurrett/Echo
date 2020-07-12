@@ -58,6 +58,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
 
                     <div className="logo-container">
                         <img src={logo} alt=""/>
+                        <h1>Echo</h1>
                     </div>
 
                 </div>

@@ -10,12 +10,14 @@ nav.Nav {
     left: 0;
     position: fixed;
     align-items: center;
-    background-color: blue;
+    border-bottom: 2px solid black;
 }
 
 .login-btn{
     border-radius: $btn-border-radius;
     background: none;
     outline: none;
-    border: 2px solid pink;
+    border: 1px solid $reddit-blue;
+    padding: 3px 16px
 }
+
