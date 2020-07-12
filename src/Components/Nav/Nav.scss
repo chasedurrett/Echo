@@ -17,8 +17,8 @@ nav.Nav {
     border-radius: $btn-border-radius;
     padding: 3px 16px;
     outline: none;
-    font-family: sans-serif;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .login-btn{
@@ -40,4 +40,17 @@ nav.Nav {
 
 .login-signup-btns-cont{
     
+}
+
+.search-bar-cont > input {
+    border-radius: $btn-border-radius;
+    background: #f6f7f8;
+    height: 36px;
+    outline: none;
+    padding: 0 16px 0 40px;
+    border: 2px solid black;
+}
+
+.search-bar-cont > input:hover {
+    border: 2px solid $reddit-blue;
 }

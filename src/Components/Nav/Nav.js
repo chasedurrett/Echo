@@ -62,7 +62,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
                     </div>
 
                     <div className='search-bar-cont'>
-                        <input type='search'></input>
+                        <input type='search' placeholder="Search"></input>
                     </div>
 
                 </div>
