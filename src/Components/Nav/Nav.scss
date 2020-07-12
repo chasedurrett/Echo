@@ -31,11 +31,11 @@ nav.Nav {
 .logo-container{
     padding: 8px 8px 8px 0;
     margin-left: 4px;
-    width: 20%;
+    width: 10%;
 }
 
 .search-bar-cont{
-    width: 80%;
+    width: 85%;
 }
 
 .search-bar-cont > input {
@@ -45,6 +45,7 @@ nav.Nav {
     outline: none;
     padding: 0 16px 0 40px;
     border: 1px solid black;
+    width: 100%;
 }
 
 .search-bar-cont > input:hover {
