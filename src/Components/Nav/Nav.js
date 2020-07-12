@@ -21,6 +21,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
 
                     <div className="logo-container">
                         <img src={logo} alt=""/>
+                        <h1>Echo</h1>
                     </div>
 
                     <div className="subforum-menu-cont">
@@ -62,7 +63,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
                 </div>
 
                 <div className="login-signup-btns-cont">
-                    <button>Log In</button>
+                    <button className='login-btn'>Log In</button>
                     <button>Signup</button>
                 </div>
 
