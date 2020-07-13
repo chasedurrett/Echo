@@ -5,9 +5,10 @@ module.exports = {
     getAllSubforumPosts: async (req, res) => {
         const db = req.app.get('db')
 
+        // const {user_id} = req.session.user 
         const {subforumId} = req.params
 
-        let posts = await db.post.get_all_posts(subforumId)
+        let posts = await db.post.get_all_subforum_posts(subforumId)
 
         res.status(200).send(posts)
     },
@@ -54,5 +55,13 @@ module.exports = {
         db.post.delete_post(postId)
 
         res.sendStatus(200)
+    },
+
+    getAllPostsWithUser: async (req, res) => {
+        const db = req.app.get('db')
+
+        // const {user_id} = req.session.user
+
+        let posts =  await db.post.get_all_posts_with_user(1)
     }
 }
