@@ -1,6 +1,4 @@
 const bcrypt = require('bcryptjs');
-const moment = require('moment-timezone');
-moment.tz.setDefault('Etc/UTC');
 
 module.exports = {
 
@@ -17,9 +15,7 @@ module.exports = {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt)
 
-        const unix_date = moment().unix()
-
-        const newUser = await db.register(user_email, username, hash, unix_date)
+        const newUser = await db.register(user_email, username, hash)
 
         req.session.user = {
             user_id: newUser[0].user_id,

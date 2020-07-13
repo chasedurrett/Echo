@@ -24,6 +24,11 @@ app.use(
 
 // Auth Endpoints
 // app.get('/auth/users/:userId')
+// i changed this first get to 
+// app.get('/auth/users/current') 
+// because i thought this was to get the current user of who is logged in... 
+// if that is the case then we just pull the user off the session 
+// and do not need a userId...  lmk and we can do whatever you guys want!
 app.get('/auth/users/current', authCtrl.currentUser);
 app.post('/auth/register', authCtrl.register);
 app.post('/auth/login', authCtrl.login);
