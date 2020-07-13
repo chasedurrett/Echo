@@ -52,9 +52,9 @@ nav.Nav {
     border: 1px solid $reddit-blue;
 }
 
-
 .login-signup-btns-cont{
     width: 30%;
+    justify-content: space-between;
 }
 
 .btn-style{
@@ -75,6 +75,7 @@ nav.Nav {
     background: none;
     border: 1px solid $reddit-blue;
     color: $reddit-blue;
+    width: 35%;
 }
 
 .signup-btn{
@@ -82,6 +83,7 @@ nav.Nav {
     color: white;
     border: none;
     margin-right: 4px;
+    width: 35%;
 }
 
 
