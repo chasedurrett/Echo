@@ -56,3 +56,9 @@ create table comments (
     comment_time text,
     vote_tracker int
 );
+
+insert into post_type(
+    post_type
+) values (
+    'text'
+)

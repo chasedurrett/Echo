@@ -10,6 +10,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 const authCtrl = require('./authController');
 const userCtrl = require('./userController');
 const subforumCtrl = require('./subforumController')
+const postCtrl = require('./postController');
 
 app.use(express.json());
 app.use(cors());
@@ -38,6 +39,12 @@ app.get('/api/users/:userId', userCtrl.getUser);
 // - app.post('/api/users/:userId/followers', userCtrl.addFollower);
 //  - app.put('/api/users/:userId', body)
 // - app.delete('/api/users/:userId/followers/:followerId')
+
+// Post Endpoints
+app.get('/api/subforum/:subforumId/posts', postCtrl.getAllSubforumPosts)
+//     - app.get('/api/subforum/:subforumId/posts/:postId')
+//     - app.put('/api/subforum/:subforumId/posts/:postId', body)
+//     - app.delete('/api/subforum/:subforumId/posts/:postId')
 
 
 // Subforum Endpoints 
