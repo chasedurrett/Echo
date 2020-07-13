@@ -1,1 +1,0 @@
-select * from posts where subforum_id = $1
