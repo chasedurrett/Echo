@@ -49,11 +49,11 @@ app.get('/api/subforum/:subforumId/posts', postCtrl.getAllSubforumPosts)
 
 // Subforum Endpoints 
 app.get('/api/subforums', subforumCtrl.getSubforums)
-app.get('/api/subforums/:subforumId')
 app.post('/api/subforums/:subforumId/posts', )
 app.post('/api/subforums/:subforumId/posts/:postId/comments', )
 app.post('/api/subforums', subforumCtrl.createSubforum)
-app.post('/api/subforums/:subforumId/users', )
+app.post('/api/subforums/:subforumId/users', subforumCtrl.addSubforumUser)
+app.delete('/api/subforums/:subforumId/users/:userId', subforumCtrl.removeSubforumUser)
 app.put('/api/subforums/:subforumId/users/:userId', subforumCtrl.editSubforum)
 app.delete('/api/subforums/:subforumId/users/:userId', subforumCtrl.deleteSubforum)
 
