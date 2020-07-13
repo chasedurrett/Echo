@@ -8,7 +8,7 @@ module.exports = {
         console.log(req.body);
         const {user_email, username, password} = req.body;
 
-        const existingUser = await db.check_user(username)
+        const existingUser = await db.auth.check_user(username)
         if(existingUser[0]){
             return res.status(409).send('user already exists')
         }
