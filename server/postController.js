@@ -7,6 +7,6 @@ module.exports = {
 
         const {subforumId} = req.params
 
-        let post = db.
+        //let post = db.
     }
 }
