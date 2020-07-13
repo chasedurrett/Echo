@@ -37,7 +37,7 @@ module.exports = {
         const {username, password} = req.body;
 
         //check to see if user exists
-        const user = await db.check_user(username)
+        const user = await db.auth.check_user(username)
         if(!username[0]){
             return res.status(404).send('user does not exist')
         }
@@ -67,7 +67,7 @@ module.exports = {
         const db = req.app.get('db');
         const {userId} = req.params;
 
-        const deleteUser = await db.delete_user(userId);
+        const deleteUser = await db.auth.delete_user(userId);
 
         res.status(200).send('successful deleted user')
     },

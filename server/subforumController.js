@@ -3,7 +3,7 @@ const moment = require("moment");
 module.exports = {
   createSubforum: async (req, res) => {
     const db = req.app.get("db"),
-      { id } = req.session.user,
+      { user_id } = req.session.user,
       {
         subforum_name,
         subforum_img,
@@ -11,25 +11,70 @@ module.exports = {
         rules_section,
         description,
       } = req.body,
-      cake_day = moment().format('LL');
-      subforum = await db.create_subforum(
-        subforum_name,
-        id,
-        subforum_img,
-        subforum_banner,
-        rules_section,
-        description,
-        cake_day
-      );
+      cake_day = moment().format("LL");
+    subforum = await db.subforum.create_subforum(
+      subforum_name,
+      user_id,
+      subforum_img,
+      subforum_banner,
+      rules_section,
+      description,
+      cake_day
+    );
+    if (!subforum) {
+      return res.status(404).send(`Something went wrong, enter info again!`);
+    }
+    return res.status(200).send(subforum);
   },
   getSubforums: async (req, res) => {
     const db = req.app.get("db");
-    const subforums = await db.get_subforums()
+    const subforums = await db.subforum.get_subforums();
     if (!subforums) {
       return res
         .status(500)
         .send(`Couldn't get subforums, we're working on that!`);
     }
     return res.status(200).send(subforums);
+  },
+  deleteSubforum: async (req, res) => {
+    const db = req.app.get("db");
+    const { subforumId, userId } = req.params;
+    const { user_id } = req.session.user;
+    const deleteSubforum = await db.subforum.delete_subforum(subforumId);
+
+    if (user_id === userId) {
+      return res.sendStatus(200).send(deleteSubforum);
+    }
+    return res.sendStatus(200);
+  },
+  editSubforum: async (req, res) => {
+    const db = req.app.get("db");
+    const { subforumId, userId } = req.params;
+    const { user_id } = req.session.user;
+    const {
+      subforum_name,
+      subforum_img,
+      subforum_banner,
+      rules_section,
+      description,
+    } = req.body;
+    const editSubforum = await db.subforum.edit_subforum(
+      subforum_name,
+      user_id,
+      subforum_img,
+      subforum_banner,
+      rules_section,
+      description,
+      subforumId
+    );
+    if (user_id === userId) {
+        return res.sendStatus(200).send(editSubforum);
+    }
+    if (!editSubforum) {
+      return res
+        .status(500)
+        .send(`Unable to edit subforum, we're fixing that!`);
+    }
+    res.sendStatus(200);
   },
 };

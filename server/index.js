@@ -56,8 +56,8 @@ app.post('/api/subforums/:subforumId/posts', )
 app.post('/api/subforums/:subforumId/posts/:postId/comments', )
 app.post('/api/subforums', subforumCtrl.createSubforum)
 app.post('/api/subforums/:subforumId/users', )
-app.put('/api/subforums/:subforumId', )
-app.delete('/api/subforums/:subforumId/')
+app.put('/api/subforums/:subforumId/users/:userId', subforumCtrl.editSubforum)
+app.delete('/api/subforums/:subforumId/users/:userId', subforumCtrl.deleteSubforum)
 
 massive({
     connectionString: CONNECTION_STRING,
