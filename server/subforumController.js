@@ -68,7 +68,7 @@ module.exports = {
       subforumId
     );
     if (user_id === userId) {
-        return res.sendStatus(200).send(editSubforum);
+      return res.sendStatus(200).send(editSubforum);
     }
     if (!editSubforum) {
       return res
@@ -76,5 +76,31 @@ module.exports = {
         .send(`Unable to edit subforum, we're fixing that!`);
     }
     res.sendStatus(200);
+  },
+  addSubforumUser: async (req, res) => {
+    const db = req.app.get("db");
+    const { subforumId } = req.params;
+    const { user_id } = req.session.user;
+    const newUser = db.subforum.add_subforum_user(user_id, subforumId);
+
+    if (!newUser) {
+      return res.status(500).send(`You couldn't join, try again later!`);
+    }
+
+    return res.status(200).send(newUser);
+  },
+  removeSubforumUser: async (req, res) => {
+    const db = req.app.get("db");
+    const { subforumId, userId } = req.params;
+    const { user_id } = req.session.user;
+    const removeUser = db.subforum.remove_subforum_user(user_id, subforumId);
+
+    if (user_id === userId) {
+      return res.sendStatus(200).send(removeUser);
+    }
+    if (!removeUser) {
+      return res.status(500).send(`Unable to leave subforum, try again later!`);
+    }
+    return res.sendStatus(200);
   },
 };
