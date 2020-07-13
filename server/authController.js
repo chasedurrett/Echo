@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const moment = require('moment');
 
 module.exports = {
 
@@ -15,7 +16,9 @@ module.exports = {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt)
 
-        const newUser = await db.register(user_email, username, hash)
+        const cake_day = moment().format('LL')
+
+        const newUser = await db.register(user_email, username, hash, cake_day)
 
         req.session.user = {
             user_id: newUser[0].user_id,
