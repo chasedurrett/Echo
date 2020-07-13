@@ -24,7 +24,7 @@ module.exports = {
             user_id: newUser[0].user_id,
             user_email: newUser[0].user_email,
             username: newUser[0].username,
-            user_img: newUser[0].user_img,
+            user_image: newUser[0].user_image,
             user_banner: newUser[0].user_banner,
             cake_day: newUser[0].cake_day
         }
@@ -48,7 +48,7 @@ module.exports = {
                 user_id: user[0].user_id,
                 user_email: user[0].user_email,
                 username: user[0].username,
-                user_img: user[0].user_img,
+                user_image: user[0].user_img,
                 user_banner: user[0].user_banner,
                 cake_day: user[0].cake_day
             }
