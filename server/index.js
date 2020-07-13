@@ -42,10 +42,12 @@ app.get('/api/users/:userId', userCtrl.getUser);
 
 // Post Endpoints
 app.get('/api/subforum/:subforumId/posts', postCtrl.getAllSubforumPosts)
-//     - app.get('/api/subforum/:subforumId/posts/:postId')
-//     - app.put('/api/subforum/:subforumId/posts/:postId', body)
-//     - app.delete('/api/subforum/:subforumId/posts/:postId')
+app.post('/api/subforum/:subforumId/post', postCtrl.createSubforumPost)
+app.get('/api/subforum/:subforumId/posts/:postId', postCtrl.getSingleSubforumPost)
+app.put('/api/subforum/:subforumId/posts/:postId', postCtrl.updateSubforumPost)
+app.delete('/api/subforum/:subforumId/posts/:postId', postCtrl.deleteSubforumPost)
 
+//Comment Endpoints
 
 // Subforum Endpoints 
 app.get('/api/subforums', subforumCtrl.getSubforums)
