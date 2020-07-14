@@ -1,9 +1,7 @@
 update users 
 set 
-    username = $2,
-    user_email = $3,
-    user_image = $4,
-    user_banner = $5
+    user_image = $2,
+    user_banner = $3
 where 
     user_id = $1
 returning *;

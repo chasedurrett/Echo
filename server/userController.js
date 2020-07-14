@@ -20,11 +20,9 @@ module.exports = {
     const db = req.app.get("db");
     const { userId } = req.params;
     const { user_id } = req.session.user;
-    const { username, user_email, user_image, user_banner } = req.body;
+    const { user_image, user_banner } = req.body;
     const updatedUser = await db.user.update_user(
       userId,
-      username,
-      user_email,
       user_image,
       user_banner
     );
