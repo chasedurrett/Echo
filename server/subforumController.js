@@ -11,8 +11,8 @@ module.exports = {
         rules_section,
         description,
       } = req.body,
-      cake_day = moment().format("LL");
-    subforum = await db.subforum.create_subforum(
+      cake_day = moment().format("LL"),
+      subforum = await db.subforum.create_subforum(
       subforum_name,
       user_id,
       subforum_img,

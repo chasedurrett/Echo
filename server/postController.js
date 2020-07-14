@@ -82,4 +82,62 @@ module.exports = {
     let posts = await db.post.get_all_posts_with_user(1);
     res.status(200).send(posts);
   },
+
+  upvotePost: async (req, res) => {
+    const db = req.app.get('db');
+
+    if(!req.session.user){
+      res.status(500).send(`Please log in to vote!`)
+    }
+
+    const { postId } = req.params;
+    let upvote = await db.post.upvote_post(postId);
+
+    if(req.session.user){
+      res.status(200).send(upvote)
+    }
+  },
+  downvotePost: async (req, res) => {
+    const db = req.app.get('db');
+
+    if(!req.session.user){
+      res.status(500).send(`Please log in to vote!`)
+    }
+
+    const { postId } = req.params;
+    let downvote = await db.post.downvote_post(postId);
+
+    if(req.session.user){
+      res.status(200).send(downvote)
+    }
+  },
+
+  upvoteComment: async (req, res) => {
+    const db = req.app.get('db');
+
+    if(!req.session.user){
+      res.status(500).send(`Please log in to vote!`)
+    }
+
+    const { commentId } = req.params;
+    let upvote = await db.post.upvote_comment(commentId);
+
+    if(req.session.user){
+      res.status(200).send(upvote)
+    }
+  },
+  downvoteComment: async (req, res) => {
+    const db = req.app.get('db');
+
+    if(!req.session.user){
+      res.status(500).send(`Please log in to vote!`)
+    }
+
+    const { commentId } = req.params;
+    let downvote = await db.post.downvote_comment(commentId);
+
+    if(req.session.user){
+      res.status(200).send(downvote)
+    }
+  }
 };
