@@ -74,3 +74,17 @@
 .username-signup-text{
     font-size: 16px;
 }
+
+.back-btn{
+    outline: none;
+    background: none;
+    border: none;
+    font-weight: bolder;
+    color: black;
+    font-size: 14px;
+    margin-top: 40px;
+    width: 50px;
+    border-radius: $reddit-border-radius;
+    font-family: $reddit-font;
+    cursor: pointer;
+}
