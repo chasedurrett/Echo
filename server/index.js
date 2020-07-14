@@ -63,7 +63,7 @@ app.put("/api/downvote/posts/:postId", postCtrl.downvotePost);
 app.put("/api/upvote/comments/:commentId", postCtrl.upvoteComment);
 app.put("/api/downvote/comments/:commentId", postCtrl.downvoteComment);
 app.get("/api/posts/:postId/comments", postCtrl.getComments);
-app.post("/api/posts/:postId/comments", postCtrl.createComment);;
+app.post("/api/posts/:postId/comments", postCtrl.createComment);
 app.delete("/api/posts/:postId/comments/:commentId", postCtrl.deleteComment);
 
 // Subforum Endpoints

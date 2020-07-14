@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Login from '../Login/Login';
+import Signup from '../Signup/Signup';
 
 
 
@@ -17,6 +18,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
     // const [ userMenuOpen, setUserMenuOpen ] = useState(false)
     const [ loggedIn, setLoggedIn ] = useState(false)
     const [ loginFormOpen, setLoginFormOpen] = useState(false)
+    const [ signupFormOpen, setSignupFormOpen] = useState(false)
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleClick = (event) => {
@@ -29,6 +31,9 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
 
     const handleLoginFormClose = () => {
         setLoginFormOpen(false)
+    }
+    const handleSignupFormClose = () => {
+        setSignupFormOpen(false)
     }
 
     return (
@@ -95,6 +100,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
                         className='login-btn btn-style'>LOG IN
                     </button>
                     <button 
+                        onClick={() => {setSignupFormOpen(true)}}
                         className='signup-btn btn-style'>SIGN UP
                     </button>
                     <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -120,6 +126,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
         </nav>
 
             {loginFormOpen ? <Login handleLoginFormClose={handleLoginFormClose}/> : ''}
+            {signupFormOpen ? <Signup handleSignupFormClose={handleSignupFormClose}/> : ''}
         </div>
     )
 }
