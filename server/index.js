@@ -56,7 +56,7 @@ app.delete(
   "/api/subforums/:subforumId/posts/:postId",
   postCtrl.deleteSubforumPost
 );
-app.put("/api/upvote/posts/:postId", postCtrl.upvotePost);
+app.post("/api/upvote/posts/:postId", postCtrl.upvotePost);
 app.put("/api/downvote/posts/:postId", postCtrl.downvotePost);
 
 //Comment Endpoints
