@@ -1,0 +1,76 @@
+@import '../../../scss/variables';
+
+.signup-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    z-index: 10;
+}
+
+.signup-form-container{
+    max-width: 850px;
+    width: 95%;
+    height: 650px;
+    background: white;
+    border-radius: $reddit-border-radius;
+    box-shadow: 0px 8px 16px 8px rgba(0,0,0,0.2);
+}
+
+.signup-form-content-container{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.signup-form-content{
+    margin: 40px 0px 60px 20px;
+}
+
+.signup-title{
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    margin-bottom: 10px;
+}
+
+.signup-input{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-userpass-input{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 278px;
+}
+
+.signup-form-btn{
+    width: 100%;
+    background: $reddit-blue;
+    color: white;
+    border: none;
+    outline: none;
+    height: 40px;
+    border-radius: $reddit-border-radius;
+    font-weight: bolder;
+    font-size: 14px;
+    font-family: $reddit-font;
+    margin: 15px 0px 0px 0px;
+}
+
+.signup-form-btn:hover{
+    cursor: pointer;
+    opacity: .7;
+}
+
+.username-signup-text{
+    font-size: 16px;
+}

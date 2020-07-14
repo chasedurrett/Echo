@@ -4,48 +4,50 @@ import {MdClose} from 'react-icons/md';
 import reddit from './reddit-background.jpeg';
 import TextField from '@material-ui/core/TextField';
 import {makeStyles} from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import axios from 'axios';
 
 function Login(props) {
-    const [inputs, setInputs] = useState({
-        username: '',
-        password: ''
-    });
-    const { username, password } = inputs;
-    const [submitted, setSubmitted] = useState(false);
-    const [] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
+    const loginUser = () => {
+        axios.post('/auth/login', {username, password})
+        .then(res => {
+            if(res.status === 200){
+                setUsername('')
+                setPassword('')
+                props.handleLoginFormClose()
+            }
+            else {
+                alert('something went wrong not good status')
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    //policy and user agreement alerts
     const termsAlert = () => {
         alert('we own everything')
     }
-
     const policyAlert = () => {
         alert(`there isn't one`)
     }
 
     //input fields 
-    const useStylesReddit = makeStyles((theme) => ({
+    const useStyles = makeStyles((theme) => ({
         root: {
-          border: '1px solid #878A8C',
-          overflow: 'hidden',
-          fontFamily: 'IBM Plex Sans',
-          borderRadius: 4,
-          backgroundColor: '#fcfcfb',
-          transition: theme.transitions.create(['border-color', 'box-shadow']),
-          '&:hover': {
-            backgroundColor: '#fff',
+            '& > *': {
+              margin: theme.spacing(1),
+              width: '25ch',
+            },
           },
-          '&$focused': {
-            backgroundColor: '#fff',
-          },
-        },
-        focused: {},
       }));
-      
-      function RedditTextField(props) {
-        const classes = useStylesReddit();
-      
-        return <TextField InputProps={{ classes, disableUnderline: true }} {...props} />;
-      }
+    const classes = useStyles();
+
 
     return (
         <div className='login-container'>
@@ -61,25 +63,27 @@ function Login(props) {
                             and <span className='lol-alert' onClick={() => {policyAlert()}}>Privacy Policy</span>.
                         </div>
                         <div className='login-input'>
-                            <RedditTextField
-                                label="Username"
-                                variant="filled"
-                                id="reddit-input"
-                                type="text"
-                            />
+                             <TextField 
+                                value={username}
+                                label="Username" 
+                                variant="outlined" 
+                                onChange={(e) => setUsername(e.target.value)}
+                             />
                             <br/>
-                            <RedditTextField
-                                className='password-field'
-                                label="Password"
-                                variant="filled"
-                                id="reddit-input"
-                                type="password"    
-                            />
-                            <button className='login-form-btn'>LOG IN</button>
+                            <TextField 
+                                value={password}
+                                label="Password" 
+                                variant="outlined"
+                                type='password'
+                                onChange={(e) => setPassword(e.target.value)}
+                             />
+                            <button className='login-form-btn'
+                            onClick={() => {loginUser(); setLoading(true)}}
+                            >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>LOG IN</span>}</button>
                          </div>
 
                          <div className='switch-to-signup'>
-                            New to Reddit? 
+                            New to Echo? 
                             <span className='signup-link'>SIGN UP</span>
                          </div>
                     </div>
