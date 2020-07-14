@@ -16,7 +16,7 @@ module.exports = {
   createSubforumPost: async (req, res) => {
     const db = req.app.get("db");
 
-    const post_time = moment().format("LT");
+    const post_time = moment().format("LLL");
     // const {post_author_id} = req.session.user
     const { subforumId } = req.params;
     const { post_title, post_content, post_type_id, post_author_id } = req.body;
@@ -126,6 +126,7 @@ module.exports = {
       res.status(200).send(upvote)
     }
   },
+
   downvoteComment: async (req, res) => {
     const db = req.app.get('db');
 
@@ -139,5 +140,39 @@ module.exports = {
     if(req.session.user){
       res.status(200).send(downvote)
     }
+  },
+
+  getComments: async (req, res) => {
+    const db = req.app.get('db');
+
+    const {postId} = req.params
+
+    let comments = await db.post.get_comments(postId)
+
+    res.status(200).send(comments)
+  },
+
+  createComment: async (req, res) => {
+    const db = req.app.get('db')
+
+    const {postId} = req.params
+    const {comment, comment_author_id} = req.body
+    // const {comment_author_id} = req.session.user.user_id
+    let comment_time = moment().format('LLL');
+
+    let newComment = await db.post.create_comment(comment_author_id, postId, comment, comment_time)
+
+    res.status(200).send(newComment)
+  },
+
+  deleteComment: async (req, res) => {
+    const db = req.app.get('db')
+
+    const {postId, commentId} = req.params
+
+    db.post.delete_comment(postId, commentId)
+
+    res.sendStatus(200)
   }
+
 };
