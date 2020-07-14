@@ -115,6 +115,7 @@ module.exports = {
       votes = {increment, updateVote}
     }
 
+
     res.status(200).send(votes)
 
     //if (!req.session.user) {
