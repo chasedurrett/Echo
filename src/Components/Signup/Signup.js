@@ -56,7 +56,7 @@ function Signup(props) {
     return(
         <div className='signup-container'>
             <div className='signup-form-container'>
-                <MdClose className='login-close-btn' onClick={() => {props.handleSignupFormClose()}}/>
+                <MdClose className='login-close-btn' onClick={() => {props.handleSignupFormClose(); props.handleLoginFormClose()}}/>
                 <div className='signup-form-content-container'>
                     <img className='reddit-img' src={reddit} alt='login-art'/>
                     {signupNext ? 
