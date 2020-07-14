@@ -38,7 +38,7 @@ create table post_type (
 
 create table posts (
     post_id serial primary key,
-    post_title varchar(300),
+    post_tiltle varchar(300),
     post_content varchar(40000),
     post_url text,
     post_author_id int references users(user_id),

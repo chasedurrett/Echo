@@ -31,4 +31,53 @@ module.exports = {
     }
     return res.sendStatus(200);
   },
+  addFollower: async(req, res) => {
+    const db = req.app.get('db')
+
+    // this is the current user or user_id in our DB
+    const {user_id} = req.session.user
+
+    // this is who the current user is following--following_id in our DB
+    const {userId} = req.params
+
+    const followUser = await db.user.follow_user(user_id, userId)
+
+    if(!req.session.user) {
+      return res.status(500).send(`Couldn't follow user, please log in!`)
+    }
+    return res.status(200).send(followUser)
+  },
+  removeFollower: async(req,res) => {
+    const db = req.app.get('db');
+    const {user_id} = req.session.user;
+    const {userId} = req.params;
+
+    const unfollowUser = await db.user.unfollow_user(user_id, userId)
+    
+    if(!req.session.user){
+      return res.status(500).send(`Couldn't unfollow user, please log in!`)
+    }
+    return res.sendStatus(200).send(unfollowUser)
+  },
+  getFollowers: async(req, res) => {
+    const db = req.app.get('db')
+    const {userId} = req.params
+    const followers = await db.user.get_followers(userId)
+
+    if(!followers){
+      return res.status(500).send(`Couldn't get followers, try again later!`)
+    }
+    return res.status(200).send(followers)
+  },
+  getFollowing: async(req, res) => {
+    const db = req.app.get('db')
+    // const {user_id} = req.session.user
+    const {userId} = req.params
+    const following = await db.user.get_following(userId)
+
+    if (!following){
+      return res.status(500).send(`Couldn't get following, try again later!`)
+    }
+    return res.status(200).send(following)
+  }
 };
