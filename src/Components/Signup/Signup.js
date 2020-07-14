@@ -21,10 +21,12 @@ function Signup(props) {
                 setUsername('')
                 setPassword('')
                 setEmail('')
+                setLoading(false)
                 props.handleSignupFormClose()
             }
             else {
                 alert('something went wrong not good status')
+                setLoading(false)
             }
         })
         .catch(err => {
@@ -54,7 +56,7 @@ function Signup(props) {
     return(
         <div className='signup-container'>
             <div className='signup-form-container'>
-                <MdClose className='login-close-btn' onClick={() => {props.handleSignupFormClose()}}/>
+                <MdClose className='login-close-btn' onClick={() => {props.handleSignupFormClose(); props.handleLoginFormClose()}}/>
                 <div className='signup-form-content-container'>
                     <img className='reddit-img' src={reddit} alt='login-art'/>
                     {signupNext ? 
@@ -83,6 +85,12 @@ function Signup(props) {
                                         <button className='signup-form-btn'
                                         onClick={() => {registerUser(); setLoading(true)}}
                                         >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>SIGN UP</span>}</button>
+
+                                        <button 
+                                            className='back-btn'
+                                            onClick={() => {setSignupNext(false)}}>
+                                            Back
+                                        </button>
                                  </div>
                     
                         </div>
