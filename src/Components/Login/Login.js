@@ -4,19 +4,21 @@ import {MdClose} from 'react-icons/md';
 import reddit from './reddit-background.jpeg';
 import TextField from '@material-ui/core/TextField';
 import {makeStyles} from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 
 function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const registerUser = () => {
+    const loginUser = () => {
         axios.post('/auth/login', {username, password})
         .then(res => {
             if(res.status === 200){
-                alert('successfully logged in')
                 setUsername('')
                 setPassword('')
+                props.handleLoginFormClose()
             }
             else {
                 alert('something went wrong not good status')
@@ -63,7 +65,6 @@ function Login(props) {
                         <div className='login-input'>
                              <TextField 
                                 value={username}
-                                id="outlined-basic" 
                                 label="Username" 
                                 variant="outlined" 
                                 onChange={(e) => setUsername(e.target.value)}
@@ -71,15 +72,14 @@ function Login(props) {
                             <br/>
                             <TextField 
                                 value={password}
-                                id="outlined-basic" 
                                 label="Password" 
                                 variant="outlined"
                                 type='password'
                                 onChange={(e) => setPassword(e.target.value)}
                              />
                             <button className='login-form-btn'
-                            onClick={() => {registerUser()}}
-                            >LOG IN</button>
+                            onClick={() => {loginUser(); setLoading(true)}}
+                            >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>LOG IN</span>}</button>
                          </div>
 
                          <div className='switch-to-signup'>
