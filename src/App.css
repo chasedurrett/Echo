@@ -1,4 +1,7 @@
 .App {
-  font-family: sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
+body {
+  background: #DAE0E6
+}
