@@ -6,6 +6,7 @@ import {MdArrowDropDown} from 'react-icons/md';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Login from '../Login/Login';
 
 
 
@@ -15,9 +16,9 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
     // const [ subforumMenuOpen, setSubforumMenuOpen ] = useState(false)
     // const [ userMenuOpen, setUserMenuOpen ] = useState(false)
     const [ loggedIn, setLoggedIn ] = useState(false)
+    const [ loginFormOpen, setLoginFormOpen] = useState(false)
 
     const [anchorEl, setAnchorEl] = React.useState(null);
-  
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -26,11 +27,12 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
       setAnchorEl(null);
     };
 
-    console.log(background, hoverBackground, linkColor, logo, navLinks)
-
-
+    const handleLoginFormClose = () => {
+        setLoginFormOpen(false)
+    }
 
     return (
+        <div>
         <nav className="Nav">
 
             { loggedIn ? 
@@ -88,8 +90,13 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
                 </div>
 
                 <div className="login-signup-btns-cont flex-row">
-                    <button className='login-btn btn-style'>LOG IN</button>
-                    <button className='signup-btn btn-style'>SIGN UP</button>
+                    <button 
+                        onClick={() => {setLoginFormOpen(true)}}
+                        className='login-btn btn-style'>LOG IN
+                    </button>
+                    <button 
+                        className='signup-btn btn-style'>SIGN UP
+                    </button>
                     <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                         <BsFillPersonFill className='person-icon'/> <MdArrowDropDown className='down-arrow'/>
                     </Button>
@@ -111,6 +118,9 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
             }
 
         </nav>
+
+            {loginFormOpen ? <Login handleLoginFormClose={handleLoginFormClose}/> : ''}
+        </div>
     )
 }
 

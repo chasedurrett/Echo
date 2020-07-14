@@ -1,0 +1,99 @@
+@import '../../../scss/variables';
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+}
+
+.login-form-container{
+    width: 850px;
+    height: 650px;
+    background: white;
+    border-radius: $reddit-border-radius;
+    box-shadow: 0px 8px 16px 8px rgba(0,0,0,0.2);
+}
+
+.login-close-btn{
+    color: $reddit-gray;
+    cursor: pointer;
+    float: right;
+    margin: 10px 10px 0px 0px;
+    font-size: 30px;
+}
+
+.login-form-content-container{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.reddit-img{
+    height: 100%;
+    width: 18%;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.login-form-content{
+    margin: 40px 0px 60px 20px;
+}
+
+.login-title{
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    margin-bottom: 10px;
+}
+
+.policy-text{
+    font-size: 13px;
+}
+
+.lol-alert{
+    color: $reddit-blue;
+    cursor: pointer;
+}
+
+.login-input{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column; 
+}
+
+.login-form-btn{
+    width: 100%;
+    background: $reddit-blue;
+    color: white;
+    border: none;
+    outline: none;
+    height: 40px;
+    border-radius: $reddit-border-radius;
+    font-weight: bolder;
+    font-size: 14px;
+    font-family: $reddit-font;
+    margin: 15px 0px 0px 0px;
+}
+
+.login-form-btn:hover{
+    cursor: pointer;
+    opacity: .7;
+}
+
+.switch-to-signup{
+    margin-top: 40px;
+    font-family: $reddit-font;
+    font-size: 13px;
+}
+
+.signup-link{
+    color: $reddit-blue;
+    margin-left: 10px;
+    cursor: pointer;
+    font-weight: bolder;
+    letter-spacing: .3px;
+}

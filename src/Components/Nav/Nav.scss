@@ -2,7 +2,7 @@
 
 nav.Nav {
     width: 100%;
-    height: 68px;
+    height: 48px;
     display: flex;
     flex-direction: row;
     top: 0;
@@ -10,7 +10,7 @@ nav.Nav {
     left: 0;
     position: fixed;
     align-items: center;
-    border-bottom: 2px solid black;
+    background: #FFFFFF
 }
 
 .flex-row{
@@ -39,12 +39,12 @@ nav.Nav {
 }
 
 .search-bar-cont > input {
-    border-radius: $btn-border-radius;
+    border-radius: $reddit-border-radius;
     background: #f6f7f8;
     height: 36px;
     outline: none;
     padding: 0 16px 0 40px;
-    border: 1px solid black;
+    border: 1px solid #DAE0E6;
     width: 100%;
 }
 
@@ -53,17 +53,23 @@ nav.Nav {
 }
 
 .login-signup-btns-cont{
-    width: 30%;
+    width: 25%;
     justify-content: space-between;
+    margin-right: 20px;
 }
 
 .btn-style{
-    border-radius: $btn-border-radius;
+    border-radius: $reddit-border-radius;
     padding: 3px 16px;
     outline: none;
-    font-weight: bold;
+    font-weight: 800;
     text-decoration: none;
-    line-height: 24px;
+    height: 32px;
+    align-self: center;
+    font-size: 13px;
+    letter-spacing: .2px;
+    font-family: $reddit-font;
+    padding-bottom: 5px;
 }
 
 .btn-style:hover{
@@ -75,7 +81,7 @@ nav.Nav {
     background: none;
     border: 1px solid $reddit-blue;
     color: $reddit-blue;
-    width: 35%;
+    width: 36%;
 }
 
 .signup-btn{
@@ -83,15 +89,18 @@ nav.Nav {
     color: white;
     border: none;
     margin-right: 4px;
-    width: 35%;
+    width: 36%;
 }
 
 .person-icon{
-    font-size: 25px;
+    font-size: 22px;
+    color: $reddit-gray;
+    margin-right: 5px;
 }
 
 .down-arrow{
-    font-size: 24px;
+    font-size: 20px;
+    color: $reddit-gray;
 }
 
 
