@@ -21,10 +21,12 @@ function Signup(props) {
                 setUsername('')
                 setPassword('')
                 setEmail('')
+                setLoading(false)
                 props.handleSignupFormClose()
             }
             else {
                 alert('something went wrong not good status')
+                setLoading(false)
             }
         })
         .catch(err => {
@@ -83,6 +85,12 @@ function Signup(props) {
                                         <button className='signup-form-btn'
                                         onClick={() => {registerUser(); setLoading(true)}}
                                         >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>SIGN UP</span>}</button>
+
+                                        <button 
+                                            className='back-btn'
+                                            onClick={() => {setSignupNext(false)}}>
+                                            Back
+                                        </button>
                                  </div>
                     
                         </div>

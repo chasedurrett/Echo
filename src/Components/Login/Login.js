@@ -18,10 +18,12 @@ function Login(props) {
             if(res.status === 200){
                 setUsername('')
                 setPassword('')
+                setLoading(false)
                 props.handleLoginFormClose()
             }
             else {
                 alert('something went wrong not good status')
+                setLoading(false)
             }
         })
         .catch(err => {
