@@ -16,7 +16,7 @@ function Post(props) {
 
   const mappedPosts = posts.map((element, index) => {
     return (
-      <div>
+      <div key={element.post_id}>
         <div className="voteTracker">
           <button className="upVoteBtn" onClick={() => upVote(element.vote_tracker)}></button>
           <div className="voteCount"></div>

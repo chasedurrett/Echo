@@ -86,33 +86,21 @@ module.exports = {
   upvotePost: async (req, res) => {
     const db = req.app.get("db");
     const { user_id } = req.session.user;
-    const { upvote, downvote } = req.body;
     const { postId } = req.params;
 
     const hasVoted = await db.post.check_if_voted(user_id, postId);
-    console.log(hasVoted);
 
-    let votes;
     if (!hasVoted) {
-      let increment = await db.post.post_vote_incrementer(postId);
-      let voteStatus = await db.post.upvote_post(
+      await db.post.post_vote_incrementer(postId);
+      await db.post.upvote_post(
         user_id,
         postId,
-        upvote,
-        downvote
       );
-      console.log(voteStatus);
-      votes = {increment, voteStatus}
     } else {
-      const increment = await db.post.post_vote_incrementer(postId);
-      const updateVote = await db.post.update_post_vote(
+      await db.post.update_post_vote(
         user_id,
-        postId,
-        upvote,
-        downvote
+        postId
       );
-      console.log(updateVote);
-      votes = {increment, updateVote}
     }
 
 
