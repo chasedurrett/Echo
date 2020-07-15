@@ -66,12 +66,18 @@
     font-size: 14px;
     width: 278px;
     font-family: $reddit-font;
+<<<<<<< HEAD
     margin-top: 15px;
+=======
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.294);
+    margin: 15px 0px 0px 0px;
+>>>>>>> master
 }
 
 .signup-form-btn:hover{
     cursor: pointer;
-    opacity: .7;
+    opacity: .9;
+    box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.294);
 }
 
 .username-signup-text{
