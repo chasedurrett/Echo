@@ -1,3 +1,2 @@
 select * from post_votes
-where user_id = $1 and post_id = $2 
-
+where user_id = $1 and post_id = $2

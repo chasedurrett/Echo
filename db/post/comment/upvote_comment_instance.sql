@@ -1,13 +1,13 @@
-insert into post_votes 
+insert into comment_votes 
 (
     user_id,
-    post_id,
+    comment_id,
     upvote,
     downvote
 ) values 
 (
     $1,
     $2,
-    true, 
+    true,
     false
-); 
+);
