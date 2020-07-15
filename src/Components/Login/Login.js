@@ -98,6 +98,7 @@ function Login(props) {
                                             onChange={(e) => setUsername(e.target.value)}
                                         />
                                         <TextField
+                                            type='password'
                                             value={password}
                                             label="Password" 
                                             variant="outlined" 
