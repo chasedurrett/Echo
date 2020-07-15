@@ -104,7 +104,7 @@ module.exports = {
     }
 
 
-    res.status(200).send(votes)
+    res.sendStatus(200)
 
     //if (!req.session.user) {
     //  res.status(500).send(`Please log in to vote!`);

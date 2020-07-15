@@ -3,9 +3,11 @@ import './Signup.scss';
 import {MdClose} from 'react-icons/md';
 import reddit from './reddit-background.jpeg';
 import TextField from '@material-ui/core/TextField';
-import {makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles'; 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
+import {connect} from 'react-redux'
+import {loginUser} from '../../redux/reducer'
 
 function Signup(props) {
     const [user_email, setEmail] = useState('');
@@ -22,6 +24,7 @@ function Signup(props) {
                 setPassword('')
                 setEmail('')
                 props.handleSignupFormClose()
+                props.loginUser(res.data);
             }
             else {
                 alert('something went wrong not good status')
@@ -119,4 +122,4 @@ function Signup(props) {
     )
 }
 
-export default Signup;
+export default connect(null, {loginUser})(Signup);

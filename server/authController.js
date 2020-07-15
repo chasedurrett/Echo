@@ -67,7 +67,7 @@ module.exports = {
         const db = req.app.get('db');
         const {userId} = req.params;
 
-        const deleteUser = await db.auth.delete_user(userId);
+        await db.auth.delete_user(userId);
 
         res.status(200).send('successful deleted user')
     },
