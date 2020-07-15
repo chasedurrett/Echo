@@ -18,7 +18,7 @@ function Post(props) {
     return (
       <div key={element.post_id}>
         <div className="voteTracker">
-          <button className="upVoteBtn" onClick={() => upVote(element.vote_tracker)}></button>
+          {/* <button className="upVoteBtn" onClick={() => upVote(element.vote_tracker)}></button> */}
           <div className="voteCount"></div>
           <div className="downVoteBtn"></div>
         </div>
@@ -26,7 +26,9 @@ function Post(props) {
     );
   });
 
-  return <div></div>;
+  return <div>
+    {mappedPosts}
+  </div>;
 }
 
 export default Post;
