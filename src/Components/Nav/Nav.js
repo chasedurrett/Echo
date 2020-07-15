@@ -8,12 +8,14 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
+import {connect} from 'react-redux';
+import {logoutUser} from '../../redux/reducer';
 
 
 
   
 
-function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
+function Nav (props, { background, hoverBackground, linkColor, logo, navLinks, }) {
     // const [ subforumMenuOpen, setSubforumMenuOpen ] = useState(false)
     // const [ userMenuOpen, setUserMenuOpen ] = useState(false)
     const [ loggedIn, setLoggedIn ] = useState(false)
@@ -115,7 +117,7 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
                     >
                         <MenuItem onClick={handleClose}>Profile</MenuItem>
                         <MenuItem onClick={handleClose}>My account</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        <MenuItem onClick={() => {handleClose(); props.logoutUser()}}>Logout</MenuItem>
                     </Menu>
                 </div>
 
@@ -131,4 +133,4 @@ function Nav ({ background, hoverBackground, linkColor, logo, navLinks }) {
     )
 }
 
-export default Nav;
+export default connect(null, {logoutUser})(Nav);

@@ -48,7 +48,7 @@ module.exports = {
                 user_id: user[0].user_id,
                 user_email: user[0].user_email,
                 username: user[0].username,
-                user_image: user[0].user_img,
+                user_image: user[0].user_image,
                 user_banner: user[0].user_banner,
                 cake_day: user[0].cake_day
             }
