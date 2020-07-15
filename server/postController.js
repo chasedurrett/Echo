@@ -5,13 +5,17 @@ module.exports = {
   getAllSubforumPosts: async (req, res) => {
     const db = req.app.get("db");
 
-    const user_id = 3;
-    // const {user_id} = req.session.user
     const { subforumId } = req.params;
 
-    let posts = await db.post.get_all_subforum_posts(subforumId, user_id);
+    if(!req.session.user){
+      let posts = await db.post.get_all_subforum_posts_no_user(subforumId);
+      res.status(200).send(posts)
+    } else {
+      const { user_id } = req.session.user
+      let posts = await db.post.get_all_subforum_posts_with_user(subforumId, user_id);
+      res.status(200).send(posts);
+    }
 
-    res.status(200).send(posts);
   },
 
   createSubforumPost: async (req, res) => {

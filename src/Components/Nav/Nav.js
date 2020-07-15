@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Nav.scss';
-import {FiSearch} from 'react-icons/fi';
+// import {FiSearch} from 'react-icons/fi';
 import {BsFillPersonFill} from 'react-icons/bs';
 import {MdArrowDropDown} from 'react-icons/md';
 import Button from '@material-ui/core/Button';
@@ -10,6 +10,7 @@ import Login from '../Login/Login';
 import Signup from '../Signup/Signup';
 import {connect} from 'react-redux';
 import {logoutUser} from '../../redux/reducer';
+import axios from 'axios';
 
 
 
@@ -36,6 +37,17 @@ function Nav (props, { background, hoverBackground, linkColor, logo, navLinks, }
     }
     const handleSignupFormClose = () => {
         setSignupFormOpen(false)
+    }
+
+    const logout = () => {
+        axios.delete('/auth/logout')
+        .then(() => {
+            console.log('logout hit')
+           props.logoutUser()
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
     return (
@@ -117,7 +129,7 @@ function Nav (props, { background, hoverBackground, linkColor, logo, navLinks, }
                     >
                         <MenuItem onClick={handleClose}>Profile</MenuItem>
                         <MenuItem onClick={handleClose}>My account</MenuItem>
-                        <MenuItem onClick={() => {handleClose(); props.logoutUser()}}>Logout</MenuItem>
+                        <MenuItem onClick={() => {handleClose(); logout()}}>Logout</MenuItem>
                     </Menu>
                 </div>
 

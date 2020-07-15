@@ -3,7 +3,6 @@ import './Signup.scss';
 import {MdClose} from 'react-icons/md';
 import reddit from './reddit-background.jpeg';
 import TextField from '@material-ui/core/TextField';
-import {makeStyles} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 import {connect} from 'react-redux';
@@ -28,13 +27,15 @@ function Signup(props) {
                 props.handleSignupFormClose()
                 props.loginUser(res.data);
             }
-            else if(res.status === 409) {
+            else {
                 alert('username already exists')
                 setLoading(false)
             }
         })
         .catch(err => {
             console.log(err)
+            alert('username already exists')
+            setLoading(false)
         })
     }
 
@@ -45,17 +46,6 @@ function Signup(props) {
     const policyAlert = () => {
         alert(`there isn't one`)
     }
-
-    //input fields 
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            '& > *': {
-              margin: theme.spacing(1),
-              width: '25ch',
-            },
-          },
-      }));
-    const classes = useStyles();
 
     return(
         <div className='signup-container'>
@@ -80,6 +70,7 @@ function Signup(props) {
                                             onChange={(e) => setUsername(e.target.value)}
                                         />
                                         <TextField 
+                                            type='password'
                                             value={password}
                                             label="Password" 
                                             variant="outlined" 
