@@ -24,6 +24,10 @@ function Subforum(props) {
   console.log(posts)
 
   const mappedPosts = posts.map((element, index) => {
+      axios.get()
+      .then()
+
+
     return (
       <div>
         {element.post_title}
