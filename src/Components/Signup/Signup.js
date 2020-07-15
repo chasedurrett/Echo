@@ -17,6 +17,7 @@ function Signup(props) {
     const registerUser = () => {
         axios.post('/auth/register', {user_email, username, password})
         .then(res => {
+            console.log('returning axio promise')
             if(res.status === 200){
                 setUsername('')
                 setPassword('')
@@ -24,8 +25,8 @@ function Signup(props) {
                 setLoading(false)
                 props.handleSignupFormClose()
             }
-            else {
-                alert('something went wrong not good status')
+            else if(res.status === 409) {
+                alert('username already exists')
                 setLoading(false)
             }
         })
@@ -75,23 +76,24 @@ function Signup(props) {
                                             variant="outlined" 
                                             onChange={(e) => setUsername(e.target.value)}
                                         />
-                                        <br/>
                                         <TextField 
                                             value={password}
                                             label="Password" 
                                             variant="outlined" 
                                             onChange={(e) => setPassword(e.target.value)}
                                         />
-                                        <button className='signup-form-btn'
-                                        onClick={() => {registerUser(); setLoading(true)}}
-                                        >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>SIGN UP</span>}</button>
-
-                                        <button 
-                                            className='back-btn'
-                                            onClick={() => {setSignupNext(false)}}>
-                                            Back
-                                        </button>
                                  </div>
+
+                                 <button className='signup-form-btn'
+                                        onClick={() => {registerUser(); setLoading(true)}}
+                                        >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>SIGN UP</span>}
+                                </button>
+
+                                <button 
+                                    className='back-btn'
+                                    onClick={() => {setSignupNext(false)}}>
+                                    Back
+                                </button>
                     
                         </div>
                     :

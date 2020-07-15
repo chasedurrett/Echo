@@ -49,7 +49,9 @@
     margin-top: 50px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 278px;
+    height: 140px;
 }
 
 .signup-form-btn{
@@ -62,9 +64,14 @@
     border-radius: $reddit-border-radius;
     font-weight: bolder;
     font-size: 14px;
+    width: 278px;
     font-family: $reddit-font;
+<<<<<<< HEAD
+    margin-top: 15px;
+=======
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.294);
     margin: 15px 0px 0px 0px;
+>>>>>>> master
 }
 
 .signup-form-btn:hover{
@@ -89,4 +96,5 @@
     border-radius: $reddit-border-radius;
     font-family: $reddit-font;
     cursor: pointer;
+    display: block;
 }
