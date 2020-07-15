@@ -7,7 +7,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 import {connect} from 'react-redux'
-import {loginUser} from '../../redux/reducer'
+import {loginUser} from '../../redux/reducer';
 
 function Login(props) {
     const [username, setUsername] = useState('');

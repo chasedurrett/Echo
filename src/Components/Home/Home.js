@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Home.scss';
+import {connect} from 'react-redux';
+import {getUser} from '../../redux/reducer';
 
-function Home(){
+function Home(props){
 
     useEffect(() => {
         console.log('use effect to grab curent user hit')
@@ -16,4 +18,4 @@ function Home(){
     )
 }
 
-export default Home;
+export default connect(null, {getUser})(Home);
