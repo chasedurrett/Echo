@@ -6,6 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import {makeStyles} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
+import {connect} from 'react-redux'
+import {loginUser} from '../../redux/reducer'
 
 function Login(props) {
     const [username, setUsername] = useState('');
@@ -23,6 +25,7 @@ function Login(props) {
                 setPassword('')
                 setLoading(false)
                 props.handleLoginFormClose()
+                props.loginUser(res.data);
             }
             else {
                 alert('something went wrong not good status')
@@ -45,6 +48,7 @@ function Login(props) {
                 setLoading(false)
                 handleSignupFormClose()
                 props.handleLoginFormClose()
+                props.loginUser(res.data);
             }
             else if(res.status === 409) {
                 alert('username already exists')
@@ -194,4 +198,4 @@ function Login(props) {
     )
 }
 
-export default Login;
+export default connect(null, {loginUser})(Login);
