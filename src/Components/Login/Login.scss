@@ -65,8 +65,11 @@
 .login-input{
     margin-top: 50px;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
+    justify-content: space-between;
+    height: 140px;
 }
+
 
 .login-form-btn{
     width: 100%;
@@ -79,7 +82,7 @@
     font-weight: bolder;
     font-size: 14px;
     font-family: $reddit-font;
-    margin: 15px 0px 0px 0px;
+    margin-top: 15px;
 }
 
 .login-form-btn:hover{
@@ -100,3 +103,4 @@
     font-weight: bolder;
     letter-spacing: .3px;
 }
+

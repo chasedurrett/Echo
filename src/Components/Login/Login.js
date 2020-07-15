@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import {makeStyles} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
-import Signup from '../Signup/Signup';
 
 function Login(props) {
     const [username, setUsername] = useState('');
@@ -38,6 +37,7 @@ function Login(props) {
     const registerUser = () => {
         axios.post('/auth/register', {user_email, username, password})
         .then(res => {
+            console.log('returning axios promise')
             if(res.status === 200){
                 setUsername('')
                 setPassword('')
@@ -46,8 +46,8 @@ function Login(props) {
                 handleSignupFormClose()
                 props.handleLoginFormClose()
             }
-            else {
-                alert('something went wrong not good status')
+            else if(res.status === 409) {
+                alert('username already exists')
                 setLoading(false)
             }
         })
@@ -105,24 +105,22 @@ function Login(props) {
                                             variant="outlined" 
                                             onChange={(e) => setUsername(e.target.value)}
                                         />
-                                        <br/>
-                                        <TextField 
+                                        <TextField
                                             value={password}
                                             label="Password" 
                                             variant="outlined" 
                                             onChange={(e) => setPassword(e.target.value)}
                                         />
-                                        <button className='signup-form-btn'
-                                        onClick={() => {registerUser(); setLoading(true)}}
-                                        >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>SIGN UP</span>}</button>
-
-                                        <button 
-                                            className='back-btn'
-                                            onClick={() => {setSignupNext(false)}}>
-                                            Back
-                                        </button>
                                  </div>
-                    
+                                 <button className='signup-form-btn'
+                                        onClick={() => {registerUser(); setLoading(true)}}
+                                >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>SIGN UP</span>}</button>
+
+                                <button 
+                                   className='back-btn'
+                                    onClick={() => {setSignupNext(false)}}>
+                                    Back
+                                </button>
                         </div>
                     :
                         <div className='signup-form-content'>
@@ -166,7 +164,6 @@ function Login(props) {
                                 variant="outlined" 
                                 onChange={(e) => setUsername(e.target.value)}
                             />
-                            <br/>
                             <TextField 
                                 value={password}
                                 label="Password" 
@@ -174,10 +171,12 @@ function Login(props) {
                                 type='password'
                                 onChange={(e) => setPassword(e.target.value)}
                             />
-                            <button className='login-form-btn'
-                            onClick={() => {loginUser(); setLoading(true)}}
-                            >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>LOG IN</span>}</button>
                         </div>
+
+                        <button className='login-form-btn'
+                            onClick={() => {loginUser(); setLoading(true)}}
+                            >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>LOG IN</span>}
+                        </button>
 
                         <div className='switch-to-signup'>
                             New to Echo? 
