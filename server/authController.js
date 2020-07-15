@@ -18,11 +18,7 @@ module.exports = {
 
         const cake_day = moment().format('LL')
 
-        console.log(user_email, username, hash, cake_day)
-
         const newUser = await db.auth.register(user_email, username, hash, cake_day)
-
-        console.log(newUser)
 
         req.session.user = {
             user_id: newUser[0].user_id,
@@ -32,8 +28,6 @@ module.exports = {
             user_banner: newUser[0].user_banner,
             cake_day: newUser[0].cake_day
         }
-
-        console.log(req.session.user)
 
         return res.status(200).send(req.session.user)
     },
