@@ -3,7 +3,6 @@ import './Login.scss';
 import {MdClose} from 'react-icons/md';
 import reddit from './reddit-background.jpeg';
 import TextField from '@material-ui/core/TextField';
-import {makeStyles} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 import {connect} from 'react-redux'
@@ -14,7 +13,7 @@ function Login(props) {
     const [password, setPassword] = useState('');
     const [user_email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
-    const [ signupFormOpen, setSignupFormOpen] = useState(false)
+    const [signupFormOpen, setSignupFormOpen] = useState(false)
     const [signupNext, setSignupNext] = useState(false);
 
     const loginUser = () => {
@@ -34,13 +33,14 @@ function Login(props) {
         })
         .catch(err => {
             console.log(err)
+            alert('username or password is incorrect')
+            setLoading(false)
         })
     }
 
     const registerUser = () => {
         axios.post('/auth/register', {user_email, username, password})
         .then(res => {
-            console.log('returning axios promise')
             if(res.status === 200){
                 setUsername('')
                 setPassword('')
@@ -72,18 +72,6 @@ function Login(props) {
     const policyAlert = () => {
         alert(`there isn't one`)
     }
-
-    //input fields 
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            '& > *': {
-              margin: theme.spacing(1),
-              width: '25ch',
-            },
-          },
-      }));
-    const classes = useStyles();
-
 
     return (
 
