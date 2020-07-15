@@ -5,7 +5,6 @@ module.exports = {
 
     register: async (req, res) => {
         const db = req.app.get('db');
-        console.log(req.body);
         const {user_email, username, password} = req.body;
 
         const existingUser = await db.auth.check_user(username)
