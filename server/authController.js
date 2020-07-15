@@ -7,6 +7,7 @@ module.exports = {
         const db = req.app.get('db');
         const {user_email, username, password} = req.body;
 
+        //alert not popping up if user exists
         const existingUser = await db.auth.check_user(username)
         if(existingUser[0]){
             return res.status(409).send('user already exists')
@@ -17,7 +18,11 @@ module.exports = {
 
         const cake_day = moment().format('LL')
 
+        console.log(user_email, username, hash, cake_day)
+
         const newUser = await db.auth.register(user_email, username, hash, cake_day)
+
+        console.log(newUser)
 
         req.session.user = {
             user_id: newUser[0].user_id,
@@ -27,6 +32,8 @@ module.exports = {
             user_banner: newUser[0].user_banner,
             cake_day: newUser[0].cake_day
         }
+
+        console.log(req.session.user)
 
         return res.status(200).send(req.session.user)
     },
@@ -51,6 +58,7 @@ module.exports = {
                 user_banner: user[0].user_banner,
                 cake_day: user[0].cake_day
             }
+            console.log(req.session.user)
             return res.status(200).send(req.session.user)
         } else {
             return res.status(403).send('username or password incorrect')

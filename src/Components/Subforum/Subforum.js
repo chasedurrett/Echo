@@ -26,11 +26,11 @@ function Subforum(props) {
   const mappedPosts = posts.map((element, index) => {
     return (
       <div>
+        {element.post_title}
         <div className="voteTracker">
-          {/* <button className="upVoteBtn" onClick={() => upVote(element.vote_tracker)}></button> */}
-          <div className="voteCount"></div>
-          <div className="downVoteBtn"></div>
-          {element.post_title}
+          <button className="upVoteBtn" onClick={() => upVote(element.vote_tracker)}>upvote</button>
+          <div className="voteCount">{element.vote_tracker}</div>
+          <button className="downVoteBtn">downvote</button>
         </div>
       </div>
     );
