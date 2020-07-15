@@ -56,12 +56,14 @@ app.delete(
   "/api/subforums/:subforumId/posts/:postId",
   postCtrl.deleteSubforumPost
 );
-app.post("/api/upvote/posts/:postId", postCtrl.upvotePost);
-app.put("/api/downvote/posts/:postId", postCtrl.downvotePost);
+app.post("/api/posts/:postId/upvote", postCtrl.upvotePost);
+app.post("/api/posts/:postId/downvote", postCtrl.downvotePost);
+app.delete('/api/posts/:postId/remove-vote', postCtrl.removeVote)
 
 //Comment Endpoints
-app.put("/api/upvote/comments/:commentId", postCtrl.upvoteComment);
-app.put("/api/downvote/comments/:commentId", postCtrl.downvoteComment);
+app.post("/api/comments/:commentId/upvote", postCtrl.upvoteComment);
+app.post("/api/comments/:commentId/downvote", postCtrl.downvoteComment);
+app.delete('/api/comments/:commentId/remove-vote', postCtrl.removeCommentVote)
 app.get("/api/posts/:postId/comments", postCtrl.getComments);
 app.post("/api/posts/:postId/comments", postCtrl.createComment);
 app.delete("/api/posts/:postId/comments/:commentId", postCtrl.deleteComment);

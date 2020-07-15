@@ -62,3 +62,18 @@ insert into post_type(
 ) values (
     'text'
 )
+
+create table comment_votes (
+    comment_vote_id serial primary key,
+    user_id int references users(user_id),
+    comment_id int references comments(comment_id),
+    upvote bool,
+    downvote bool
+)
+create table post_votes (
+    post_vote_id serial primary key,
+    user_id int references users(user_id),
+    post_id int references posts(post_id),
+    upvote bool,
+    downvote bool
+)
