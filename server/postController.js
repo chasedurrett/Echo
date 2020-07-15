@@ -5,7 +5,7 @@ module.exports = {
   getAllSubforumPosts: async (req, res) => {
     const db = req.app.get("db");
 
-    const user_id = 3
+    const user_id = 3;
     // const {user_id} = req.session.user
     const { subforumId } = req.params;
 
@@ -87,89 +87,149 @@ module.exports = {
   upvotePost: async (req, res) => {
     const db = req.app.get("db");
     const { user_id } = req.session.user;
-    const { upvote, downvote } = req.body;
     const { postId } = req.params;
 
     const hasVoted = await db.post.check_if_voted(user_id, postId);
-    console.log(hasVoted);
 
-    let votes;
-    if (!hasVoted) {
-      let increment = await db.post.post_vote_incrementer(postId);
-      let voteStatus = await db.post.upvote_post(
-        user_id,
-        postId,
-        upvote,
-        downvote
-      );
-      console.log(voteStatus);
-      votes = {increment, voteStatus}
+    if (hasVoted.length === 0) {
+      // if user hasn't upvoted previously
+      await db.post.post_vote_incrementer(postId);
+      await db.post.upvote_post(user_id, postId);
     } else {
-      const increment = await db.post.post_vote_incrementer(postId);
-      const updateVote = await db.post.update_post_vote(
-        user_id,
-        postId,
-        upvote,
-        downvote
-      );
-      console.log(updateVote);
-      votes = {increment, updateVote}
+      // if user previously downvoted
+      await db.post.post_vote_incrementer_2(postId);
+      await db.post.update_post_upvote(user_id, postId);
     }
 
+    if (!req.session.user) {
+      res.status(500).send(`Please log in to vote!`);
+    }
 
-    res.status(200).send(votes)
-
-    //if (!req.session.user) {
-    //  res.status(500).send(`Please log in to vote!`);
-    //}
-
-    //if (req.session.user) {
-    //  res.status(200).send(voteStatus);
-    //}
+    if (req.session.user) {
+      res.sendStatus(200);
+    }
   },
   downvotePost: async (req, res) => {
     const db = req.app.get("db");
+    const { user_id } = req.session.user;
+    const { postId } = req.params;
+
+    const hasVoted = await db.post.check_if_voted(user_id, postId);
+
+    if (hasVoted.length === 0) {
+      // if user hasn't previously downvoted
+      await db.post.downvote_post(postId);
+      await db.post.downvote_post_instance(user_id, postId);
+    } else {
+      // if user previously upvoted
+      await db.post.post_vote_decrementer_2(postId);
+      await db.post.update_post_downvote(user_id, postId);
+    }
 
     if (!req.session.user) {
       res.status(500).send(`Please log in to vote!`);
     }
 
-    const { postId } = req.params;
-    let downvote = await db.post.downvote_post(postId);
-
     if (req.session.user) {
-      res.status(200).send(downvote);
+      res.sendStatus(200);
     }
   },
+  removeVote: async (req, res) => {
+    const db = req.app.get("db");
+    const { user_id } = req.session.user;
+    const { postId } = req.params;
 
+    const checkVote = await db.post.check_how_user_voted(user_id, postId);
+
+    if (checkVote.length === 0) {
+      // if user had downvoted
+      await db.post.post_vote_incrementer(postId);
+      await db.post.remove_vote(user_id, postId);
+    } else {
+      // if user had upvoted
+      await db.post.downvote_post(postId);
+      await db.post.remove_vote(user_id, postId);
+    }
+
+    res.sendStatus(200);
+  },
   upvoteComment: async (req, res) => {
     const db = req.app.get("db");
+    const { commentId } = req.params;
+    const { user_id } = req.session.user;
+
+    const hasVotedOnComment = await db.post.comment.check_if_voted_comment(
+      user_id,
+      commentId
+    );
+
+    if (hasVotedOnComment.length === 0) {
+      // if user hasn't upvoted previously
+      await db.post.comment.upvote_comment(commentId);
+      await db.post.comment.upvote_comment_instance(user_id, commentId);
+    } else {
+      // if user has downvoted and is pressing upvote
+      await db.post.comment.upvote_comment_2(commentId);
+      await db.post.comment.update_comment_upvote(user_id, commentId);
+    }
 
     if (!req.session.user) {
       res.status(500).send(`Please log in to vote!`);
     }
-
-    const { commentId } = req.params;
-    let upvote = await db.post.upvote_comment(commentId);
-
     if (req.session.user) {
-      res.status(200).send(upvote);
+      res.sendStatus(200);
     }
   },
 
   downvoteComment: async (req, res) => {
     const db = req.app.get("db");
+    const { commentId } = req.params;
+    const { user_id } = req.session.user;
+
+    const hasVotedOnComment = await db.post.comment.check_if_voted_comment(
+      user_id,
+      commentId
+    );
+
+    if (hasVotedOnComment.length === 0) {
+      // if user hasn't previously downvoted
+      await db.post.comment.downvote_comment(commentId);
+      await db.post.comment.downvote_comment_instance(user_id, commentId);
+    } else {
+      // if user has previously upvoted
+      await db.post.comment.downvote_comment_2(commentId);
+      await db.post.comment.update_comment_downvote(user_id, commentId);
+    }
 
     if (!req.session.user) {
       res.status(500).send(`Please log in to vote!`);
     }
-
-    const { commentId } = req.params;
-    let downvote = await db.post.downvote_comment(commentId);
-
     if (req.session.user) {
-      res.status(200).send(downvote);
+      res.sendStatus(200);
     }
+  },
+
+  removeCommentVote: async (req, res) => {
+    const db = req.app.get("db");
+    const { user_id } = req.session.user;
+    const { commentId } = req.params;
+
+    const checkVote = await db.post.comment.check_how_user_voted_comment(
+      user_id,
+      commentId
+    );
+
+    if (checkVote.length === 0) {
+      // if the user had downvoted
+      await db.post.comment.upvote_comment(commentId);
+      await db.post.comment.remove_comment_vote(user_id, commentId);
+    } else {
+      // if the user had upvoted
+      await db.post.comment.downvote_comment(commentId);
+      await db.post.comment.remove_comment_vote(user_id, commentId);
+    }
+
+    res.sendStatus(200);
   },
 
   getComments: async (req, res) => {
@@ -177,7 +237,7 @@ module.exports = {
 
     const { postId } = req.params;
 
-    let comments = await db.post.get_comments(postId);
+    let comments = await db.post.comment.get_comments(postId);
 
     res.status(200).send(comments);
   },
@@ -190,7 +250,7 @@ module.exports = {
     // const {comment_author_id} = req.session.user.user_id
     let comment_time = moment().format("LLL");
 
-    let newComment = await db.post.create_comment(
+    let newComment = await db.post.comment.create_comment(
       comment_author_id,
       postId,
       comment,
@@ -205,7 +265,7 @@ module.exports = {
 
     const { postId, commentId } = req.params;
 
-    db.post.delete_comment(postId, commentId);
+    db.post.comment.delete_comment(postId, commentId);
 
     res.sendStatus(200);
   },

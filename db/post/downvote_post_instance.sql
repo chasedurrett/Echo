@@ -8,6 +8,6 @@ insert into post_votes
 (
     $1,
     $2,
-    true, 
-    false
-); 
+    false,
+    true
+);
