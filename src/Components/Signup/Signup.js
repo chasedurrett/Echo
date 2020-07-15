@@ -3,11 +3,11 @@ import './Signup.scss';
 import {MdClose} from 'react-icons/md';
 import reddit from './reddit-background.jpeg';
 import TextField from '@material-ui/core/TextField';
-import {makeStyles} from '@material-ui/core/styles'; 
+import {makeStyles} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
-import {connect} from 'react-redux'
-import {loginUser} from '../../redux/reducer'
+import {connect} from 'react-redux';
+import {loginUser} from '../../redux/reducer';
 
 function Signup(props) {
     const [user_email, setEmail] = useState('');
@@ -23,11 +23,13 @@ function Signup(props) {
                 setUsername('')
                 setPassword('')
                 setEmail('')
+                setLoading(false)
                 props.handleSignupFormClose()
                 props.loginUser(res.data);
             }
             else {
                 alert('something went wrong not good status')
+                setLoading(false)
             }
         })
         .catch(err => {
@@ -86,6 +88,12 @@ function Signup(props) {
                                         <button className='signup-form-btn'
                                         onClick={() => {registerUser(); setLoading(true)}}
                                         >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>SIGN UP</span>}</button>
+
+                                        <button 
+                                            className='back-btn'
+                                            onClick={() => {setSignupNext(false)}}>
+                                            Back
+                                        </button>
                                  </div>
                     
                         </div>

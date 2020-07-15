@@ -8,15 +8,15 @@ function Home(props){
     useEffect(() => {
         console.log('use effect hit')
         props.getUser()
-      });
+      },);
 
     return(
-        <div className={'home-container'}>
-            Home Page
+        <div className='home-container'>
+            Home
             
         </div>
     )
 }
 
 
-export default connect(null, {getUser})(Home);
+export default connect(null, {getUser})(Home)
