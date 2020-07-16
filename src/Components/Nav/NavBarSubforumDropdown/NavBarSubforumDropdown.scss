@@ -32,3 +32,9 @@
     }
   }
 }
+.dropdown-input{
+  &:focus{
+    border: none;
+    box-shadow: none;
+  }
+}
