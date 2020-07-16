@@ -8,10 +8,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import Popper from "@material-ui/core/Popper";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import "./NavBarSubforumDropdown.css";
+import "./NavBarSubforumDropdown.scss";
 
 export default function NavBarSubforumDropdown(props) {
   const [subforumsList, setSubforumsList] = useState([]);
+  const [inputVal, setInputVal] = useState('')
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -101,6 +102,15 @@ export default function NavBarSubforumDropdown(props) {
                 onKeyDown={handleListKeyDown}
                 style={{ borderRadius: 15 }}
               >
+              <MenuItem 
+              style={{
+                height: 40,
+                width: 300,
+                backgroundColor: "#ffffff",
+              }}
+              >
+                <input className="dropdown-input" style={{border: 0, height: '100%', width: '100%', borderColor: "#ffffff", boxShadow: 'none'}} placeholder="Search.."></input>
+              </MenuItem>
                 {subforumsList.map((e) => (
                   <MenuItem
                     key={e.subforum_id}

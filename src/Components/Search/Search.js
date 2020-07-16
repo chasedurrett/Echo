@@ -56,17 +56,25 @@ function Search(props) {
     const [value, setValue] = useState(0);
     const classes = useStyles();
 
-    const getPosts = (val) => {
-        axios.get(`/search/input?query=${val}`);
-        const results = 
+   function getPosts(val){
+        axios.get(`api/posts/search/?posts=${val}`)
+        .then((res) => {
+          setPosts(res.data);
+        })
     }
 
-    const getChambers = () => {
-
+    function getChambers(val){
+      axios.get(`api/chambers/search/?chambers=${val}`)
+      .then((res) => {
+        setChambers(res.data)
+      })
     }
 
-    const getUsers = () => {
-
+    function getUsers(val){
+      axios.get(`/api/users/search/?users=${val}`)
+      .then((res) => {
+        setUsers(res.data)
+      })
     }
 
     const handleChange = (event, newValue) => {

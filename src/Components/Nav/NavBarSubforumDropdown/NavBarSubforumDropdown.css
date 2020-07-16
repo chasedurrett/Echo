@@ -36,4 +36,10 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+.dropdown-input:focus {
+  border: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
 /*# sourceMappingURL=NavBarSubforumDropdown.css.map */
