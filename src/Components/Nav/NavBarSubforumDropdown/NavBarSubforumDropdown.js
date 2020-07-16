@@ -120,14 +120,21 @@ export default function NavBarSubforumDropdown(props) {
                         alignItems: "center",
                       }}
                     >
-                      {/* this link is for testing, needs to be e.subforum_img */}
-                      <img
-                        style={{ height: 30, width: 30, borderRadius: 50 }}
-                        className="subforum-preview-img"
-                        src={
-                          "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
-                        }
-                      ></img>
+                      {e.subforum_img === null ? (
+                        <img
+                          style={{ height: 30, width: 30, borderRadius: 50 }}
+                          className="subforum-preview-img"
+                          src={
+                            "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
+                          }
+                        ></img>
+                      ) : (
+                        <img
+                          style={{ height: 30, width: 30, borderRadius: 50 }}
+                          className="subforum-preview-img"
+                          src={e.subforum_img}
+                        ></img>
+                      )}
                     </div>
                     <div
                       className="subforum-preview-link-container"

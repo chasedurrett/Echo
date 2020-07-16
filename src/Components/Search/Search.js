@@ -56,8 +56,9 @@ function Search(props) {
     const [value, setValue] = useState(0);
     const classes = useStyles();
 
-    const getPosts = () => {
-        
+    const getPosts = (val) => {
+        axios.get(`/search/input?query=${val}`);
+        const results = 
     }
 
     const getChambers = () => {
