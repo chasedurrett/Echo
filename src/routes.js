@@ -6,17 +6,18 @@ import Post from "./Components/Post/Post";
 import Profile from "./Components/Profile/Profile";
 import CreatePost from "./Components/CreatePost/CreatePost";
 import PostDetailed from "./Components/Post/PostDetailed/PostDetailed";
+//protected route imports
+import ProtectedProfile from "./ProtectedRoutes/ProtectedProfile";
+import Search from "./Components/Search/Search";
 
 export default (
   <Switch>
     <Route exact path="/" component={Home} />
     <Route path="/subforum/:subforumId" component={Subforum} />
     <Route path="/subforum/:subforumId/posts/:postId" component={Post} />
-    <Route path="/user/:username" component={Profile} />
+    <ProtectedProfile path="/user/:username" component={Profile} />
     <Route path="/subforum/:subforumId/post" component={CreatePost} />
-    <Route
-      path="/subforum/:subforumId/posts/:postId"
-      component={PostDetailed}
-    />
+    <Route path="/subforum/:subforumId/posts/:postId" component={PostDetailed} />
+    <Route path="/search" component={Search} />
   </Switch>
 );

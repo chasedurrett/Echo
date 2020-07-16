@@ -1,0 +1,124 @@
+.signup-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 10;
+}
+
+.signup-form-container {
+  max-width: 850px;
+  width: 95%;
+  height: 650px;
+  background: white;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 8px 16px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 8px rgba(0, 0, 0, 0.2);
+}
+
+.signup-form-content-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 100%;
+}
+
+.signup-form-content {
+  margin: 40px 0px 60px 20px;
+}
+
+.signup-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  margin-bottom: 10px;
+}
+
+.signup-input {
+  margin-top: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.signup-userpass-input {
+  margin-top: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 278px;
+  height: 140px;
+}
+
+.signup-form-btn {
+  width: 100%;
+  background: #0079d3;
+  color: white;
+  border: none;
+  outline: none;
+  height: 40px;
+  border-radius: 4px;
+  font-weight: bolder;
+  font-size: 14px;
+  width: 278px;
+  font-family: "IBM Plex Sans", sans-serif;
+  -webkit-box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.294);
+          box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.294);
+  margin: 15px 0px 0px 0px;
+}
+
+.signup-form-btn:hover {
+  cursor: pointer;
+  opacity: .9;
+  -webkit-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.294);
+          box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.294);
+}
+
+.username-signup-text {
+  font-size: 16px;
+}
+
+.back-btn {
+  outline: none;
+  background: none;
+  border: none;
+  font-weight: bolder;
+  color: black;
+  font-size: 14px;
+  margin-top: 40px;
+  width: 50px;
+  border-radius: 4px;
+  font-family: "IBM Plex Sans", sans-serif;
+  cursor: pointer;
+  display: block;
+}
+/*# sourceMappingURL=Signup.css.map */

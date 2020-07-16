@@ -1,8 +1,15 @@
-.vote-arrow{
-    max-width: 20px;
-    border-radius: 3px;
+@import "../../../scss/variables";
+
+.subforum-container {
+  margin-top: $margintop-clear-navbar-height;
 }
 
-.vote-arrow:hover{
-    cursor: pointer;
+.vote-arrow {
+  max-width: 20px;
+  border-radius: 3px;
+  &:hover{
+      cursor: pointer;
+  }
 }
+
+

@@ -67,25 +67,7 @@ function Nav(
             <div>
               {props.isLoggedIn ? (
                 <div>
-                  <Button
-                    aria-controls="simple-menu"
-                    aria-haspopup="true"
-                    onClick={handleClick}
-                  >
-                    Home
-                    <MdArrowDropDown className="down-arrow" />
-                  </Button>
-                  <Menu
-                    id="user-subforums-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  >
-                    <MenuItem>
-                      <NavBarSubforumDropdown />
-                    </MenuItem>
-                  </Menu>
+                 <NavBarSubforumDropdown/>
                 </div>
               ) : null}
             </div>
@@ -136,27 +118,31 @@ function Nav(
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>
-                <Link
-                  to={`/user/${props.user.username}`}
-                  className="profile-menu-link"
-                >
-                  Profile
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
+               <MenuItem onClick={handleClose}>
                 <Link to={`/`} className="profile-menu-link">
                   Home
                 </Link>
               </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  logout();
-                }}
-              >
-                Logout
-              </MenuItem>
+              {props.isLoggedIn ? 
+              <span>
+                <MenuItem onClick={handleClose}>
+                <Link
+                    to={`/user/${props.user.username}`}
+                    className="profile-menu-link"
+                  >
+                    Profile
+                  </Link> 
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    logout();
+                  }}
+                >
+                  Logout
+                </MenuItem>
+                </span>
+              : '' }
             </Menu>
           </div>
         </div>

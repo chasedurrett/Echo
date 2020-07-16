@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAA;EACP,SAAS,EAAE,IAAI;EACf,aAAa,EAAE,GAAG;CACrB;;AAED,AAAA,WAAW,AAAA,MAAM,CAAA;EACb,MAAM,EAAE,OAAO;CAClB",
+    "sources": [
+        "Subforum.scss"
+    ],
+    "names": [],
+    "file": "Subforum.css"
+}
