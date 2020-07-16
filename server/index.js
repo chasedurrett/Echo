@@ -11,6 +11,7 @@ const authCtrl = require("./authController");
 const userCtrl = require("./userController");
 const subforumCtrl = require("./subforumController");
 const postCtrl = require("./postController");
+const searchCtrl = require("./searchController");
 
 app.use(express.json());
 app.use(cors());
@@ -82,6 +83,11 @@ app.delete(
   "/api/subforums/:subforumId/users/:userId",
   subforumCtrl.deleteSubforum
 );
+
+// Search Endpoints
+app.get("/api/posts/search", searchCtrl.getPosts);
+app.get("/api/subforums/search", searchCtrl.getSubforums);
+app.get("/api/users/search", searchCtrl.getUsers);
 
 massive({
   connectionString: CONNECTION_STRING,
