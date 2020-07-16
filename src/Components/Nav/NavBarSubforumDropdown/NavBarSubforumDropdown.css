@@ -1,0 +1,39 @@
+.subforum-preview-img-container {
+  background-color: #878A8C;
+}
+
+.subforum-preview-img-container:hover {
+  background-color: #6d6d6d;
+}
+
+.subforum-preview-img-container .subforum-preview-img-container {
+  height: 40px;
+  width: 40px;
+}
+
+.subforum-preview-img-container .subforum-preview-img-container .subforum-preview-img img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  -webkit-transition: -webkit-transform 0.8s ease-in-out;
+  transition: -webkit-transform 0.8s ease-in-out;
+  transition: transform 0.8s ease-in-out;
+  transition: transform 0.8s ease-in-out, -webkit-transform 0.8s ease-in-out;
+}
+
+.subforum-preview-img-container .subforum-preview-img-container .subforum-preview-img img:hover {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+.subforum-preview-img-container .subforum-preview-link-container .subforum-preview-link {
+  text-decoration: none;
+  font-family: "IBM Plex Sans", sans-serif;
+  color: black;
+}
+
+.subforum-preview-img-container .subforum-preview-link-container .subforum-preview-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+/*# sourceMappingURL=NavBarSubforumDropdown.css.map */

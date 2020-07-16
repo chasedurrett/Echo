@@ -13,14 +13,14 @@ module.exports = {
       } = req.body,
       cake_day = moment().format("LL"),
       subforum = await db.subforum.create_subforum(
-      subforum_name,
-      user_id,
-      subforum_img,
-      subforum_banner,
-      rules_section,
-      description,
-      cake_day
-    );
+        subforum_name,
+        user_id,
+        subforum_img,
+        subforum_banner,
+        rules_section,
+        description,
+        cake_day
+      );
     if (!subforum) {
       return res.status(404).send(`Something went wrong, enter info again!`);
     }
@@ -35,6 +35,14 @@ module.exports = {
         .send(`Couldn't get subforums, we're working on that!`);
     }
     return res.status(200).send(subforums);
+  },
+  getUserSubforums: async (req, res) => {
+    const db = req.app.get("db");
+    const { user_id } = req.session.user;
+
+    const userSubforums = await db.subforum.get_user_subforums(user_id);
+
+    res.status(200).send(userSubforums);
   },
   deleteSubforum: async (req, res) => {
     const db = req.app.get("db");

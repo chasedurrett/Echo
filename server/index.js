@@ -56,20 +56,21 @@ app.delete(
   "/api/subforums/:subforumId/posts/:postId",
   postCtrl.deleteSubforumPost
 );
-app.post("/api/posts/:postId/upvote", postCtrl.upvotePost);
-app.post("/api/posts/:postId/downvote", postCtrl.downvotePost);
-app.delete('/api/posts/:postId/remove-vote', postCtrl.removeVote)
+app.post("/api/subforums/posts/:postId/upvote", postCtrl.upvotePost);
+app.post("/api/subforums/posts/:postId/downvote", postCtrl.downvotePost);
+app.delete('/api/subforum/posts/:postId/remove-vote', postCtrl.removeVote)
 
 //Comment Endpoints
-app.post("/api/comments/:commentId/upvote", postCtrl.upvoteComment);
-app.post("/api/comments/:commentId/downvote", postCtrl.downvoteComment);
-app.delete('/api/comments/:commentId/remove-vote', postCtrl.removeCommentVote)
+app.post("/api/posts/:postId/comments/:commentId/upvote", postCtrl.upvoteComment);
+app.post("/api/posts/:postId/comments/:commentId/downvote", postCtrl.downvoteComment);
+app.delete('/api/posts/:postId/comments/:commentId/remove-vote', postCtrl.removeCommentVote)
 app.get("/api/posts/:postId/comments", postCtrl.getComments);
 app.post("/api/posts/:postId/comments", postCtrl.createComment);
 app.delete("/api/posts/:postId/comments/:commentId", postCtrl.deleteComment);
 
 // Subforum Endpoints
 app.get("/api/subforums", subforumCtrl.getSubforums);
+app.get('/api/subforums/users', subforumCtrl.getUserSubforums)
 app.post("/api/subforums", subforumCtrl.createSubforum);
 app.post("/api/subforums/:subforumId/users", subforumCtrl.addSubforumUser);
 app.delete(
