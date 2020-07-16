@@ -5,3 +5,4 @@ full join users a on a.user_id = p.post_author_id
 full join users u on u.user_id = $2
 full join post_votes pv on (p.post_id = pv.post_id and pv.user_id = $2)
 where s.subforum_id = $1
+order by p.post_id desc;
