@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
+import upArrow from '../../upvoteArrow.png'
+import downArrow from '../../downvoteArrow.png'
 import axios from "axios";
+import './Subforum.scss'
+
 
 function Subforum(props) {
   const [posts, setPosts] = useState([]);
@@ -28,9 +32,9 @@ function Subforum(props) {
       <div>
         {element.post_title}
         <div className="voteTracker">
-          <button className="upVoteBtn" onClick={() => upVote(element.vote_tracker)}>upvote</button>
+          <img src={upArrow} alt='upvote' className='vote-arrow'/>
           <div className="voteCount">{element.vote_tracker}</div>
-          <button className="downVoteBtn">downvote</button>
+          <img src={downArrow} alt='downvote'  className='vote-arrow'/>
         </div>
       </div>
     );

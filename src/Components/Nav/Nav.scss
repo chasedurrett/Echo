@@ -1,111 +1,127 @@
-@import '../../../scss/variables';
+@import "../../../scss/variables";
 
 nav.Nav {
-    width: 100%;
-    height: 48px;
-    display: flex;
-    flex-direction: row;
-    top: 0;
-    right: 0;
-    left: 0;
-    position: fixed;
-    align-items: center;
-    background: #FFFFFF
+  width: 100%;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  right: 0;
+  left: 0;
+  position: fixed;
+  align-items: center;
+  background: #ffffff;
 }
 
-.flex-row{
-    display: flex;
-    flex-direction: row;
+.flex-row {
+  display: flex;
+  flex-direction: row;
 }
 
-.no-user-toolbar{
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+.no-user-toolbar {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.logo-search-cont{
-    width: 70%;
+.logo-search-cont {
+  width: 70%;
 }
 
-.logo-container{
-    padding: 8px 8px 8px 0;
-    margin-left: 4px;
-    width: 10%;
+.logo-container {
+  padding: 8px 8px 8px 0;
+  margin-left: 4px;
+  width: 10%;
 }
 
-.search-bar-cont{
-    width: 85%;
+.search-bar-cont {
+  width: 85%;
 }
 
 .search-bar-cont > input {
-    border-radius: $reddit-border-radius;
-    background: #f6f7f8;
-    height: 36px;
-    outline: none;
-    padding: 0 16px 0 40px;
-    border: 1px solid #DAE0E6;
-    width: 100%;
+  border-radius: $reddit-border-radius;
+  background: #f6f7f8;
+  height: 36px;
+  outline: none;
+  padding: 0 16px 0 40px;
+  border: 1px solid #dae0e6;
+  width: 100%;
 }
 
 .search-bar-cont > input:hover {
-    border: 1px solid $reddit-blue;
+  border: 1px solid $reddit-blue;
 }
 
-.login-signup-btns-cont{
-    width: 25%;
-    justify-content: space-between;
-    margin-right: 20px;
+.nav-btns-cont {
+  width: 30%;
+  margin-right: 20px;
 }
 
-.btn-style{
-    border-radius: $reddit-border-radius;
-    padding: 3px 16px;
-    outline: none;
-    font-weight: 800;
-    text-decoration: none;
-    height: 32px;
-    align-self: center;
-    font-size: 13px;
-    letter-spacing: .2px;
-    font-family: $reddit-font;
-    padding-bottom: 5px;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.137);
+.nav-icons-cont {
+  width: 100%;
+  justify-content: space-around;
 }
 
-.btn-style:hover{
-    cursor: pointer;
-    opacity: .9;
-    box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.294);
+.nav-icon {
+  align-self: center;
+  font-size: 25px;
+  cursor: pointer;
 }
 
-.login-btn{
-    background: none;
-    border: 1px solid $reddit-blue;
-    color: $reddit-blue;
-    width: 36%;
+.login-signup-btns-cont {
+  width: 100%;
+  justify-content: space-around;
+  margin-right: 20px;
 }
 
-.signup-btn{
-    background: $reddit-blue;
-    color: white;
-    border: none;
-    margin-right: 4px;
-    width: 36%;
+.btn-style {
+  border-radius: $reddit-border-radius;
+  padding: 3px 16px;
+  outline: none;
+  font-weight: 800;
+  text-decoration: none;
+  height: 32px;
+  align-self: center;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+  font-family: $reddit-font;
+  padding-bottom: 5px;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.137);
 }
 
-.person-icon{
-    font-size: 22px;
-    color: $reddit-gray;
-    margin-right: 5px;
+.btn-style:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.294);
 }
 
-.down-arrow{
-    font-size: 20px;
-    color: $reddit-gray;
+.login-btn {
+  background: none;
+  border: 1px solid $reddit-blue;
+  color: $reddit-blue;
+  width: 36%;
 }
 
+.signup-btn {
+  background: $reddit-blue;
+  color: white;
+  border: none;
+  margin-right: 4px;
+  width: 36%;
+}
 
+.person-icon {
+  font-size: 22px;
+  color: $reddit-gray;
+  margin-right: 5px;
+}
 
+.down-arrow {
+  font-size: 20px;
+  color: $reddit-gray;
+}
 
-
+.profile-menu-link {
+  text-decoration: none;
+  color: black;
+}
