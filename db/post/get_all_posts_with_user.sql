@@ -3,4 +3,4 @@ from subforums s
 join posts p on s.subforum_id = p.subforum_id
 join users a on a.user_id = p.post_author_id
 join subforum_users su on su.subforum_id = s.subforum_id
-join users u on u.user_id = 1
+join users u on u.user_id = $1

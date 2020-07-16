@@ -6,11 +6,6 @@ import {getUser} from '../../redux/reducer';
 
 function Post(props) {
 
-  useEffect(() => {
-    console.log('use effect to grab curent user hit on post page')
-    props.getUser()
-  },[]);
-
   return (
     <div className='post-container'>
       post page

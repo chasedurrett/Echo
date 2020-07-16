@@ -82,9 +82,9 @@ module.exports = {
   getAllPostsWithUser: async (req, res) => {
     const db = req.app.get("db");
 
-    // const {user_id} = req.session.user
+    const {user_id} = req.session.user
 
-    let posts = await db.post.get_all_posts_with_user(1);
+    let posts = await db.post.get_all_posts_with_user(user_id);
     res.status(200).send(posts);
   },
 
@@ -93,15 +93,18 @@ module.exports = {
     const { user_id } = req.session.user;
     const { postId } = req.params;
 
+    console.log(postId)
+
     const hasVoted = await db.post.check_if_voted(user_id, postId);
+    let voteCount
 
     if (hasVoted.length === 0) {
       // if user hasn't upvoted previously
-      await db.post.post_vote_incrementer(postId);
+      voteCount = await db.post.post_vote_incrementer(postId);
       await db.post.upvote_post(user_id, postId);
     } else {
       // if user previously downvoted
-      await db.post.post_vote_incrementer_2(postId);
+      voteCount = await db.post.post_vote_incrementer_2(postId);
       await db.post.update_post_upvote(user_id, postId);
     }
 
@@ -110,7 +113,9 @@ module.exports = {
     }
 
     if (req.session.user) {
-      res.sendStatus(200);
+      console.log(voteCount)
+
+      res.status(200).send(voteCount[0]);
     }
   },
   downvotePost: async (req, res) => {
@@ -119,14 +124,15 @@ module.exports = {
     const { postId } = req.params;
 
     const hasVoted = await db.post.check_if_voted(user_id, postId);
+    let voteCount
 
     if (hasVoted.length === 0) {
       // if user hasn't previously downvoted
-      await db.post.downvote_post(postId);
+      voteCount = await db.post.downvote_post(postId)
       await db.post.downvote_post_instance(user_id, postId);
     } else {
       // if user previously upvoted
-      await db.post.post_vote_decrementer_2(postId);
+      voteCount = await db.post.post_vote_decrementer_2(postId);
       await db.post.update_post_downvote(user_id, postId);
     }
 
@@ -135,7 +141,7 @@ module.exports = {
     }
 
     if (req.session.user) {
-      res.sendStatus(200);
+      res.status(200).send(voteCount[0]);
     }
   },
   removeVote: async (req, res) => {
@@ -144,18 +150,19 @@ module.exports = {
     const { postId } = req.params;
 
     const checkVote = await db.post.check_how_user_voted(user_id, postId);
+    let voteCount
 
     if (checkVote.length === 0) {
       // if user had downvoted
-      await db.post.post_vote_incrementer(postId);
+      voteCount = await db.post.post_vote_incrementer(postId);
       await db.post.remove_vote(user_id, postId);
     } else {
       // if user had upvoted
-      await db.post.downvote_post(postId);
+      voteCount = await db.post.downvote_post(postId);
       await db.post.remove_vote(user_id, postId);
     }
 
-    res.sendStatus(200);
+    res.status(200).send(voteCount[0]);
   },
   upvoteComment: async (req, res) => {
     const db = req.app.get("db");

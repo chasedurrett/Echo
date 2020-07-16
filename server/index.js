@@ -57,9 +57,9 @@ app.delete(
   "/api/subforums/:subforumId/posts/:postId",
   postCtrl.deleteSubforumPost
 );
-app.post("/api/subforums/posts/:postId/upvote", postCtrl.upvotePost);
-app.post("/api/subforums/posts/:postId/downvote", postCtrl.downvotePost);
-app.delete('/api/subforum/posts/:postId/remove-vote', postCtrl.removeVote)
+app.post("/api/subforums/:subforumId/posts/:postId/upvote", postCtrl.upvotePost);
+app.post("/api/subforums/:subforumId/posts/:postId/downvote", postCtrl.downvotePost);
+app.delete('/api/subforums/:subforumId/posts/:postId/remove-vote', postCtrl.removeVote)
 
 //Comment Endpoints
 app.post("/api/posts/:postId/comments/:commentId/upvote", postCtrl.upvoteComment);
