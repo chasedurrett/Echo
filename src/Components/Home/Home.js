@@ -15,7 +15,6 @@ function Home(props){
         <div className={'home-container'}>
             Home Page
             {props.isLoggedIn ? <div>username is {props.user.username}</div> : ''}
-            
         </div>
     )
 }

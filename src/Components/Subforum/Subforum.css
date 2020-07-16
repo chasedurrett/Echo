@@ -1,0 +1,9 @@
+.vote-arrow {
+  max-width: 20px;
+  border-radius: 3px;
+}
+
+.vote-arrow:hover {
+  cursor: pointer;
+}
+/*# sourceMappingURL=Subforum.css.map */
