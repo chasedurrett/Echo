@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './Profile.scss';
+import {FaPen} from 'react-icons/fa'
 import {connect} from 'react-redux';
 import {getUser} from '../../redux/reducer';
 import axios from 'axios';
@@ -11,13 +12,11 @@ function Profile(props){
     useEffect(() => {
         getUserInfo()
         getUserPosts()
-      },[]);
+      },[props.match.params.userId]);
 
     const getUserInfo = () => {
-        console.log('hit getuserinfo function')
         axios.get(`/api/users/${props.match.params.userId}`)
         .then(res => {
-            console.log('res.data', res.data)
             setUser(res.data[0])
         })
         .catch(err => {
@@ -34,15 +33,32 @@ function Profile(props){
         })
     }
 
-    console.log(props.match.params.userId)
-    console.log(user)
     return(
         <div className='profile-container'>
-           Profile
-           {user.username}
-           {userPosts.map(post => {
-            <div>{post.post_title}</div>
-           })}
+            <div className='post-container'>
+                {userPosts.map(post => (
+                    <div key={post.post_id}>
+                        {post.post_title}
+                    </div>
+                 ))}
+            </div>
+
+           <div className='user-info-container'> 
+            <div className='user-info-section'>
+                <div className='edit-profile-banner'>
+                    <FaPen className='profile-pic-edit'/>
+                </div>
+                <div className='profile-image-section'>
+                    <div className='edit-profile-image'>
+                        <FaPen className='profile-pic-edit'/>
+                    </div>
+                </div>
+                <div className='user-info-username'>
+                    u/{user.username}
+                </div>
+            </div>
+           </div>
+           
             
         </div>
     )
