@@ -1,7 +1,23 @@
 @import "../../../scss/variables";
 
+
+
 .create-post-container{
     margin-top: $margintop-clear-navbar-height;
-    height: 100vh;
+    height: 90vh;
     width: 100%;
+    display: flex;
+    align-items: center;
+    .post-form-container{
+        height: 70%;
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .post-info-container{
+        height: 70%;
+        width: 35%;
+    }
 }
