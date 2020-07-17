@@ -1,8 +1,9 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,WAAW,CAAA;EACP,SAAS,EAAE,IAAI;EACf,aAAa,EAAE,GAAG;CACrB;;AAED,AAAA,WAAW,AAAA,MAAM,CAAA;EACb,MAAM,EAAE,OAAO;CAClB",
+    "mappings": "AAEA,AAAA,mBAAmB,CAAC;EAClB,UAAU,ECOoB,IAAI;CDNnC;;AAED,AAAA,WAAW,CAAC;EACV,SAAS,EAAE,IAAI;EACf,aAAa,EAAE,GAAG;CAInB;;AAND,AAGE,WAHS,AAGR,MAAM,CAAA;EACH,MAAM,EAAE,OAAO;CAClB;;AAGH,AAAA,MAAM,CAAC;EACL,KAAK,ECbO,OAAO;CDcpB",
     "sources": [
-        "Subforum.scss"
+        "Subforum.scss",
+        "../../../scss/_variables.scss"
     ],
     "names": [],
     "file": "Subforum.css"
