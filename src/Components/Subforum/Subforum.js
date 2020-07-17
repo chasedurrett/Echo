@@ -22,18 +22,49 @@ function Subforum(props) {
   };
 
   const upVote = (postId) => {
-    console.log(postId);
-    axios.post(`/api/posts/${postId}/upvote`).then();
+    console.log(`upvoting`);
+    axios.post(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/upvote`)
+      .then(res => {
+        console.log(res.data.vote_tracker)
+        console.log(posts)
+        setPosts(posts.map(element => {
+          if (element.post_id === postId) {
+            element.vote_tracker = res.data.vote_tracker
+          }
+          return element
+        }
+        ))
+      })
+      .catch(err => console.log(err))
+      ;
   };
 
   const downVote = (postId) => {
-    console.log(postId);
-    axios.post(`/api/posts/${postId}/downvote`).then();
+    console.log(`downvoting`);
+    axios.post(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/downvote`)
+      .then(res => {
+        setPosts(posts.map(element => {
+          if (element.post_id === postId) {
+            element.vote_tracker = res.data.vote_tracker
+          }
+          return element
+        }
+        ))
+      });
   };
 
   const deleteVote = (postId) => {
-    console.log(postId);
-    axios.delete(`/api/posts/${postId}/remove-vote`).then();
+    console.log(`deleting vote`);
+    axios.delete(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/remove-vote`)
+      .then(res => {
+        setPosts(posts.map(element => {
+          if (element.post_id === postId) {
+            element.vote_tracker = res.data.vote_tracker
+          }
+          return element
+        }
+        ))
+      });
   };
 
   console.log(posts);
@@ -54,12 +85,12 @@ function Subforum(props) {
                 onClick={() => deleteVote(element.post_id)}
               />
             ) : (
-              <GoArrowUp
-                alt="upvote"
-                className="vote-arrow"
-                onClick={() => upVote(element.post_id)}
-              />
-            )}
+                <GoArrowUp
+                  alt="upvote"
+                  className="vote-arrow"
+                  onClick={() => upVote(element.post_id)}
+                />
+              )}
           </div>
           <div className="voteCount">{element.vote_tracker}</div>
           <div>
@@ -71,12 +102,12 @@ function Subforum(props) {
                 onClick={() => deleteVote(element.post_id)}
               />
             ) : (
-              <GoArrowDown
-                alt="downvote"
-                className="vote-arrow"
-                onClick={() => downVote(element.post_id)}
-              />
-            )}
+                <GoArrowDown
+                  alt="downvote"
+                  className="vote-arrow"
+                  onClick={() => downVote(element.post_id)}
+                />
+              )}
           </div>
         </div>
       </div>

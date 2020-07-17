@@ -2,4 +2,5 @@ select distinct p.post_id, p.post_title, p.post_content, p.post_url, p.post_auth
 from posts p 
 join subforums s on s.subforum_id = p.subforum_id
 join users a on a.user_id = p.post_author_id
-where s.subforum_id = $1;
+where s.subforum_id = $1
+order by p.post_id desc;

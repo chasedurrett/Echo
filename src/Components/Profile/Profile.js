@@ -5,12 +5,6 @@ import {getUser} from '../../redux/reducer';
 
 function Profile(props){
 
-    useEffect(() => {
-        console.log('use effect to grab curent user hit on profile page')
-        props.getUser()
-      },[]);
-
-
     return(
         <div className='profile-container'>
             Profile Page
