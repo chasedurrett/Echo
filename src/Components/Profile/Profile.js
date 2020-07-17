@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './Profile.scss';
-import {FaPen} from 'react-icons/fa';
-import {GiCakeSlice} from 'react-icons/gi';
+import ProfileBox from '../ProfileBox/ProfileBox';
 import {connect} from 'react-redux';
 import {getUser} from '../../redux/reducer';
 import axios from 'axios';
+
 
 function Profile(props){
     const [userPosts, setUserPosts] = useState([]);
@@ -34,6 +34,7 @@ function Profile(props){
         })
     }
 
+    console.log(user)
     return(
         <div className='profile-container'>
             <div className='post-container'>
@@ -45,28 +46,15 @@ function Profile(props){
             </div>
 
            <div className='user-info-container'> 
-            <div className='user-info-section'>
-                <div className='edit-profile-banner'>
-                    <FaPen className='profile-pic-edit'/>
-                </div>
-                <div className='profile-image-section'>
-                    <div className='edit-profile-image'>
-                        <FaPen className='profile-pic-edit'/>
-                    </div>
-                </div>
-                <div className='user-info-username'>
-                    u/{user.username}
-                </div>
-                <div className='user-info-cake-day-container'>
-                    <div className='user-info-cake-day'>
-                        <div className='cake-day'>Cake day</div>
-                        <div className='cake-day-date'>
-                            <GiCakeSlice className='cake-icon'/>
-                            {user.cake_day}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
+            <ProfileBox 
+                cake_day={user.cake_day} 
+                username={user.username} 
+                user_id={user.user_id} 
+                user_image={user.user_image} 
+                user_banner={user.user_banner}
+            />
+
             <div className='other-info-section'>
                 <ul className='other-info-list'>
                     <li>Help</li>
