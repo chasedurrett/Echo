@@ -128,3 +128,27 @@
   font-family: $reddit-font;
   color: $reddit-gray
 }
+
+.other-info-section{
+  height: 140px;
+  width: 100%;
+  max-width: 310px;
+  margin-top: 50px;
+  border-radius: $reddit-border-radius;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+.other-info-list{
+  list-style: none;
+  font-size: 13px;
+  margin: 0px;
+  padding: 15px 0px 0px 10px;
+  font-family: $reddit-font;
+
+}
+
+.other-info-list li {
+  margin-bottom: 5px;
+  cursor: pointer;
+}

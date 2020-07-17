@@ -67,6 +67,15 @@ function Profile(props){
                     </div>
                 </div>
             </div>
+            <div className='other-info-section'>
+                <ul className='other-info-list'>
+                    <li>Help</li>
+                    <li>About</li>
+                    <li>Communities</li>
+                    <li>Top Posts</li>
+                    <li>Terms</li>
+                </ul>
+            </div>
            </div>
            
             
