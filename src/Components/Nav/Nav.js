@@ -127,7 +127,7 @@ function Nav(
               <span>
                 <MenuItem onClick={handleClose}>
                 <Link
-                    to={`/user/${props.user.username}`}
+                    to={`/user/${props.user.user_id}`}
                     className="profile-menu-link"
                   >
                     Profile

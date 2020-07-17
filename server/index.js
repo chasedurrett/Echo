@@ -37,6 +37,9 @@ app.get("/api/users", userCtrl.getAllUsers);
 app.get("/api/users/:userId", userCtrl.getUser);
 app.get("/api/users/:userId/followers", userCtrl.getFollowers);
 app.get("/api/users/:userId/following", userCtrl.getFollowing);
+
+app.get("/api/users/:userId/profileInfo", userCtrl.getUserProfileInfo);
+
 app.post("/api/users/:userId", userCtrl.addFollower);
 app.put("/api/users/:userId", userCtrl.updateUser);
 app.delete("/api/users/:userId", userCtrl.removeFollower);
@@ -45,18 +48,9 @@ app.delete("/api/users/:userId", userCtrl.removeFollower);
 app.get("/api/subforums/:subforumId/posts", postCtrl.getAllSubforumPosts);
 app.get("/api/subforums/posts/no-user", postCtrl.getAllPostsNoUser);
 app.post("/api/subforums/:subforumId/post", postCtrl.createSubforumPost);
-app.get(
-  "/api/subforums/:subforumId/posts/:postId",
-  postCtrl.getSingleSubforumPost
-);
-app.put(
-  "/api/subforums/:subforumId/posts/:postId",
-  postCtrl.updateSubforumPost
-);
-app.delete(
-  "/api/subforums/:subforumId/posts/:postId",
-  postCtrl.deleteSubforumPost
-);
+app.get("/api/subforums/:subforumId/posts/:postId", postCtrl.getSingleSubforumPost);
+app.put("/api/subforums/:subforumId/posts/:postId", postCtrl.updateSubforumPost);
+app.delete("/api/subforums/:subforumId/posts/:postId", postCtrl.deleteSubforumPost);
 app.post("/api/subforums/:subforumId/posts/:postId/upvote", postCtrl.upvotePost);
 app.post("/api/subforums/:subforumId/posts/:postId/downvote", postCtrl.downvotePost);
 app.delete('/api/subforums/:subforumId/posts/:postId/remove-vote', postCtrl.removeVote)
@@ -74,15 +68,9 @@ app.get("/api/subforums", subforumCtrl.getSubforums);
 app.get('/api/subforums/users', subforumCtrl.getUserSubforums)
 app.post("/api/subforums", subforumCtrl.createSubforum);
 app.post("/api/subforums/:subforumId/users", subforumCtrl.addSubforumUser);
-app.delete(
-  "/api/subforums/:subforumId/users/:userId",
-  subforumCtrl.removeSubforumUser
-);
+app.delete("/api/subforums/:subforumId/users/:userId", subforumCtrl.removeSubforumUser);
 app.put("/api/subforums/:subforumId/users/:userId", subforumCtrl.editSubforum);
-app.delete(
-  "/api/subforums/:subforumId/users/:userId",
-  subforumCtrl.deleteSubforum
-);
+app.delete("/api/subforums/:subforumId/users/:userId", subforumCtrl.deleteSubforum);
 
 // Search Endpoints
 app.get("/api/posts/search", searchCtrl.getPosts);
