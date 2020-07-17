@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {getUser} from '../../redux/reducer';
 import axios from 'axios';
 
+
 function Profile(props){
     const [userPosts, setUserPosts] = useState([]);
     const [user, setUser] = useState({});
@@ -46,7 +47,13 @@ function Profile(props){
 
            <div className='user-info-container'> 
             
-            <ProfileBox cake_day={user.cake_day} username={user.username} user_id={user.user_id}/>
+            <ProfileBox 
+                cake_day={user.cake_day} 
+                username={user.username} 
+                user_id={user.user_id} 
+                user_image={user.user_image} 
+                user_banner={user.user_banner}
+            />
 
             <div className='other-info-section'>
                 <ul className='other-info-list'>
