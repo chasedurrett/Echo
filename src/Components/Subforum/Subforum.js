@@ -10,11 +10,10 @@ function Subforum(props) {
   useEffect(() => {
     console.log(props.match.params);
     getPosts();
-  }, []);
+  }, [props.match.params.subforumId]);
 
   const getPosts = () => {
-    axios
-      .get(`/api/subforums/${props.match.params.subforumId}/posts`)
+    axios.get(`/api/subforums/${props.match.params.subforumId}/posts`)
       .then((res) => {
         console.log(res.data);
         setPosts(res.data);
