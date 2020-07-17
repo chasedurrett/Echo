@@ -210,7 +210,6 @@ export default function NavBarSubforumDropdown(props) {
                 autoFocusItem={open}
                 id="menu-list-grow"
                 onKeyDown={handleListKeyDown}
-                style={{ borderRadius: 15 }}
               >
                 <MenuItem
                   style={{
