@@ -73,8 +73,7 @@ export default function NavBarSubforumDropdown(props) {
     .map((e) => (
       <Link
         style={{ textDecoration: "none", fontFamily: "IBM Plex Sans" }}
-        to={`/subforum/${e.subforum_id}`}
-        key={e.subforum_id}
+        to={`/subforums/${e.subforum_id}`}
       >
         <MenuItem
           onClick={handleClose}

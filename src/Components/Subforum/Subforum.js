@@ -6,9 +6,10 @@ import "./Subforum.scss";
 
 function Subforum(props) {
   const [posts, setPosts] = useState([]);
+  const [buttonsDisabled, setButtonsDisabled] = useState(false)
 
   useEffect(() => {
-    console.log(props.match.params);
+    // console.log(props.match.params);
     getPosts();
   }, [props.match.params.subforumId]);
 
@@ -17,52 +18,36 @@ function Subforum(props) {
       .then((res) => {
         console.log(res.data);
         setPosts(res.data);
+        setButtonsDisabled(false)
       });
   };
 
   const upVote = (postId) => {
+    setButtonsDisabled(true)
     console.log(`upvoting`);
     axios.post(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/upvote`)
       .then(res => {
-        console.log(res.data.vote_tracker)
-        console.log(posts)
-        setPosts(posts.map(element => {
-          if (element.post_id === postId) {
-            element.vote_tracker = res.data.vote_tracker
-          }
-          return element
-        }
-        ))
+        getPosts()
       })
       .catch(err => console.log(err))
       ;
   };
 
   const downVote = (postId) => {
+    setButtonsDisabled(true)
     console.log(`downvoting`);
     axios.post(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/downvote`)
       .then(res => {
-        setPosts(posts.map(element => {
-          if (element.post_id === postId) {
-            element.vote_tracker = res.data.vote_tracker
-          }
-          return element
-        }
-        ))
+        getPosts()
       });
   };
 
   const deleteVote = (postId) => {
+    setButtonsDisabled(true)
     console.log(`deleting vote`);
     axios.delete(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/remove-vote`)
       .then(res => {
-        setPosts(posts.map(element => {
-          if (element.post_id === postId) {
-            element.vote_tracker = res.data.vote_tracker
-          }
-          return element
-        }
-        ))
+        getPosts()
       });
   };
 
@@ -71,7 +56,7 @@ function Subforum(props) {
   const mappedPosts = posts.map((element, index) => {
     console.log(element);
     return (
-      <div>
+      <div key={element.post_id}>
         {element.post_title}
         {element.post_id}
         <div className="voteTracker">
@@ -80,14 +65,14 @@ function Subforum(props) {
               <GoArrowUp
                 alt="upvote"
                 style={{ maxWidth: 50 }}
-                className="vote-arrow"
-                onClick={() => deleteVote(element.post_id)}
+                className="vote-arrow voted"
+                onClick={() => buttonsDisabled ? null : deleteVote(element.post_id)}
               />
             ) : (
                 <GoArrowUp
                   alt="upvote"
                   className="vote-arrow"
-                  onClick={() => upVote(element.post_id)}
+                  onClick={() => buttonsDisabled ? null :  upVote(element.post_id)}
                 />
               )}
           </div>
@@ -97,14 +82,14 @@ function Subforum(props) {
               <GoArrowDown
                 alt="upvote"
                 style={{ maxWidth: 50 }}
-                className="vote-arrow"
-                onClick={() => deleteVote(element.post_id)}
+                className="vote-arrow voted"
+                onClick={() => buttonsDisabled ? null :  deleteVote(element.post_id)}
               />
             ) : (
                 <GoArrowDown
                   alt="downvote"
                   className="vote-arrow"
-                  onClick={() => downVote(element.post_id)}
+                  onClick={() => buttonsDisabled ? null :  downVote(element.post_id)}
                 />
               )}
           </div>
