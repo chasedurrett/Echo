@@ -12,7 +12,7 @@ import "./NavBarSubforumDropdown.scss";
 
 export default function NavBarSubforumDropdown(props) {
   const [subforumsList, setSubforumsList] = useState([]);
-  const [inputVal, setInputVal] = useState('')
+  const [inputVal, setInputVal] = useState("");
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
@@ -32,6 +32,10 @@ export default function NavBarSubforumDropdown(props) {
         }
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleChange = (e) => {
+    setInputVal(e.target.value);
   };
 
   const handleToggle = () => {
@@ -62,6 +66,78 @@ export default function NavBarSubforumDropdown(props) {
     prevOpen.current = open;
   }, [open]);
 
+  const dropDownSubforumsList = subforumsList
+    .filter((e) => {
+      return e.subforum_name.includes(inputVal);
+    })
+    .map((e) => (
+      <Link
+        style={{ textDecoration: "none", fontFamily: "IBM Plex Sans" }}
+        to={`/subforum/${e.subforum_id}`}
+      >
+        <MenuItem
+          key={e.subforum_id}
+          onClick={handleClose}
+          style={{
+            height: 40,
+            width: 300,
+            backgroundColor: "#ffffff",
+            display: "flex",
+            alignItems: "center",
+            borderBottom: "1px black",
+          }}
+        >
+          <div
+            className="subforum-preview-img-container"
+            style={{
+              background: "none",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {e.subforum_img === null ? (
+              <img
+                style={{ height: 25, width: 25, borderRadius: 50 }}
+                className="subforum-preview-img"
+                src={
+                  "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
+                }
+              ></img>
+            ) : (
+              <img
+                style={{ height: 25, width: 25, borderRadius: 50 }}
+                className="subforum-preview-img"
+                src={e.subforum_img}
+              ></img>
+            )}
+          </div>
+          <div
+            className="subforum-preview-link-container"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: 40,
+            }}
+          >
+            <h3
+              style={{
+                fontSize: 15,
+                fontWeight: 300,
+                fontFamily: "IBM Plex Sans",
+                textDecoration: "none",
+                color: "black",
+                marginLeft: 15,
+              }}
+            >
+              c/{e.subforum_name}
+            </h3>
+          </div>
+        </MenuItem>
+      </Link>
+    ));
+
   return (
     <div className="user-subforums-dropdown-container">
       <Button
@@ -76,7 +152,41 @@ export default function NavBarSubforumDropdown(props) {
           justifyContent: "space-between",
         }}
       >
-        Home
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: 80,
+          }}
+        >
+          <div
+            className="subforum-preview-img-container"
+            style={{
+              background: "none",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img
+              style={{ height: 25, width: 25, borderRadius: 50 }}
+              className="subforum-preview-img"
+              src={
+                "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
+              }
+            ></img>
+          </div>
+          <div
+            style={{
+              fontSize: 15,
+              fontWeight: 300,
+              fontFamily: "IBM Plex Sans",
+              textDecoration: "none",
+            }}
+          >
+            Home
+          </div>
+        </div>
         <MdArrowDropDown className="down-arrow" />
       </Button>
 
@@ -102,72 +212,48 @@ export default function NavBarSubforumDropdown(props) {
                 onKeyDown={handleListKeyDown}
                 style={{ borderRadius: 15 }}
               >
-              <MenuItem 
-              style={{
-                height: 40,
-                width: 300,
-                backgroundColor: "#ffffff",
-              }}
-              >
-                <input className="dropdown-input" style={{border: 0, height: '100%', width: '100%', borderColor: "#ffffff", boxShadow: 'none'}} placeholder="Search.."></input>
-              </MenuItem>
-                {subforumsList.map((e) => (
-                  <MenuItem
-                    key={e.subforum_id}
-                    onClick={handleClose}
+                <MenuItem
+                  style={{
+                    height: 40,
+                    width: 300,
+                    backgroundColor: "#ffffff",
+                  }}
+                >
+                  <input
+                    className="dropdown-input"
                     style={{
-                      height: 40,
-                      width: 300,
-                      backgroundColor: "#ffffff",
+                      border: 0,
+                      outline: "none",
+                      height: 100,
+                      width: "100%",
+                      borderColor: "#ffffff",
+                      boxShadow: "none",
+                      fontSize: 15,
+                      fontFamily: "IBM Plex Sans",
+                    }}
+                    value={inputVal}
+                    placeholder="Search.."
+                    onChange={handleChange}
+                  ></input>
+                </MenuItem>
+                <MenuItem
+                  style={{ height: 40, width: 300, backgroundColor: "#ffffff" }}
+                  onClick={handleClose}
+                >
+                  <Link
+                    to={`/`}
+                    style={{
+                      fontSize: 15,
+                      fontWeight: 300,
+                      fontFamily: "IBM Plex Sans",
+                      textDecoration: "none",
+                      color: "#0079d3",
                     }}
                   >
-                    <div
-                      className="subforum-preview-img-container"
-                      style={{
-                        background: "none",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      {e.subforum_img === null ? (
-                        <img
-                          style={{ height: 30, width: 30, borderRadius: 50 }}
-                          className="subforum-preview-img"
-                          src={
-                            "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
-                          }
-                        ></img>
-                      ) : (
-                        <img
-                          style={{ height: 30, width: 30, borderRadius: 50 }}
-                          className="subforum-preview-img"
-                          src={e.subforum_img}
-                        ></img>
-                      )}
-                    </div>
-                    <div
-                      className="subforum-preview-link-container"
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Link
-                        style={{
-                          textDecoration: "none",
-                          color: "black",
-                          marginLeft: 35,
-                        }}
-                        className="subforum-preview-link"
-                        to={{ pathname: `/subforum/${e.subforum_id}` }}
-                      >
-                        <h3>c/{e.subforum_name}</h3>
-                      </Link>
-                    </div>
-                  </MenuItem>
-                ))}
+                    <h4>Home Feed</h4>
+                  </Link>
+                </MenuItem>
+                {dropDownSubforumsList}
                 <MenuItem
                   onClick={handleClose}
                   style={{
@@ -176,7 +262,19 @@ export default function NavBarSubforumDropdown(props) {
                     backgroundColor: "#ffffff",
                   }}
                 >
-                  Create a chamber
+                  <Link
+                    style={{
+                      textDecoration: "none",
+                      fontSize: 15,
+                      fontWeight: 300,
+                      fontFamily: "IBM Plex Sans",
+                      color: "#0079d3",
+                    }}
+                    onClick={handleClose}
+                    to={`/subforum/post`}
+                  >
+                    Create a post
+                  </Link>
                 </MenuItem>
               </MenuList>
             </ClickAwayListener>

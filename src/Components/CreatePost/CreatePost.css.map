@@ -1,8 +1,9 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAEA,AAAA,sBAAsB,CAAA;EAClB,UAAU,ECKkB,IAAI;EDJhC,MAAM,EAAE,KAAK;EACb,KAAK,EAAE,IAAI;CACd",
     "sources": [
-        "CreatePost.scss"
+        "CreatePost.scss",
+        "../../../scss/_variables.scss"
     ],
     "names": [],
     "file": "CreatePost.css"

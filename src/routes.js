@@ -17,6 +17,7 @@ export default (
     <Route path="/subforum/:subforumId/posts/:postId" component={Post} />
     <ProtectedProfile path="/user/:username" component={Profile} />
     <Route path="/subforum/:subforumId/post" component={CreatePost} />
+    <Route path="/subforum/post" component={CreatePost} />
     <Route path="/subforum/:subforumId/posts/:postId" component={PostDetailed} />
     <Route path="/search" component={Search} />
   </Switch>
