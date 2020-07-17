@@ -34,7 +34,7 @@
   max-width: 310px;
   border-radius: $reddit-border-radius;
   border: 1px solid #ccc;
-  background: linear-gradient(360deg, white 65%, #33a8ff 25%);
+  background: linear-gradient(360deg, white 65%, $reddit-light-blue 25%);
 }
 
 .profile-image-section{
@@ -47,10 +47,11 @@
 }
 
 .user-info-username{
-  font-size: 13px;
-  font-weight: bolder;
+  font-size: 12px;
+  font-weight: bold;
   font-family: $reddit-font;
-  margin: 5px 0px 0px 15px;
+  margin: 5px 0px 0px 12px;
+  letter-spacing: .5px;
 }
 
 .edit-profile-image {
@@ -88,4 +89,42 @@
   float: right;
   right: 10px;
   top: 50px;
+  cursor: pointer;
+}
+
+.user-info-cake-day-container{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+
+.user-info-cake-day{
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0px 0px 12px;
+}
+
+.cake-day{
+  font-size: 14px;
+  font-weight: bold;
+  font-family: $reddit-font;
+  letter-spacing: .5px;
+  margin-bottom: 1px;
+}
+
+.cake-icon{
+  color: $reddit-light-blue;
+  font-size: 14px;
+  margin-right: 4px;
+  top: 3px;
+  position: relative;
+  transform: rotateY(190deg);
+}
+
+.cake-day-date{
+  font-size: 13px;
+  font-family: $reddit-font;
+  color: $reddit-gray
 }

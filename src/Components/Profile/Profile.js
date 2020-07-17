@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './Profile.scss';
-import {FaPen} from 'react-icons/fa'
+import {FaPen} from 'react-icons/fa';
+import {GiCakeSlice} from 'react-icons/gi';
 import {connect} from 'react-redux';
 import {getUser} from '../../redux/reducer';
 import axios from 'axios';
@@ -55,6 +56,15 @@ function Profile(props){
                 </div>
                 <div className='user-info-username'>
                     u/{user.username}
+                </div>
+                <div className='user-info-cake-day-container'>
+                    <div className='user-info-cake-day'>
+                        <div className='cake-day'>Cake day</div>
+                        <div className='cake-day-date'>
+                            <GiCakeSlice className='cake-icon'/>
+                            {user.cake_day}
+                        </div>
+                    </div>
                 </div>
             </div>
            </div>
