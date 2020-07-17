@@ -1,8 +1,9 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAEA,AAAA,OAAO,CAAC;EACN,UAAU,ECOoB,IAAI;CDNnC",
     "sources": [
-        "Search.scss"
+        "Search.scss",
+        "../../../scss/_variables.scss"
     ],
     "names": [],
     "file": "Search.css"

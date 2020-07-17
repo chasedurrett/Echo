@@ -3,7 +3,7 @@
 module.exports = {
     getPosts: async (req, res) => {
         const db = req.app.get('db')
-        let val = req.query
+        let val = req.query.input
         console.log(val)
 
         const data = await db.search.get_search_posts(val)
@@ -16,7 +16,7 @@ module.exports = {
     
     getSubforums: async (req, res) => {
         const db = req.app.get('db')
-        let val = req.query.val
+        let val = req.query.input
 
         const data = await db.search.get_search_subforums(val)
 
@@ -28,8 +28,8 @@ module.exports = {
 
     getUsers: async (req, res) => {
         const db = req.app.get('db')
-        let val = req.query.val
-
+        let val = req.query.input
+        
         const data = await db.search.get_search_users(val)
 
         if(data.length === 0){

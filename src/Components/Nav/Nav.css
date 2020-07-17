@@ -45,11 +45,24 @@ nav.Nav {
 .logo-container {
   padding: 8px 8px 8px 0;
   margin-left: 4px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 10%;
 }
 
+.subforum-dropdown {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
 .search-bar-cont {
-  width: 85%;
+  width: 80%;
+  margin-left: 10px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 
 .search-bar-cont > input {
