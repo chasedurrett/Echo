@@ -76,7 +76,6 @@ export default function NavBarSubforumDropdown(props) {
         to={`/subforums/${e.subforum_id}`}
       >
         <MenuItem
-          key={e.subforum_id}
           onClick={handleClose}
           style={{
             height: 40,
@@ -210,7 +209,6 @@ export default function NavBarSubforumDropdown(props) {
                 autoFocusItem={open}
                 id="menu-list-grow"
                 onKeyDown={handleListKeyDown}
-                style={{ borderRadius: 15 }}
               >
                 <MenuItem
                   style={{
@@ -271,7 +269,7 @@ export default function NavBarSubforumDropdown(props) {
                       color: "#0079d3",
                     }}
                     onClick={handleClose}
-                    to={`/subforum/post`}
+                    to={`/create-post`}
                   >
                     Create a post
                   </Link>

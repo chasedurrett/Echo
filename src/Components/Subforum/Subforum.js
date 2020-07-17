@@ -14,8 +14,7 @@ function Subforum(props) {
   }, [props.match.params.subforumId]);
 
   const getPosts = () => {
-    axios
-      .get(`/api/subforums/${props.match.params.subforumId}/posts`)
+    axios.get(`/api/subforums/${props.match.params.subforumId}/posts`)
       .then((res) => {
         console.log(res.data);
         setPosts(res.data);
@@ -57,7 +56,7 @@ function Subforum(props) {
   const mappedPosts = posts.map((element, index) => {
     console.log(element);
     return (
-      <div>
+      <div key={element.post_id}>
         {element.post_title}
         {element.post_id}
         <div className="voteTracker">
