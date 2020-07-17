@@ -38,6 +38,7 @@ function CreatePost(props) {
               className={classes.tabBar}
             >
               <Tabs
+                className={classes.tabs}
                 value={value}
                 onChange={handleChange}
                 indicatorColor="primary"
@@ -171,6 +172,8 @@ const useStyles = makeStyles((theme) => ({
     height: 500,
     borderRadius: 8,
     boxShadow: "6px 6px 6px lightgrey",
+    indicatorColor: '#0079d3',
+    textColor: '#0079d3'
   },
   tabBar: {
     backgroundColor: theme.palette.background.paper,
@@ -186,5 +189,9 @@ const useStyles = makeStyles((theme) => ({
   },
   textArea: {
       width: "100%"
+  },
+  tabs: {
+      indicatorColor: '#0079d3',
+      textColor: '#0079d3'
   }
 }));
