@@ -71,73 +71,71 @@ export default function NavBarSubforumDropdown(props) {
       return e.subforum_name.includes(inputVal);
     })
     .map((e) => (
-      <MenuItem
-        key={e.subforum_id}
-        onClick={handleClose}
-        style={{
-          height: 40,
-          width: 300,
-          backgroundColor: "#ffffff",
-          display: "flex",
-          alignItems: "center",
-          borderBottom: "1px black",
-        }}
+      <Link
+        style={{ textDecoration: "none", fontFamily: "IBM Plex Sans" }}
+        to={`/subforum/${e.subforum_id}`}
       >
-        <div
-          className="subforum-preview-img-container"
+        <MenuItem
+          key={e.subforum_id}
+          onClick={handleClose}
           style={{
-            background: "none",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {e.subforum_img === null ? (
-            <img
-              style={{ height: 25, width: 25, borderRadius: 50 }}
-              className="subforum-preview-img"
-              src={
-                "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
-              }
-            ></img>
-          ) : (
-            <img
-              style={{ height: 25, width: 25, borderRadius: 50 }}
-              className="subforum-preview-img"
-              src={e.subforum_img}
-            ></img>
-          )}
-        </div>
-        <div
-          className="subforum-preview-link-container"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
             height: 40,
+            width: 300,
+            backgroundColor: "#ffffff",
+            display: "flex",
+            alignItems: "center",
+            borderBottom: "1px black",
           }}
         >
-          <Link
+          <div
+            className="subforum-preview-img-container"
             style={{
-              textDecoration: "none",
-              color: "black",
-              marginLeft: 15,
+              background: "none",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
-            className="subforum-preview-link"
-            to={{ pathname: `/subforum/${e.subforum_id}` }}
+          >
+            {e.subforum_img === null ? (
+              <img
+                style={{ height: 25, width: 25, borderRadius: 50 }}
+                className="subforum-preview-img"
+                src={
+                  "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
+                }
+              ></img>
+            ) : (
+              <img
+                style={{ height: 25, width: 25, borderRadius: 50 }}
+                className="subforum-preview-img"
+                src={e.subforum_img}
+              ></img>
+            )}
+          </div>
+          <div
+            className="subforum-preview-link-container"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: 40,
+            }}
           >
             <h3
               style={{
                 fontSize: 15,
                 fontWeight: 300,
                 fontFamily: "IBM Plex Sans",
+                textDecoration: "none",
+                color: "black",
+                marginLeft: 15,
               }}
             >
               c/{e.subforum_name}
             </h3>
-          </Link>
-        </div>
-      </MenuItem>
+          </div>
+        </MenuItem>
+      </Link>
     ));
 
   return (
@@ -154,7 +152,13 @@ export default function NavBarSubforumDropdown(props) {
           justifyContent: "space-between",
         }}
       >
-        <div style={{display: 'flex', justifyContent: 'space-between', width: 80}}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: 80,
+          }}
+        >
           <div
             className="subforum-preview-img-container"
             style={{
@@ -219,13 +223,13 @@ export default function NavBarSubforumDropdown(props) {
                     className="dropdown-input"
                     style={{
                       border: 0,
-                      outline: 'none',
+                      outline: "none",
                       height: 100,
-                      width: '100%',
+                      width: "100%",
                       borderColor: "#ffffff",
                       boxShadow: "none",
                       fontSize: 15,
-                      fontFamily: "IBM Plex Sans"
+                      fontFamily: "IBM Plex Sans",
                     }}
                     value={inputVal}
                     placeholder="Search.."
@@ -237,13 +241,13 @@ export default function NavBarSubforumDropdown(props) {
                   onClick={handleClose}
                 >
                   <Link
-                    to={{ pathname: `/` }}
+                    to={`/`}
                     style={{
                       fontSize: 15,
                       fontWeight: 300,
                       fontFamily: "IBM Plex Sans",
                       textDecoration: "none",
-                      color: '#0079d3'
+                      color: "#0079d3",
                     }}
                   >
                     <h4>Home Feed</h4>
@@ -264,10 +268,10 @@ export default function NavBarSubforumDropdown(props) {
                       fontSize: 15,
                       fontWeight: 300,
                       fontFamily: "IBM Plex Sans",
-                      color: '#0079d3'
+                      color: "#0079d3",
                     }}
                     onClick={handleClose}
-                    to={{ pathname: `/subforum/post` }}
+                    to={`/subforum/post`}
                   >
                     Create a post
                   </Link>
