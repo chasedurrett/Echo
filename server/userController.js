@@ -2,7 +2,7 @@ module.exports = {
   getAllUsers: async (req, res) => {
     const db = req.app.get("db");
 
-    const users = await db.all_users();
+    const users = await db.user.all_users();
 
     res.status(200).send(users);
   },
@@ -12,7 +12,7 @@ module.exports = {
 
     const { userId } = req.params;
 
-    const user = await db.user(userId);
+    const user = await db.user.user(userId);
 
     res.status(200).send(user);
   },
@@ -31,7 +31,7 @@ module.exports = {
     }
     return res.sendStatus(200);
   },
-  addFollower: async(req, res) => {
+  addFollower: async (req, res) => {
     const db = req.app.get('db')
 
     // this is the current user or user_id in our DB
@@ -47,7 +47,7 @@ module.exports = {
     }
     return res.status(200).send(followUser)
   },
-  removeFollower: async(req,res) => {
+  removeFollower: async (req,res) => {
     const db = req.app.get('db');
     const {user_id} = req.session.user;
     const {userId} = req.params;
@@ -59,7 +59,7 @@ module.exports = {
     }
     return res.sendStatus(200).send(unfollowUser)
   },
-  getFollowers: async(req, res) => {
+  getFollowers: async (req, res) => {
     const db = req.app.get('db')
     const {userId} = req.params
     const followers = await db.user.get_followers(userId)
@@ -69,7 +69,7 @@ module.exports = {
     }
     return res.status(200).send(followers)
   },
-  getFollowing: async(req, res) => {
+  getFollowing: async (req, res) => {
     const db = req.app.get('db')
     // const {user_id} = req.session.user
     const {userId} = req.params
@@ -79,5 +79,13 @@ module.exports = {
       return res.status(500).send(`Couldn't get following, try again later!`)
     }
     return res.status(200).send(following)
+  },
+  getUserProfileInfo: async (req, res) => {
+    const db = req.app.get('db')
+    const {userId} = req.params
+    console.log('user_id', userId)
+    const userInfo = await db.user.get_user_posts_info(userId)
+
+    res.status(200).send(userInfo)
   }
 };

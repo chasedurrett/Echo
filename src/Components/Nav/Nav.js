@@ -59,12 +59,16 @@ function Nav(
       <nav className="Nav">
         <div className="no-user-toolbar flex-row">
           <div className="logo-search-cont flex-row">
-            <div className="logo-container">
-              <img src={logo} alt="" />
-              <span>Echo</span>
+            <div className="logo-container flex-row">
+            <img
+              style={{ height: 30, width: 30, borderRadius: 50, marginRight: 10 }}
+              className="subforum-preview-img"
+               src={"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"}
+            />
+              <span style={{fontWeight: 'bold'}}>Echo</span>
             </div>
 
-            <div>
+            <div className='subforum-dropdown'>
               {props.isLoggedIn ? (
                 <div>
                  <NavBarSubforumDropdown/>
@@ -127,7 +131,7 @@ function Nav(
               <span>
                 <MenuItem onClick={handleClose}>
                 <Link
-                    to={`/user/${props.user.username}`}
+                    to={`/users/${props.user.user_id}`}
                     className="profile-menu-link"
                   >
                     Profile
