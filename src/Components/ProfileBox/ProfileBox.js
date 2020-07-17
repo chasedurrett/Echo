@@ -10,7 +10,8 @@ function ProfileBox(props) {
     // console.log('page of user trying to view', props.user_id)
     return (
         <div className='user-info-section'>
-            {props.user.user_id ===  props.user_id?
+            {/* ensure that edit btns only appear when viewing a profile page */}
+            {props.user.user_id ===  props.user_id && !props.subforum_name ?
             <div className='edit-profile-banner'>
                 <FaPen className='profile-pic-edit'/>
             </div>
@@ -18,7 +19,7 @@ function ProfileBox(props) {
 
             <div className='profile-image-section'>
                 {/* <img src='' */}
-                {props.user.user_id === props.user_id ?
+                {props.user.user_id === props.user_id && !props.subforum_name?
                     <div className='edit-profile-image'>
                     <FaPen className='profile-pic-edit'/>
                 </div>
