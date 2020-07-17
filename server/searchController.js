@@ -29,7 +29,7 @@ module.exports = {
     getUsers: async (req, res) => {
         const db = req.app.get('db')
         let val = req.query.input
-
+        
         const data = await db.search.get_search_users(val)
 
         if(data.length === 0){

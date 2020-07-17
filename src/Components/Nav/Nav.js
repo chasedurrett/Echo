@@ -11,7 +11,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
 import NavBarSubforumDropdown from "./NavBarSubforumDropdown/NavBarSubforumDropdown";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../redux/reducer";
 import axios from "axios";
@@ -25,6 +25,7 @@ function Nav(
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginFormOpen, setLoginFormOpen] = useState(false);
   const [signupFormOpen, setSignupFormOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
@@ -41,6 +42,24 @@ function Nav(
   const handleSignupFormClose = () => {
     setSignupFormOpen(false);
   };
+
+  let history = useHistory();
+  const location = useLocation();
+  
+  const handleSearch = (e) => {
+    if(e.key === 'Enter'){
+      history.push({
+        pathname: '/search',
+        params: `?input=${searchInput}`
+      })
+    } else if (e.key === 'Enter' && location.pathname === '/search'){
+      
+    }
+  };
+
+  const handleChange = (e) => {
+    setSearchInput(e.target.value);
+  }
 
   const logout = () => {
     axios
@@ -84,7 +103,7 @@ function Nav(
             </div>
 
             <div className="search-bar-cont">
-              <input type="search" placeholder="Search"></input>
+              <input type="search" placeholder="Search" onKeyPress={handleSearch} onChange={handleChange}></input>
             </div>
           </div>
 
