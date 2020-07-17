@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { getUser } from "../../redux/reducer";
 import "./CreatePost.css";
 import PropTypes from "prop-types";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -7,26 +9,34 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import ChooseSubforumDropdown from './ChooseSubforumDropdown/ChooseSubforumDropdown'
+import ChooseSubforumDropdown from "./ChooseSubforumDropdown/ChooseSubforumDropdown";
+import TextField from "@material-ui/core/TextField";
 
-export default function CreatePost(props) {
+function CreatePost(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [inputVal, setInputVal] = useState("");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const handleInput = (e) => setInputVal(e.target.value);
+
   return (
     <div className="create-post-container">
       <div className="post-form-container">
-        <div className="subforum-drowdown-container">
-            <ChooseSubforumDropdown/>
+        <div className="subforum-dropdown-container">
+          <ChooseSubforumDropdown />
         </div>
         <div className="post-form-body">
           <div className={classes.root}>
-            <AppBar position="static" color="default" className={classes.tabBar}>
+            <AppBar
+              position="static"
+              color="default"
+              className={classes.tabBar}
+            >
               <Tabs
                 value={value}
                 onChange={handleChange}
@@ -40,24 +50,86 @@ export default function CreatePost(props) {
                 <Tab label="Link" {...a11yProps(2)} />
               </Tabs>
             </AppBar>
-              <TabPanel value={value} index={0} dir={theme.direction}>
-                Text
-              </TabPanel>
-              <TabPanel value={value} index={1} dir={theme.direction}>
-                Image & Video
-              </TabPanel>
-              <TabPanel value={value} index={2} dir={theme.direction}>
-                Link
-              </TabPanel>
+            <TabPanel
+              className={classes.tabPanel}
+              value={value}
+              index={0}
+              dir={theme.direction}
+            >
+              <div className="title-container">
+                <TextField
+                  className={classes.textArea}
+                  onChange={handleInput}
+                  id="standard-basic"
+                  label="Title"
+                />
+              </div>
+              <div className="content-container">
+                <TextField
+                  className={classes.textArea}
+                  onChange={handleInput}
+                  id="outlined-multiline-static"
+                  label="Content"
+                  variant="outlined"
+                  multiline
+                  rows={8}
+                />
+              </div>
+              <div
+                className="submit-button-container"
+                style={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <button style={{ width: 95 }} className="signup-btn btn-style">
+                  Submit
+                </button>
+              </div>
+            </TabPanel>
+            <TabPanel
+              className={classes.tabPanel}
+              value={value}
+              index={1}
+              dir={theme.direction}
+            >
+              Image & Video
+              <div
+                className="submit-button-container"
+                style={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <button style={{ width: 95 }} className="signup-btn btn-style">
+                  Submit
+                </button>
+              </div>
+            </TabPanel>
+            <TabPanel
+              className={classes.tabPanel}
+              value={value}
+              index={2}
+              dir={theme.direction}
+            >
+              Link
+              <div
+                className="submit-button-container"
+                style={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <button style={{ width: 95 }} className="signup-btn btn-style">
+                  Submit
+                </button>
+              </div>
+            </TabPanel>
           </div>
+          <div></div>
         </div>
       </div>
       <div className="post-info-container">
-          Post rules and subreddit info goes here
+        Post rules and subreddit info goes here
       </div>
     </div>
   );
 }
+
+const mapStateToProps = (reduxState) => reduxState;
+
+export default connect(mapStateToProps, { getUser })(CreatePost);
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -97,13 +169,22 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     width: 800,
     height: 500,
-    borderRadius: 8
+    borderRadius: 8,
+    boxShadow: "6px 6px 6px lightgrey",
   },
   tabBar: {
     backgroundColor: theme.palette.background.paper,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
-    boxShadow: 'none',
-    fontFamily: 'IBM Plex Sans'
+    boxShadow: "none",
+    fontFamily: "IBM Plex Sans",
+  },
+  tabPanel: {
+    display: "flex",
+    flexDirection: "center",
+    alignItems: "center",
+  },
+  textArea: {
+      width: "100%"
   }
 }));

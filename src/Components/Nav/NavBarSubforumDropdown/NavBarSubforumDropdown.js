@@ -72,7 +72,7 @@ export default function NavBarSubforumDropdown(props) {
     })
     .map((e) => (
       <Link
-        style={{ textDecoration: "none", fontFamily: "IBM Plex Sans" }}
+        style={{ textDecoration: "none", fontFamily: "IBM Plex Sans", zIndex: 1 }}
         to={`/subforums/${e.subforum_id}`}
       >
         <MenuItem
