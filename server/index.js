@@ -73,9 +73,9 @@ app.put("/api/subforums/:subforumId/users/:userId", subforumCtrl.editSubforum);
 app.delete("/api/subforums/:subforumId/users/:userId", subforumCtrl.deleteSubforum);
 
 // Search Endpoints
-app.get("/api/posts/search", searchCtrl.getPosts);
-app.get("/api/subforums/search", searchCtrl.getSubforums);
-app.get("/api/users/search", searchCtrl.getUsers);
+app.get("/api/search/posts", searchCtrl.getPosts);
+app.get("/api/search/subforums", searchCtrl.getSubforums);
+app.get("/api/search/users", searchCtrl.getUsers);
 
 massive({
   connectionString: CONNECTION_STRING,
