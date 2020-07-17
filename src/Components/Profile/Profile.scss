@@ -143,12 +143,15 @@
   list-style: none;
   font-size: 13px;
   margin: 0px;
-  padding: 15px 0px 0px 10px;
+  padding: 0px 0px 0px 12px;
   font-family: $reddit-font;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
 }
 
 .other-info-list li {
-  margin-bottom: 5px;
   cursor: pointer;
 }
