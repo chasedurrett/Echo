@@ -13,12 +13,12 @@ import Search from "./Components/Search/Search";
 export default (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/subforum/:subforumId" component={Subforum} />
-    <Route path="/subforum/:subforumId/posts/:postId" component={Post} />
+    <Route path="/subforums/:subforumId" component={Subforum} />
+    <Route path="/subforums/:subforumId/posts/:postId" component={Post} />
     <ProtectedProfile path="/users/:userId" component={Profile} />
     <Route path="/create-post/:subforumId" component={CreatePost} />
     <Route path="/create-post" component={CreatePost} />
-    <Route path="/subforum/:subforumId/posts/:postId" component={PostDetailed} />
+    <Route path="/subforums/:subforumId/posts/:postId" component={PostDetailed} />
     <Route path="/search" component={Search} />
   </Switch>
 );
