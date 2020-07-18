@@ -11,19 +11,27 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import ChooseSubforumDropdown from "./ChooseSubforumDropdown/ChooseSubforumDropdown";
 import TextField from "@material-ui/core/TextField";
+import ProfileBox from "../ProfileBox/ProfileBox";
 
 function CreatePost(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(0);
-  const [inputVal, setInputVal] = useState("");
+  const [inputVal, setInputVal] = useState({
+    post_title: "",
+    post_content: ""
+  });
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (e, newValue) => {
     setValue(newValue);
   };
 
-  const handleInput = (e) => setInputVal(e.target.value);
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setInputVal({ ...inputVal, [name]: value });
+  };
 
+  const { subforum } = props;
   return (
     <div className="create-post-container">
       <div className="post-form-container">
@@ -46,9 +54,9 @@ function CreatePost(props) {
                 variant="fullWidth"
                 aria-label="full width tabs example"
               >
-                <Tab label="Text" {...a11yProps(0)} />
-                <Tab label="Image & Video" {...a11yProps(1)} />
-                <Tab label="Link" {...a11yProps(2)} />
+                <Tab name="post_type"  label="Text" {...a11yProps(0)} />
+                <Tab name="post_type"  label="Image & Video" {...a11yProps(1)} />
+                <Tab name="post_type"  label="Link" {...a11yProps(2)} />
               </Tabs>
             </AppBar>
             <TabPanel
@@ -63,12 +71,14 @@ function CreatePost(props) {
                   onChange={handleInput}
                   id="standard-basic"
                   label="Title"
+                  name="post_title"
                 />
               </div>
               <div className="content-container">
                 <TextField
                   className={classes.textArea}
                   onChange={handleInput}
+                  name="post_content"
                   id="outlined-multiline-static"
                   label="Content"
                   variant="outlined"
@@ -108,21 +118,26 @@ function CreatePost(props) {
               dir={theme.direction}
             >
               Link
-              <div
+              <span
                 className="submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
                 <button style={{ width: 95 }} className="signup-btn btn-style">
                   Submit
                 </button>
-              </div>
+              </span>
             </TabPanel>
           </div>
           <div></div>
         </div>
       </div>
       <div className="post-info-container">
-        Post rules and subreddit info goes here
+        <ProfileBox
+          subforum_banner={subforum.subforum_banner}
+          subforum_name={subforum.subforum_name}
+          cake_day={subforum.cake_day}
+        />
+        subforum rules
       </div>
     </div>
   );
@@ -172,8 +187,8 @@ const useStyles = makeStyles((theme) => ({
     height: 500,
     borderRadius: 8,
     boxShadow: "6px 6px 6px lightgrey",
-    indicatorColor: '#0079d3',
-    textColor: '#0079d3'
+    indicatorColor: "#0079d3",
+    textColor: "#0079d3",
   },
   tabBar: {
     backgroundColor: theme.palette.background.paper,
@@ -188,10 +203,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   textArea: {
-      width: "100%"
+    width: "100%",
   },
   tabs: {
-      indicatorColor: '#0079d3',
-      textColor: '#0079d3'
-  }
+    indicatorColor: "#0079d3",
+    textColor: "#0079d3",
+  },
 }));

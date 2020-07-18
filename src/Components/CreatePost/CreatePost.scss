@@ -5,12 +5,13 @@
 .create-post-container{
     margin-top: $margintop-clear-navbar-height;
     height: 90vh;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     .post-form-container{
         height: 70%;
-        width: 65%;
+        width: 70%;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -37,6 +38,6 @@
     }
     .post-info-container{
         height: 70%;
-        width: 35%;
+        width: 30%;
     }
 }
