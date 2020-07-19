@@ -8,6 +8,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { useLocation } from 'react-router-dom';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -56,22 +57,39 @@ function Search(props) {
     const [value, setValue] = useState(0);
     const classes = useStyles();
 
-   function getPosts(val){
-        axios.get(`api/posts/search/?posts=${val}`)
+    useEffect( () => {
+      async function grabResults() {
+        await getPosts();
+        await getChambers();
+        await getUsers();
+      }
+      
+      grabResults();
+      console.log(posts)
+      console.log(chambers)
+      console.log(users)
+    }, []);
+
+    const location = useLocation();
+    console.log(location.params);
+    let searchParam = location.params;
+    
+    function getPosts(){
+        axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)
         .then((res) => {
           setPosts(res.data);
         })
     }
 
-    function getChambers(val){
-      axios.get(`api/chambers/search/?chambers=${val}`)
+    function getChambers(){
+      axios.get(`http://localhost:4000/api/search/subforums/${searchParam}`)
       .then((res) => {
         setChambers(res.data)
       })
     }
 
-    function getUsers(val){
-      axios.get(`/api/users/search/?users=${val}`)
+    function getUsers(){
+      axios.get(`http://localhost:4000/api/search/users/${searchParam}`)
       .then((res) => {
         setUsers(res.data)
       })

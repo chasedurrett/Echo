@@ -1,4 +1,5 @@
 select
+    u.user_id,
     u.username,
     u.user_image
 from users u

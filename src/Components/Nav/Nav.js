@@ -11,7 +11,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
 import NavBarSubforumDropdown from "./NavBarSubforumDropdown/NavBarSubforumDropdown";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../redux/reducer";
 import axios from "axios";
@@ -25,6 +25,7 @@ function Nav(
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginFormOpen, setLoginFormOpen] = useState(false);
   const [signupFormOpen, setSignupFormOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
@@ -41,6 +42,24 @@ function Nav(
   const handleSignupFormClose = () => {
     setSignupFormOpen(false);
   };
+
+  let history = useHistory();
+  const location = useLocation();
+  
+  const handleSearch = (e) => {
+    if(e.key === 'Enter'){
+      history.push({
+        pathname: '/search',
+        params: `?input=${searchInput}`
+      })
+    } else if (e.key === 'Enter' && location.pathname === '/search'){
+      
+    }
+  };
+
+  const handleChange = (e) => {
+    setSearchInput(e.target.value);
+  }
 
   const logout = () => {
     axios
@@ -60,24 +79,31 @@ function Nav(
         <div className="no-user-toolbar flex-row">
           <div className="logo-search-cont flex-row">
             <div className="logo-container flex-row">
-            <img
-              style={{ height: 30, width: 30, borderRadius: 50, marginRight: 10 }}
-              className="subforum-preview-img"
-               src={"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"}
-            />
-              <span style={{fontWeight: 'bold'}}>Echo</span>
+              <img
+                style={{
+                  height: 30,
+                  width: 30,
+                  borderRadius: 50,
+                  marginRight: 10,
+                }}
+                className="subforum-preview-img"
+                src={
+                  "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
+                }
+              />
+              <span style={{ fontWeight: "bold" }}>Echo</span>
             </div>
 
-            <div className='subforum-dropdown'>
+            <div className="subforum-dropdown">
               {props.isLoggedIn ? (
                 <div>
-                 <NavBarSubforumDropdown/>
+                  <NavBarSubforumDropdown />
                 </div>
               ) : null}
             </div>
 
             <div className="search-bar-cont">
-              <input type="search" placeholder="Search"></input>
+              <input type="search" placeholder="Search" onKeyPress={handleSearch} onChange={handleChange}></input>
             </div>
           </div>
 
@@ -122,31 +148,33 @@ function Nav(
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-               <MenuItem onClick={handleClose}>
+              <MenuItem onClick={handleClose}>
                 <Link to={`/`} className="profile-menu-link">
                   Home
                 </Link>
               </MenuItem>
-              {props.isLoggedIn ? 
-              <span>
-                <MenuItem onClick={handleClose}>
-                <Link
-                    to={`/users/${props.user.user_id}`}
-                    className="profile-menu-link"
+              {props.isLoggedIn ? (
+                <span>
+                  <MenuItem onClick={handleClose}>
+                    <Link
+                      to={`/users/${props.user.user_id}`}
+                      className="profile-menu-link"
+                    >
+                      Profile
+                    </Link>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      logout();
+                    }}
                   >
-                    Profile
-                  </Link> 
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    handleClose();
-                    logout();
-                  }}
-                >
-                  Logout
-                </MenuItem>
+                    Logout
+                  </MenuItem>
                 </span>
-              : '' }
+              ) : (
+                ""
+              )}
             </Menu>
           </div>
         </div>
