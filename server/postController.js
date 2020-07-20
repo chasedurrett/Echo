@@ -197,11 +197,9 @@ module.exports = {
     const { commentId } = req.params;
     const { user_id } = req.session.user;
 
-    const hasVotedOnComment = await db.post.comment.check_if_voted_comment(
-      user_id,
-      commentId
-    );
+    const hasVotedOnComment = await db.post.comment.check_if_voted_comment(user_id,commentId);
 
+    console.log(hasVotedOnComment)
     if (hasVotedOnComment.length === 0) {
       // if user hasn't previously downvoted
       await db.post.comment.downvote_comment(commentId);
@@ -243,14 +241,19 @@ module.exports = {
     res.sendStatus(200);
   },
 
-  getComments: async (req, res) => {
+  getAllComments: async (req, res) => {
     const db = req.app.get("db");
 
     const { postId } = req.params;
 
-    let comments = await db.post.comment.get_comments(postId);
-
-    res.status(200).send(comments);
+    if(!req.session.user){
+      let posts = await db.post.comment.get_all_comments_no_user(postId);
+      res.status(200).send(posts)
+    } else {
+      const { user_id } = req.session.user
+      let posts = await db.post.comment.get_all_comments_with_user(postId, user_id);
+      res.status(200).send(posts);
+    }
   },
 
   createComment: async (req, res) => {

@@ -1,7 +1,43 @@
 @import "../../../scss/variables";
 
+
+
 .create-post-container{
     margin-top: $margintop-clear-navbar-height;
-    height: 100vh;
-    width: 100%;
+    height: 90vh;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    .post-form-container{
+        height: 70%;
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        .subforum-dropdown-container{
+            width: 800px;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .post-form-body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .title-container, .content-container, .submit-button-container{
+                width: 700px;
+            }
+            .title-container{
+                height: 100px;
+            }
+            .content-container {
+                height: 250px;
+            }
+        }
+    }
+    .post-info-container{
+        height: 70%;
+        width: 30%;
+    }
 }

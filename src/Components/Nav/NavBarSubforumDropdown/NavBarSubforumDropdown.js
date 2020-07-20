@@ -26,7 +26,6 @@ export default function NavBarSubforumDropdown(props) {
       .then((res) => {
         if (res.status === 200) {
           setSubforumsList(res.data);
-          console.log(res.data);
         } else {
           console.log(`Couldn't recieve list of chambers!`);
         }
@@ -53,7 +52,6 @@ export default function NavBarSubforumDropdown(props) {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpen(false);
   };
 
@@ -72,7 +70,7 @@ export default function NavBarSubforumDropdown(props) {
     })
     .map((e) => (
       <Link
-        style={{ textDecoration: "none", fontFamily: "IBM Plex Sans" }}
+        style={{ textDecoration: "none", fontFamily: "IBM Plex Sans", zIndex: 1 }}
         to={`/subforums/${e.subforum_id}`}
       >
         <MenuItem
@@ -269,7 +267,7 @@ export default function NavBarSubforumDropdown(props) {
                       color: "#0079d3",
                     }}
                     onClick={handleClose}
-                    to={`/create-post`}
+                    to={`/create-post/${props.match}`}
                   >
                     Create a post
                   </Link>
