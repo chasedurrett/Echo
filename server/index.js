@@ -39,7 +39,6 @@ app.get("/api/users/:userId/followers", userCtrl.getFollowers);
 app.get("/api/users/:userId/following", userCtrl.getFollowing);
 
 app.get("/api/users/:userId/profileInfo", userCtrl.getUserProfileInfo);
-
 app.post("/api/users/:userId", userCtrl.addFollower);
 app.put("/api/users/:userId", userCtrl.updateUser);
 app.delete("/api/users/:userId", userCtrl.removeFollower);
@@ -65,6 +64,7 @@ app.delete("/api/posts/:postId/comments/:commentId", postCtrl.deleteComment);
 
 // Subforum Endpoints
 app.get("/api/subforums", subforumCtrl.getSubforums);
+app.get('/api/subforum/:subforumId', subforumCtrl.getSingleSubforum)
 app.get('/api/subforums/users', subforumCtrl.getUserSubforums)
 app.post("/api/subforums", subforumCtrl.createSubforum);
 app.post("/api/subforums/:subforumId/users", subforumCtrl.addSubforumUser);

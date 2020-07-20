@@ -2,13 +2,15 @@ import React, {useEffect} from 'react';
 import './Home.scss';
 import {connect} from 'react-redux';
 import {getUser} from '../../redux/reducer';
+import HomeDashUser from './HomeDashUser/HomeDashUser';
+import HomeDashNoUser from './HomeDashNoUser/HomeDashNoUser';
 
 function Home(props){
 
     return(
         <div className={'home-container'}>
             Home Page
-            {props.isLoggedIn ? <div>username is {props.user.username}</div> : ''}
+            {props.isLoggedIn ? <HomeDashUser /> : <HomeDashNoUser />}
         </div>
     )
 }

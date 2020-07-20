@@ -7,6 +7,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import axios from "axios";
 import { MdArrowDropDown } from "react-icons/md";
+import {withRouter} from 'react-router-dom'
 
 function ChooseSubforumDropdown(props) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -42,6 +43,7 @@ function ChooseSubforumDropdown(props) {
     // console.log(subforum)
     handleClose();
     props.getCurrentSubforum(subforum);
+    props.history.push(`/create-post/${subforum.subforum_id}`)
   };
 
   const subforumsList = allSubforums
@@ -180,7 +182,7 @@ function ChooseSubforumDropdown(props) {
   );
 }
 
-export default connect(null, { getCurrentSubforum })(ChooseSubforumDropdown);
+export default withRouter(connect(null, { getCurrentSubforum })(ChooseSubforumDropdown));
 
 const StyledMenu = withStyles({
   paper: {
