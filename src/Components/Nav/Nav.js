@@ -47,13 +47,13 @@ function Nav(
   const location = useLocation();
   
   const handleSearch = (e) => {
-    if(e.key === 'Enter'){
+    if(e.key === 'Enter' && location.pathname != '/search'){
       history.push({
         pathname: '/search',
         params: `?input=${searchInput}`
       })
     } else if (e.key === 'Enter' && location.pathname === '/search'){
-      
+      searchParam = searchInput
     }
   };
 
