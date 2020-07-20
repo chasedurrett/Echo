@@ -162,6 +162,7 @@ function CreatePost(props) {
                 className="submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
+
                 <button
                   onClick={() => createPost()}
                   style={{ width: 95 }}
@@ -182,6 +183,7 @@ function CreatePost(props) {
                 className="submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
+
                 <button
                   onClick={() => createPost()}
                   style={{ width: 95 }}
