@@ -4,5 +4,9 @@
         "get",
         "get subforums",
         "subforums"
-    ]
+    ],
+    "extensions.ignoreRecommendations": true,
+    "files.autoSave": "off"
+    "files.autoSave": "off",
+    "debug.allowBreakpointsEverywhere": true
 }
