@@ -1,0 +1,1 @@
+select * from subforums where subforum_id = $1
