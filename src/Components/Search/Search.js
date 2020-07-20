@@ -9,6 +9,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { useLocation } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -55,50 +57,60 @@ function Search(props) {
     const [users, setUsers] = useState([]);
     const [chambers, setChambers] = useState([]);
     const [value, setValue] = useState(0);
+    const [loading, setLoading] = useState(null);
+
     const classes = useStyles();
 
-    useEffect( () => {
-      async function grabResults() {
-        await getPosts();
-        await getChambers();
-        await getUsers();
-      }
-      
-      grabResults();
-      console.log(posts)
-      console.log(chambers)
-      console.log(users)
-    }, []);
-
     const location = useLocation();
-    console.log(location.params);
-    let searchParam = location.params;
-    console.log(props);
+    console.log(location.search);
+    let searchParam = location.search;
 
-    // propsSearch = (props) => {
-    // if(!location.params){
-    //   let searchParam = props.search
-    //   }
-    // }
-    
-    function getPosts(){
-        axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)
+    useEffect(() => {
+      getPosts();
+      getUsers();
+      getChambers();
+    }, [searchParam]);
+
+    async function getPosts(){
+      setPosts([])
+      console.log('getPosts hit')
+        setLoading(true)
+        await axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)
         .then((res) => {
+          console.log(res.data)
           setPosts(res.data);
+          setLoading(false)
         })
     }
 
-    function getChambers(){
-      axios.get(`http://localhost:4000/api/search/subforums/${searchParam}`)
+    async function getChambers(){
+      setChambers([])
+      setLoading(true)
+      console.log('getChambers hit')
+      await axios.get(`http://localhost:4000/api/search/subforums/${searchParam}`)
       .then((res) => {
+        
+        if(res.status === 200){
+          setChambers(res.data)
+          setLoading(false)
+        } else {
+          
+        }
+ 
+        console.log(res.data)
         setChambers(res.data)
       })
     }
 
-    function getUsers(){
-      axios.get(`http://localhost:4000/api/search/users/${searchParam}`)
+    async function getUsers(){
+      setUsers([])
+      console.log('getUsers hit')
+      setLoading(true)
+      await axios.get(`http://localhost:4000/api/search/users/${searchParam}`)
       .then((res) => {
+        console.log(res.data)
         setUsers(res.data)
+        setLoading(false)
       })
     }
 
@@ -118,15 +130,31 @@ function Search(props) {
             </AppBar>
 
             <TabPanel value={value} index={0}>
-            Posts
+            <div>
+            {loading === true ? <CircularProgress /> : posts.length === 0 ? <div>No results found.</div>
+            : posts.map((post) => (
+            <div>{post.post_title}</div>
+            ))
+            }
+            </div>
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-            Chambers
+            {loading === true ? <CircularProgress /> : chambers.length === 0 ? <div>No results found.</div>
+            : chambers.map((chamber) => (
+            <div>{chamber.subforum_name}</div>
+            ))
+            }
             </TabPanel>
 
             <TabPanel value={value} index={2}>
-            Users
+            <div>
+            {loading === true ? <CircularProgress /> : users.length === 0 ? <div>No results found.</div>
+            : users.map((user) => (
+            <div>{user.username}</div>
+            ))
+            }
+            </div>
             </TabPanel>
 
         </div>
