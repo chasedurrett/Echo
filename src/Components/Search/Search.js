@@ -73,29 +73,25 @@ function Search(props) {
 
     async function getPosts(){
       setPosts([])
-      console.log('getPosts hit')
-        setLoading(true)
-        await axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)
-        .then((res) => {
-          console.log(res.data)
-          setPosts(res.data);
-          setLoading(false)
-        })
+      setLoading(true)
+      await axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)
+      .then((res) => {
+        console.log(res.data)
+        setPosts(res.data);
+        setLoading(false)
+      })
     }
 
     async function getChambers(){
       setChambers([])
       setLoading(true)
-      console.log('getChambers hit')
       await axios.get(`http://localhost:4000/api/search/subforums/${searchParam}`)
       .then((res) => {
         
         if(res.status === 200){
           setChambers(res.data)
           setLoading(false)
-        } else {
-          
-        }
+        } 
  
         console.log(res.data)
         setChambers(res.data)
