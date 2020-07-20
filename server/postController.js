@@ -22,14 +22,12 @@ module.exports = {
   createSubforumPost: async (req, res) => {
     const db = req.app.get("db");
 
-    console.log('creating post')
+    console.log("creating post");
 
     const post_time = moment().format("LLL");
-    const {user_id} = req.session.user
+    const { user_id } = req.session.user;
     const { subforumId } = req.params;
-    const { post_title, post_content, post_type_id} = req.body;
-
-    console.log(req.body)
+    const { post_title, post_content, post_type_id } = req.body;
 
     let post = await db.post.create_subforum_post(
       post_title,
@@ -39,8 +37,6 @@ module.exports = {
       post_type_id,
       post_time
     );
-
-    console.log(post)
 
     res.status(200).send(post);
   },
