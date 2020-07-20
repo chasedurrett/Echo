@@ -25,7 +25,7 @@ function TabPanel(props) {
       >
         {value === index && (
           <Box p={3}>
-            <Typography>{children}</Typography>
+            <Typography component='span'>{children}</Typography>
           </Box>
         )}
       </div>
@@ -62,7 +62,6 @@ function Search(props) {
     const classes = useStyles();
 
     const location = useLocation();
-    console.log(location.search);
     let searchParam = location.search;
 
     useEffect(() => {
@@ -76,8 +75,11 @@ function Search(props) {
       setLoading(true)
       await axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)
       .then((res) => {
-        console.log(res.data)
-        setPosts(res.data);
+        setPosts(res.data)
+        setLoading(false)
+      })
+      .catch((err) =>{
+        console.log('500 status if statement', err.message)
         setLoading(false)
       })
     }
@@ -87,27 +89,28 @@ function Search(props) {
       setLoading(true)
       await axios.get(`http://localhost:4000/api/search/subforums/${searchParam}`)
       .then((res) => {
-        
-        if(res.status === 200){
-          setChambers(res.data)
-          setLoading(false)
-        } 
- 
-        console.log(res.data)
         setChambers(res.data)
+        setLoading(false)
       })
+      .catch((err) =>{
+        console.log('500 status if statement', err.message)
+        setLoading(false)
+      })  
     }
 
     async function getUsers(){
       setUsers([])
-      console.log('getUsers hit')
       setLoading(true)
       await axios.get(`http://localhost:4000/api/search/users/${searchParam}`)
       .then((res) => {
-        console.log(res.data)
         setUsers(res.data)
         setLoading(false)
       })
+      .catch((err) =>{
+        console.log('500 status if statement', err.message)
+        setLoading(false)
+      })  
+      
     }
 
     const handleChange = (event, newValue) => {
@@ -126,31 +129,33 @@ function Search(props) {
             </AppBar>
 
             <TabPanel value={value} index={0}>
-            <div>
-            {loading === true ? <CircularProgress /> : posts.length === 0 ? <div>No results found.</div>
-            : posts.map((post) => (
-            <div>{post.post_title}</div>
-            ))
-            }
-            </div>
+              {loading === true ? <CircularProgress/> : posts.length === 0 ? <div>No results found.</div>
+              : posts.map((post) => (
+              <div key={post.post_id}>
+                {post.post_title}
+              </div>
+              ))
+              }
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-            {loading === true ? <CircularProgress /> : chambers.length === 0 ? <div>No results found.</div>
-            : chambers.map((chamber) => (
-            <div>{chamber.subforum_name}</div>
-            ))
-            }
+              {loading === true ? <CircularProgress/> : chambers.length === 0 ? <div>No results found.</div>
+              : chambers.map((chamber) => (
+              <div key={chamber.subforum_id}>
+                {chamber.subforum_name}
+              </div>
+              ))
+              }
             </TabPanel>
 
             <TabPanel value={value} index={2}>
-            <div>
-            {loading === true ? <CircularProgress /> : users.length === 0 ? <div>No results found.</div>
-            : users.map((user) => (
-            <div>{user.username}</div>
-            ))
-            }
-            </div>
+              {loading === true ? <CircularProgress/> : users.length === 0 ? <div>No results found.</div>
+              : users.map((user) => (
+              <div key={user.user_id}>
+                {user.username}
+              </div>
+              ))
+              }
             </TabPanel>
 
         </div>
