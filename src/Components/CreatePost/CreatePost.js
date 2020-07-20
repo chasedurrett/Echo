@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/reducer";
 import "./CreatePost.css";
 import PropTypes from "prop-types";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -24,18 +23,12 @@ function CreatePost(props) {
     post_content: "",
   });
   const [postType, setPostType] = useState(1);
-  const [subforumId, setSubforumId] = useState(props.match.params.subforumId);
+  const [subforum, setSubforum] = useState({});
 
   // Setting up useEffect() to only render on update as opposed to mount and update //
-  const didMountRef = useRef(false);
   useEffect(() => {
-    if (didMountRef) {
-      setSubforumId(props.subforum.subforum_id);
-    } else {
-      setSubforumId(props.match.params.subforumId);
-      didMountRef.current = true;
-    }
-  }, [props.subforum]);
+    getSubforum();
+  }, [props.match.params.subforumId]);
 
   const handleChange = (e, newValue) => {
     setValue(newValue);
@@ -50,14 +43,32 @@ function CreatePost(props) {
     setInputVal({ ...inputVal, [name]: value });
   };
 
-  // const CreatePost = () => {
-  //   const { user_id } = props.user.user_id;
-  //   const { post_title, post_content } = inputVal;
-  //   axios.post(`/api/subforums/${subforumId}/post`);
-  // };
+  const getSubforum = () => {
+    const subforumId =
+      props.match.params.subforumId === undefined
+        ? ""
+        : props.match.params.subforumId;
+    axios.get(`/api/subforum/${subforumId}`).then((res) => {
+      setSubforum(res.data[0]);
+    });
+  };
 
-  console.log(`subforumId is ${subforumId}`);
-  const { subforum } = props;
+  const createPost = () => {
+    const { post_title, post_content } = inputVal;
+
+    console.log(postType, post_title, post_content);
+
+    axios
+      .post(`/api/subforums/${props.match.params.subforumId}/post`, {
+        post_title,
+        post_content,
+        postType,
+      })
+      .then((res) => {
+        props.history.push(`/subforums/${props.match.params.subforumId}`);
+      });
+  };
+
   return (
     <div className="create-post-container">
       <div className="post-form-container">
@@ -131,7 +142,11 @@ function CreatePost(props) {
                 className="submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
-                <button style={{ width: 95 }} className="signup-btn btn-style">
+                <button
+                  onClick={() => createPost()}
+                  style={{ width: 95 }}
+                  className="signup-btn btn-style"
+                >
                   Submit
                 </button>
               </div>
@@ -147,7 +162,11 @@ function CreatePost(props) {
                 className="submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
-                <button style={{ width: 95 }} className="signup-btn btn-style">
+                <button
+                  onClick={() => createPost()}
+                  style={{ width: 95 }}
+                  className="signup-btn btn-style"
+                >
                   Submit
                 </button>
               </div>
@@ -163,7 +182,11 @@ function CreatePost(props) {
                 className="submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
-                <button style={{ width: 95 }} className="signup-btn btn-style">
+                <button
+                  onClick={() => createPost()}
+                  style={{ width: 95 }}
+                  className="signup-btn btn-style"
+                >
                   Submit
                 </button>
               </span>
@@ -184,9 +207,7 @@ function CreatePost(props) {
   );
 }
 
-const mapStateToProps = (reduxState) => reduxState;
-
-export default connect(mapStateToProps, { getUser })(CreatePost);
+export default CreatePost;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
