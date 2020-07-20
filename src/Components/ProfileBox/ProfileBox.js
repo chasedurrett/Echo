@@ -26,7 +26,7 @@ function ProfileBox(props) {
             <div className='profile-image-section'>
                 {!props.subforum_name ?
                 <img src={props.user_image ? props.user_image : defaultImage} className='profile-image'></img> 
-                : null }
+                :  <img src={props.subforum_image ? props.subforum_image : "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"} className='profile-image'></img>}
                 
                 
                 {props.user.user_id === props.user_id && !props.subforum_name?
@@ -44,7 +44,7 @@ function ProfileBox(props) {
 
                {props.subforum_name ? 
                     <div className='subforum-info-name'>
-                        {props.subforum_name} 
+                        c/{props.subforum_name}
                     </div>
                 : null}
             <div className='user-info-cake-day-container'>
