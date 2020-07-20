@@ -21,10 +21,12 @@ function Comments(props) {
         })
     }
 
-    const upVote = (postId) => {
+    console.log(comments)
+
+    const upVote = (commentId) => {
         setButtonsDisabled(true)
         console.log(`upvoting`);
-        axios.post(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/upvote`)
+        axios.post(`/api/posts/${props.postId}/comments/${commentId}/upvote`)
           .then(res => {
             getComments()
           })
@@ -32,19 +34,19 @@ function Comments(props) {
           ;
       };
     
-      const downVote = (postId) => {
+      const downVote = (commentId) => {
         setButtonsDisabled(true)
         console.log(`downvoting`);
-        axios.post(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/downvote`)
+        axios.post(`/api/posts/${props.postId}/comments/${commentId}/downvote`)
           .then(res => {
             getComments()
           });
       };
     
-      const deleteVote = (postId) => {
+      const deleteVote = (commentId) => {
         setButtonsDisabled(true)
         console.log(`deleting vote`);
-        axios.delete(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/remove-vote`)
+        axios.delete(`/api/posts/${props.postId}/comments/${commentId}/remove-vote`)
           .then(res => {
             getComments()
           });
@@ -53,30 +55,51 @@ function Comments(props) {
     const mappedComments = comments.map((element, index) => {
         console.log(element)
         return (
-            <div className='vote-tracker'>
-                <div>
-                    {element.upvote === true ? (
-                        <GoArrowUp
+            <div key={element.comment_id}>
+                <div className='vote-tracker'>
+                        {element.comment}
+                    <div>
+                        {element.upvote === true ? (
+                            <GoArrowUp
                             alt='upvote'
                             className='vote-arrow voted'
-                            onClick={() => buttonsDisabled ? null : props.deleteVote(element.comment_id)}
-                        />
-                    )  : (
-                        <GoArrowUp
+                            onClick={() => buttonsDisabled ? null : deleteVote(element.comment_id)}
+                            />
+                            )  : (
+                                <GoArrowUp
+                                alt="upvote"
+                                className="vote-arrow"
+                                onClick={() => buttonsDisabled ? null :  upVote(element.comment_id)}
+                                />
+                                )     
+                            }
+                    </div>
+                    <div className='voteCount'>{element.vote_tracker}</div>
+                    <div>
+                        {element.downvote === true ? (
+                            <GoArrowDown
                             alt="upvote"
-                            className="vote-arrow"
-                            onClick={() => buttonsDisabled ? null :  props.upVote(element.comment_id)}
-                        />
-                        )     
-                    }
+                            style={{ maxWidth: 50 }}
+                            className="vote-arrow voted"
+                            onClick={() => buttonsDisabled ? null :  deleteVote(element.comment_id)}
+                            />
+                            ) : (
+                                <GoArrowDown
+                                alt="downvote"
+                                className="vote-arrow"
+                                onClick={() => buttonsDisabled ? null :  downVote(element.comment_id)}
+                                />
+                                )}
+                    </div>
+
                 </div>
             </div>
         )
     })
 
     return (
-        <div>
-
+        <div className='comments-container'>
+            {mappedComments}
         </div>
     )
 }
