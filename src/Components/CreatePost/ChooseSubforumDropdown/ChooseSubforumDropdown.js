@@ -39,6 +39,7 @@ function ChooseSubforumDropdown(props) {
 
   const handleSubforumClick = (subforum) => {
     setSubforumPick(subforum);
+    // console.log(subforum)
     handleClose();
     props.getCurrentSubforum(subforum);
   };

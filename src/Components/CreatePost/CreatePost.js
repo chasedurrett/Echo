@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import {useHistory} from 'react-router-dom'
 import { connect } from "react-redux";
 import { getUser } from "../../redux/reducer";
 import "./CreatePost.css";
@@ -12,6 +13,7 @@ import Box from "@material-ui/core/Box";
 import ChooseSubforumDropdown from "./ChooseSubforumDropdown/ChooseSubforumDropdown";
 import TextField from "@material-ui/core/TextField";
 import ProfileBox from "../ProfileBox/ProfileBox";
+import axios from "axios";
 
 function CreatePost(props) {
   const classes = useStyles();
@@ -19,11 +21,28 @@ function CreatePost(props) {
   const [value, setValue] = useState(0);
   const [inputVal, setInputVal] = useState({
     post_title: "",
-    post_content: ""
+    post_content: "",
   });
+  const [postType, setPostType] = useState(1);
+  const [subforumId, setSubforumId] = useState(props.match.params.subforumId);
+
+  // Setting up useEffect() to only render on update as opposed to mount and update //
+  const didMountRef = useRef(false);
+  useEffect(() => {
+    if (didMountRef) {
+      setSubforumId(props.subforum.subforum_id);
+    } else {
+      setSubforumId(props.match.params.subforumId);
+      didMountRef.current = true;
+    }
+  }, [props.subforum]);
 
   const handleChange = (e, newValue) => {
     setValue(newValue);
+  };
+
+  const handlePostType = (n) => {
+    setPostType(n);
   };
 
   const handleInput = (e) => {
@@ -31,6 +50,13 @@ function CreatePost(props) {
     setInputVal({ ...inputVal, [name]: value });
   };
 
+  // const CreatePost = () => {
+  //   const { user_id } = props.user.user_id;
+  //   const { post_title, post_content } = inputVal;
+  //   axios.post(`/api/subforums/${subforumId}/post`);
+  // };
+
+  console.log(`subforumId is ${subforumId}`);
   const { subforum } = props;
   return (
     <div className="create-post-container">
@@ -54,9 +80,24 @@ function CreatePost(props) {
                 variant="fullWidth"
                 aria-label="full width tabs example"
               >
-                <Tab name="post_type"  label="Text" {...a11yProps(0)} />
-                <Tab name="post_type"  label="Image & Video" {...a11yProps(1)} />
-                <Tab name="post_type"  label="Link" {...a11yProps(2)} />
+                <Tab
+                  name="post_type"
+                  onClick={() => handlePostType(1)}
+                  label="Text"
+                  {...a11yProps(0)}
+                />
+                <Tab
+                  name="post_type"
+                  onClick={() => handlePostType(2)}
+                  label="Image & Video"
+                  {...a11yProps(1)}
+                />
+                <Tab
+                  name="post_type"
+                  onClick={() => handlePostType(3)}
+                  label="Link"
+                  {...a11yProps(2)}
+                />
               </Tabs>
             </AppBar>
             <TabPanel
