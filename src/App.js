@@ -13,7 +13,7 @@ function App(props) {
 
   return (
     <div className="App">
-      <Nav/>
+      <Nav search={props.search}/>
       {routes}
     </div>
   );

@@ -73,6 +73,13 @@ function Search(props) {
     const location = useLocation();
     console.log(location.params);
     let searchParam = location.params;
+    console.log(props);
+
+    // propsSearch = (props) => {
+    // if(!location.params){
+    //   let searchParam = props.search
+    //   }
+    // }
     
     function getPosts(){
         axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)

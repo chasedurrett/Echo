@@ -11,7 +11,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
 import NavBarSubforumDropdown from "./NavBarSubforumDropdown/NavBarSubforumDropdown";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../../redux/reducer";
 import axios from "axios";
@@ -43,8 +43,9 @@ function Nav(
     setSignupFormOpen(false);
   };
 
-  let history = useHistory();
+  const history = useHistory();
   const location = useLocation();
+  const { params } = useParams();
   
   const handleSearch = (e) => {
     if(e.key === 'Enter' && location.pathname != '/search'){
@@ -53,7 +54,7 @@ function Nav(
         params: `?input=${searchInput}`
       })
     } else if (e.key === 'Enter' && location.pathname === '/search'){
-      searchParam = searchInput
+      // const search = SearchInput
     }
   };
 
