@@ -19,6 +19,5 @@ export default (
     <Route path="/create-post" component={CreatePost} />
     <Route path="/subforums/:subforumId/posts/:postId" component={PostDetailed} />
     <Route path="/search" component={Search} />
-    <Route path="/testingpost" component={PostImage} />
   </Switch>
 );
