@@ -25,18 +25,10 @@ function ProfileBox(props) {
 
             <div className='profile-image-section'>
                 {!props.subforum_name ?
-<<<<<<< HEAD
                 <img src={props.user_image ? props.user_image : defaultImage} className='profile-image'></img> 
                 :  <img src={props.subforum_image ? props.subforum_image : "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"} className='profile-image'></img>}
                 
                 
-=======
-
-                <img src={props.user_image ? props.user_image : defaultImage} className='profile-image'></img> 
-                :  <img src={props.subforum_image ? props.subforum_image : "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"} className='profile-image'></img>}
-                
-
->>>>>>> a8f4e747700142d0b65be79d42050466ab024733
                 {props.user.user_id === props.user_id && !props.subforum_name?
                     <div className='edit-profile-image'>
                         <FaPen className='profile-pic-edit'/>
