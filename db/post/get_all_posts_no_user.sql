@@ -4,6 +4,7 @@ select
     p.post_url,
     p.post_time,
     p.vote_tracker,
+    p.post_type_id,
     s.subforum_name,
     s.subforum_img,
     u.username

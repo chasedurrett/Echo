@@ -1,0 +1,29 @@
+@import "../../../../scss/variables";
+
+.home-dashboard-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  .explore-subforums-container-nu {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .posts-sidebar-parent-container {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 60%;
+    .subforum-posts-container {
+      width: 70%;
+    }
+    .sidebar-container {
+      width: 30%;
+    }
+  }
+}

@@ -1,20 +1,18 @@
-import React, {useEffect} from 'react';
-import './Home.scss';
-import {connect} from 'react-redux';
-import {getUser} from '../../redux/reducer';
-import HomeDashUser from './HomeDashUser/HomeDashUser';
-import HomeDashNoUser from './HomeDashNoUser/HomeDashNoUser';
+import React, { useEffect } from "react";
+import "./Home.scss";
+import { connect } from "react-redux";
+import { getUser } from "../../redux/reducer";
+import HomeDashUser from "./HomeDashUser/HomeDashUser";
+import HomeDashNoUser from "./HomeDashNoUser/HomeDashNoUser";
 
-function Home(props){
-
-    return(
-        <div className={'home-container'}>
-            Home Page
-            {props.isLoggedIn ? <HomeDashUser /> : <HomeDashNoUser />}
-        </div>
-    )
+function Home(props) {
+  return (
+    <div className={"home-container"}>
+      {props.isLoggedIn ? <HomeDashUser /> : <HomeDashNoUser />}
+    </div>
+  );
 }
 
-const mapStateToProps = state => state
+const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps, {getUser})(Home);
+export default connect(mapStateToProps, { getUser })(Home);
