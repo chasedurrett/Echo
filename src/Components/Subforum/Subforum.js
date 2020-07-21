@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { GoArrowUp } from "react-icons/go";
-import { GoArrowDown } from "react-icons/go";
 import axios from "axios";
+import CardPost from '../Post/CardPost/CardPost'
 import "./Subforum.scss";
 
 function Subforum(props) {
@@ -14,6 +13,7 @@ function Subforum(props) {
   }, [props.match.params.subforumId]);
 
   const getPosts = () => {
+    // setButtonsDisabled(true)
     axios.get(`/api/subforums/${props.match.params.subforumId}/posts`)
       .then((res) => {
         console.log(res.data);
@@ -22,83 +22,21 @@ function Subforum(props) {
       });
   };
 
-  const upVote = (postId) => {
-    setButtonsDisabled(true)
-    console.log(`upvoting`);
-    axios.post(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/upvote`)
-      .then(res => {
-        getPosts()
-      })
-      .catch(err => console.log(err))
-      ;
-  };
-
-  const downVote = (postId) => {
-    setButtonsDisabled(true)
-    console.log(`downvoting`);
-    axios.post(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/downvote`)
-      .then(res => {
-        getPosts()
-      });
-  };
-
-  const deleteVote = (postId) => {
-    setButtonsDisabled(true)
-    console.log(`deleting vote`);
-    axios.delete(`/api/subforums/${props.match.params.subforumId}/posts/${postId}/remove-vote`)
-      .then(res => {
-        getPosts()
-      });
-  };
-
-  console.log(posts);
-
-  const mappedPosts = posts.map((element, index) => {
-    console.log(element);
-    return (
-      <div key={element.post_id}>
-        {element.post_title}
-        {/* {element.post_id} */}
-        <div className="voteTracker">
-          <div>
-            {element.upvote === true ? (
-              <GoArrowUp
-                alt="upvote"
-                style={{ maxWidth: 50 }}
-                className="vote-arrow voted"
-                onClick={() => buttonsDisabled ? null : deleteVote(element.post_id)}
-              />
-            ) : (
-                <GoArrowUp
-                  alt="upvote"
-                  className="vote-arrow"
-                  onClick={() => buttonsDisabled ? null :  upVote(element.post_id)}
-                />
-              )}
-          </div>
-          <div className="voteCount">{element.vote_tracker}</div>
-          <div>
-            {element.downvote === true ? (
-              <GoArrowDown
-                alt="upvote"
-                style={{ maxWidth: 50 }}
-                className="vote-arrow voted"
-                onClick={() => buttonsDisabled ? null :  deleteVote(element.post_id)}
-              />
-            ) : (
-                <GoArrowDown
-                  alt="downvote"
-                  className="vote-arrow"
-                  onClick={() => buttonsDisabled ? null :  downVote(element.post_id)}
-                />
-              )}
-          </div>
-        </div>
-      </div>
-    );
-  });
-
-  return <div className="subforum-container">{mappedPosts}</div>;
+  return <div className="subforum-container">
+    {posts.map(post => (
+      <CardPost key={post.post_id}
+      post_id={post.post_id}
+      subforumId={post.subforum_id}
+      post_title={post.post_title}
+      getPosts={getPosts}
+      setButtonsDisabled={setButtonsDisabled}
+      buttonsDisabled={buttonsDisabled}
+      upvote={post.upvote}
+      downvote={post.downvote}
+      vote_tracker={post.vote_tracker}
+      />
+    ))}
+  </div>;
 }
 
 export default Subforum;
