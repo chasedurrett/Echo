@@ -1,6 +1,5 @@
 {
   "cSpell.words": ["Subforum", "get", "get subforums", "subforums"],
   "extensions.ignoreRecommendations": true,
-  "files.autoSave": "onFocusChange",
   "debug.allowBreakpointsEverywhere": true
 }

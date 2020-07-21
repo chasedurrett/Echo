@@ -85,6 +85,7 @@ app.delete("/api/users/:userId", userCtrl.removeFollower);
 // Post Endpoints
 app.get("/api/subforums/:subforumId/posts", postCtrl.getAllSubforumPosts);
 app.get("/api/subforums/posts/no-user", postCtrl.getAllPostsNoUser);
+app.get('/api/subforums/posts/user-feed', postCtrl.getAllPostsWithUser)
 app.post("/api/subforums/:subforumId/post", postCtrl.createSubforumPost);
 app.get("/api/subforums/:subforumId/posts/:postId", postCtrl.getSingleSubforumPost);
 app.put("/api/subforums/:subforumId/posts/:postId", postCtrl.updateSubforumPost);
