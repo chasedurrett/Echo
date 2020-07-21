@@ -8,7 +8,7 @@ import PostDetailed from "./Components/Post/PostDetailed/PostDetailed";
 //protected route imports
 import ProtectedProfile from "./ProtectedRoutes/ProtectedProfile";
 import Search from "./Components/Search/Search";
-import PostImage from './Components/postImage';
+
 
 export default (
   <Switch>
