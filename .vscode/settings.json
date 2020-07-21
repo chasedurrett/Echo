@@ -6,5 +6,5 @@
         "subforums"
     ],
     "extensions.ignoreRecommendations": true,
-    "debug.allowBreakpointsEverywhere": true
+    "debug.allowBreakpointsEverywhere": true,
 }
