@@ -133,7 +133,7 @@ function Search(props) {
 
             <TabPanel value={value} index={0}>
               <div className="post-container">
-                {loading === true ? <CircularProgress/> : posts.length === 0 ? <div className="no-post-msg">No results found.</div>
+                {loading === true ? <div className="loading-container"><CircularProgress/></div> : posts.length === 0 ? <div className="no-post-msg">No results found.</div>
                 : posts.map((post) => (
                   <ClassicPost key={post.post_id} 
                       title={post.post_title} 
@@ -147,14 +147,14 @@ function Search(props) {
 
             <TabPanel value={value} index={1}>
               <div className="chamber-container">
-                {loading === true ? <CircularProgress/> : chambers.length === 0 ? <div className="no-post-msg">No results found.</div>
+                {loading === true ? <div className="loading-container"><CircularProgress/></div> : chambers.length === 0 ? <div className="no-post-msg">No results found.</div>
                 : chambers.map((chamber) => (
                   <div key={chamber.subforum_id} className="chamber-item">
                     <div className="img-and-title-container">
                       <div className="img-container">
                         <img src={chamber.subforum_img} className="subforum-img" />
                       </div>
-                      <p>{chamber.subforum_name}</p>
+                      <p className="subforum-title">{chamber.subforum_name}</p>
                     </div>
                     <div className="description">
                       <p>{chamber.description}</p>
@@ -171,14 +171,14 @@ function Search(props) {
 
             <TabPanel value={value} index={2}>
               <div className="user-container">
-                {loading === true ? <CircularProgress/> : users.length === 0 ? <div className="no-post-msg">No results found.</div>
+                {loading === true ? <div className="loading-container"><CircularProgress/></div> : users.length === 0 ? <div className="no-post-msg">No results found.</div>
                 : users.map((user) => (
                   <div key={user.user_id} className="user-item">
                     <div className="img-and-username-container">
                       <div className="img-container">
                         <img src={user.user_image} className="user-img" />
                       </div>
-                      <p>{user.username}</p>
+                      <p className="username">{user.username}</p>
                     </div>
                     <div className="description">
                     </div>
