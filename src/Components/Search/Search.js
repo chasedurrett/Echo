@@ -133,36 +133,52 @@ function Search(props) {
 
             <TabPanel value={value} index={0}>
               <div className="post-container">
-              {loading === true ? <CircularProgress/> : posts.length === 0 ? <div className="no-post-msg">No results found.</div>
-              : posts.map((post) => (
-                <ClassicPost key={post.post_id} 
-                    title={post.post_title} 
-                    chamber={post.subforum_name}
-                    username={post.username}
-                    />
+                {loading === true ? <CircularProgress/> : posts.length === 0 ? <div className="no-post-msg">No results found.</div>
+                : posts.map((post) => (
+                  <ClassicPost key={post.post_id} 
+                      title={post.post_title} 
+                      chamber={post.subforum_name}
+                      username={post.username}
+                  />
                     ))
-                  }
+                }
               </div>
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-              {loading === true ? <CircularProgress/> : chambers.length === 0 ? <div>No results found.</div>
-              : chambers.map((chamber) => (
-              <div key={chamber.subforum_id}>
-                {chamber.subforum_name}
+              <div className="chamber-container">
+                {loading === true ? <CircularProgress/> : chambers.length === 0 ? <div className="no-post-msg">No results found.</div>
+                : chambers.map((chamber) => (
+                  <div key={chamber.subforum_id} className="chamber-item">
+                    <div className="img-and-title-container">
+                      <div className="img-container">
+                        <img src={chamber.subforum_img} className="subforum-img" />
+                      </div>
+                      <p>{chamber.subforum_name}</p>
+                    </div>
+                    <div className="description">
+                      <p>{chamber.description}</p>
+                    </div>
+                    <div className="join-btn-container">
+                      <button>JOIN</button>
+                    </div>
+
+                  </div>
+                    ))
+                }
               </div>
-              ))
-              }
             </TabPanel>
 
             <TabPanel value={value} index={2}>
-              {loading === true ? <CircularProgress/> : users.length === 0 ? <div>No results found.</div>
-              : users.map((user) => (
-              <div key={user.user_id}>
-                {user.username}
+              <div className="user-container">
+                {loading === true ? <CircularProgress/> : users.length === 0 ? <div className="no-post-msg">No results found.</div>
+                : users.map((user) => (
+                  <div key={user.user_id}>
+                    {user.username}
+                  </div>
+                    ))
+                }
               </div>
-              ))
-              }
             </TabPanel>
 
             <div className='other-info-section'>

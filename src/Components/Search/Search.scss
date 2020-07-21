@@ -41,7 +41,7 @@
 }
 
 .post-container{
-  width: 100%;
+  width: 680px;
   height: 100%;
   margin: 20px 10px 0px 0px;
   display: flex;
@@ -52,4 +52,53 @@
   font-family: $reddit-font;
   font-size: 30px;
   text-align: center;
+}
+
+.chamber-container {
+  width: 680px;
+  height: 100%;
+  margin: 20px 10px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background: white;
+  padding: 5px 10px;
+}
+
+.user-container {
+  width: 680px;
+  height: 100%;
+  margin: 20px 10px 0px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.img-and-title-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 310px;
+  margin-right: 16px;
+}
+
+.img-container {
+  width: 50px;
+  margin-right: 4px;
+}
+
+.subforum-img {
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  vertical-align: middle;
+  border: 1px solid white;
+}
+
+.chamber-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.description {
+  font-size: 12px;
+  max-width: 480px;
 }
