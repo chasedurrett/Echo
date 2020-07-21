@@ -77,7 +77,6 @@ app.get("/api/users/:userId", userCtrl.getUser);
 app.get("/api/users/:userId/followers", userCtrl.getFollowers);
 app.get("/api/users/:userId/following", userCtrl.getFollowing);
 app.get("/api/users/:userId/profileInfo", userCtrl.getUserProfileInfo);
-
 app.post("/api/users/:userId", userCtrl.addFollower);
 app.put("/api/users/:userId/profileImage", userCtrl.updateProfileImage);
 app.put("/api/users/:userId/bannerImage", userCtrl.updateBannerImage);
@@ -95,15 +94,16 @@ app.post("/api/subforums/:subforumId/posts/:postId/downvote", postCtrl.downvoteP
 app.delete('/api/subforums/:subforumId/posts/:postId/remove-vote', postCtrl.removeVote)
 
 //Comment Endpoints
+app.get("/api/posts/:postId/comments", postCtrl.getAllComments);
 app.post("/api/posts/:postId/comments/:commentId/upvote", postCtrl.upvoteComment);
 app.post("/api/posts/:postId/comments/:commentId/downvote", postCtrl.downvoteComment);
 app.delete('/api/posts/:postId/comments/:commentId/remove-vote', postCtrl.removeCommentVote)
-app.get("/api/posts/:postId/comments", postCtrl.getComments);
 app.post("/api/posts/:postId/comments", postCtrl.createComment);
 app.delete("/api/posts/:postId/comments/:commentId", postCtrl.deleteComment);
 
 // Subforum Endpoints
 app.get("/api/subforums", subforumCtrl.getSubforums);
+app.get('/api/subforum/:subforumId', subforumCtrl.getSingleSubforum)
 app.get('/api/subforums/users', subforumCtrl.getUserSubforums)
 app.post("/api/subforums", subforumCtrl.createSubforum);
 app.post("/api/subforums/:subforumId/users", subforumCtrl.addSubforumUser);
