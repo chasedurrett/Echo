@@ -10,7 +10,7 @@
   height: 100vh;
   margin-left: 10%;
   margin-right: 10%;
-  min-width: 900px;
+  width: 90vw;
 }
 
 .other-info-section{
@@ -55,7 +55,7 @@
 }
 
 .chamber-container {
-  width: 680px;
+  width: 960px;
   height: 100%;
   margin: 20px 10px 0px 0px;
   display: flex;
@@ -63,20 +63,52 @@
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   background: white;
   padding: 5px 10px;
+  border-radius: 4px;
 }
 
 .user-container {
-  width: 680px;
+  width: 960px;
   height: 100%;
   margin: 20px 10px 0px 0px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   display: flex;
   flex-direction: column;
+  background: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.user-img {
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  vertical-align: middle;
+  border: 1px solid white;
+}
+
+.follow-btn {
+  font-size: 12px;
+  font-family: $reddit-font;
+  line-height: 24px;
+  padding: 4px 9px 2px;
+  width: 100%;
+  font-weight: 700;
+  letter-spacing: .5px;
+  border-radius: 4px;
+  text-decoration: none;
 }
 
 .img-and-title-container {
   display: flex;
   flex-direction: row;
-  max-width: 310px;
+  width: 310px;
+  margin-right: 16px;
+}
+
+.img-and-username-container {
+  display: flex;
+  flex-direction: row;
+  width: 310px;
   margin-right: 16px;
 }
 
@@ -96,9 +128,48 @@
 .chamber-item {
   display: flex;
   flex-direction: row;
+  width: 940px;
+}
+
+.user-item {
+  display: flex;
+  flex-direction: row;
+  width: 940px;
 }
 
 .description {
   font-size: 12px;
-  max-width: 480px;
+  width: 480px;
+}
+
+.join-btn-container {
+  width: 120px;
+  align-self: start;
+  flex-shrink: 0;
+  margin-top: 2px;
+  margin-left: 16px;
+}
+
+.follow-btn-container {
+  width: 120px;
+  align-self: start;
+  flex-shrink: 0;
+  margin-top: 2px;
+  margin-left: 16px;
+}
+
+.join-btn {
+  font-size: 12px;
+  font-family: $reddit-font;
+  line-height: 24px;
+  padding: 4px 9px 2px;
+  width: 100%;
+  font-weight: 700;
+  letter-spacing: .5px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+button:hover {
+  cursor: pointer;
 }

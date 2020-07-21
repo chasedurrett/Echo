@@ -160,7 +160,7 @@ function Search(props) {
                       <p>{chamber.description}</p>
                     </div>
                     <div className="join-btn-container">
-                      <button>JOIN</button>
+                      <button className="join-btn">JOIN</button>
                     </div>
 
                   </div>
@@ -173,8 +173,18 @@ function Search(props) {
               <div className="user-container">
                 {loading === true ? <CircularProgress/> : users.length === 0 ? <div className="no-post-msg">No results found.</div>
                 : users.map((user) => (
-                  <div key={user.user_id}>
-                    {user.username}
+                  <div key={user.user_id} className="user-item">
+                    <div className="img-and-username-container">
+                      <div className="img-container">
+                        <img src={user.user_image} className="user-img" />
+                      </div>
+                      <p>{user.username}</p>
+                    </div>
+                    <div className="description">
+                    </div>
+                    <div className="follow-btn-container">
+                      <button className="follow-btn">FOLLOW</button>
+                    </div>
                   </div>
                     ))
                 }
