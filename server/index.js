@@ -3,9 +3,22 @@ const express = require("express");
 const massive = require("massive");
 const session = require("express-session");
 const cors = require("cors");
+const bodyParser = require('body-parser');
+const aws = require('aws-sdk');
+const multer = require('multer');
+const multerS3 = require('multer-s3'); 
 
-const app = express();
-const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
+const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, AWS_ACCESS_KEY, AWS_KEY_ID } = process.env;
+
+aws.config.update({
+  secretAccessKey: AWS_ACCESS_KEY,
+  accessKeyId: AWS_KEY_ID,
+  region: 'us-west-2'
+});
+
+const app = express(),
+      s3 = new aws.S3()
+
 
 const authCtrl = require("./authController");
 const userCtrl = require("./userController");
@@ -13,7 +26,8 @@ const subforumCtrl = require("./subforumController");
 const postCtrl = require("./postController");
 const searchCtrl = require("./searchController");
 
-app.use(express.json());
+app.use(bodyParser.json());
+// app.use(express.json());
 app.use(cors());
 
 app.use(
@@ -24,6 +38,31 @@ app.use(
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 14 }, //2weeks
   })
 );
+
+var upload = multer({
+  storage: multerS3({
+      s3: s3,
+      acl: 'public-read',
+      bucket: 'echo-app-files',
+      key: function (req, file, cb) {
+          console.log(file);
+          cb(null, Date.now() + file.originalname); //use Date.now() for unique file keys
+      }
+  })
+});
+
+//aws s3 bucket upload
+app.post('/upload', upload.array('upl',1), function (req, res, next) {
+  console.log('got hit aws upload post to s3')
+  console.log(req.files)
+  console.log('req files key',req.files[0].location)
+  if(req.files.length === 0){
+      res.status(404).send('no image found')
+  }
+  // // console.log('res',res)
+  res.status(200).send(req.files[0].location);
+});
+
 
 // Auth Endpoints
 app.get("/auth/users/current", authCtrl.currentUser);
@@ -37,10 +76,10 @@ app.get("/api/users", userCtrl.getAllUsers);
 app.get("/api/users/:userId", userCtrl.getUser);
 app.get("/api/users/:userId/followers", userCtrl.getFollowers);
 app.get("/api/users/:userId/following", userCtrl.getFollowing);
-
 app.get("/api/users/:userId/profileInfo", userCtrl.getUserProfileInfo);
 app.post("/api/users/:userId", userCtrl.addFollower);
-app.put("/api/users/:userId", userCtrl.updateUser);
+app.put("/api/users/:userId/profileImage", userCtrl.updateProfileImage);
+app.put("/api/users/:userId/bannerImage", userCtrl.updateBannerImage);
 app.delete("/api/users/:userId", userCtrl.removeFollower);
 
 // Post Endpoints

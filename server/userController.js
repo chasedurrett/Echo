@@ -16,21 +16,28 @@ module.exports = {
 
     res.status(200).send(user);
   },
-  updateUser: async (req, res) => {
+
+  updateProfileImage: async (req, res) => {
     const db = req.app.get("db");
     const { userId } = req.params;
-    const { user_id } = req.session.user;
-    const { user_image, user_banner } = req.body;
-    const updatedUser = await db.user.update_user(
-      userId,
-      user_image,
-      user_banner
-    );
-    if (userId === user_id) {
-      return res.status(200).send(updatedUser);
-    }
-    return res.sendStatus(200);
+    console.log('userId in put controller', userId)
+    console.log(req.body)
+    const { user_image } = req.body;
+    console.log('userImage on req body', user_image)
+    const updatedUser = await db.user.update_profile_image(userId, user_image);
+    return res.status(200).send(updatedUser);
   },
+
+  updateBannerImage: async (req, res) => {
+    const db = req.app.get("db");
+    const { userId } = req.params;
+    // const { user_id } = req.session.user;
+    const { user_banner } = req.body;
+    const updatedUser = await db.user.update_banner_image(userId, user_banner);
+    return res.status(200).send(updatedUser);
+  },
+
+
   addFollower: async (req, res) => {
     const db = req.app.get('db')
 
