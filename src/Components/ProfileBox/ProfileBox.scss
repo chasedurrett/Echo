@@ -2,15 +2,14 @@
 
 .user-info-section{
     height: 270px;
-    width: 100%;
-    max-width: 310px;
+    width: 310px;
     border-radius: $reddit-border-radius;
     border: 1px solid #ccc;
     background: linear-gradient(360deg, white 65%, $reddit-light-blue 25%);
 }
 
 .banner-image{
-    width: 292px;
+    width: 310px;
     height: 95px;
     position: absolute;
 }

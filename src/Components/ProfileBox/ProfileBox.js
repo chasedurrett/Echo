@@ -25,10 +25,13 @@ function ProfileBox(props) {
 
             <div className='profile-image-section'>
                 {!props.subforum_name ?
-                <img src={props.user_image ? props.user_image : defaultImage} className='profile-image'></img> 
+                    <img src={props.user_image ? props.user_image : defaultImage} className='profile-image'></img> 
                 : null }
-                
-                
+
+                {props.subforum_name ?
+                    <img src={props.subforum_img ? props.subforum_img : defaultImage} className='profile-image'></img> 
+                : null }
+ 
                 {props.user.user_id === props.user_id && !props.subforum_name?
                     <div className='edit-profile-image'>
                         <FaPen className='profile-pic-edit'/>

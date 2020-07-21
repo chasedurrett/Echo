@@ -4,11 +4,15 @@ import ProfileBox from '../ProfileBox/ProfileBox';
 import {connect} from 'react-redux';
 import {getUser} from '../../redux/reducer';
 import axios from 'axios';
+import ClassicPost from '../Post/ClassicPost/ClassicPost';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 
 
 function Profile(props){
     const [userPosts, setUserPosts] = useState([]);
     const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(null);
 
     useEffect(() => {
         getUserInfo()
@@ -25,9 +29,11 @@ function Profile(props){
         })
     }
     const getUserPosts = () => {
+        setLoading(true)
         axios.get(`/api/users/${props.match.params.userId}/profileInfo `)
         .then(res => {
             setUserPosts(res.data)
+            setLoading(false)
         })
         .catch(err => {
             console.log(err)
@@ -38,10 +44,17 @@ function Profile(props){
     return(
         <div className='profile-container'>
             <div className='post-container'>
-                {userPosts.map(post => (
-                    <div key={post.post_id}>
-                        {post.post_title}
-                    </div>
+                {loading === true ? 
+                <LinearProgress /> :
+                userPosts.length === 0 ? 
+                <div className='no-post-msg'>No posts yet... Starting Echoing</div>
+                :
+                userPosts.map(post => (
+                    <ClassicPost key={post.post_id} 
+                    title={post.post_title} 
+                    chamber={post.subforum_name}
+                    username={post.username}
+                    />
                  ))}
             </div>
 
