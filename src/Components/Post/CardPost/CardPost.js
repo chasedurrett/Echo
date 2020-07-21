@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CardPost.css";
 
 export default function CardPost(props) {
