@@ -6,6 +6,8 @@ import HomeDashUser from "./HomeDashUser/HomeDashUser";
 import HomeDashNoUser from "./HomeDashNoUser/HomeDashNoUser";
 
 function Home(props) {
+  const [buttonsDisabled, setButtonsDisabled] = useState(false);
+
   return (
     <div className={"home-container"}>
       {props.isLoggedIn ? <HomeDashUser /> : <HomeDashNoUser />}
