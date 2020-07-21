@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/reducer";
 import "./CreatePost.css";
 import PropTypes from "prop-types";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -11,18 +11,63 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import ChooseSubforumDropdown from "./ChooseSubforumDropdown/ChooseSubforumDropdown";
 import TextField from "@material-ui/core/TextField";
+import ProfileBox from "../ProfileBox/ProfileBox";
+import axios from "axios";
 
 function CreatePost(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(0);
-  const [inputVal, setInputVal] = useState("");
+  const [inputVal, setInputVal] = useState({
+    post_title: "",
+    post_content: "",
+  });
+  const [postType, setPostType] = useState(1);
+  const [subforum, setSubforum] = useState({});
 
-  const handleChange = (event, newValue) => {
+  // Setting up useEffect() to only render on update as opposed to mount and update //
+  useEffect(() => {
+    getSubforum();
+  }, [props.match.params.subforumId]);
+
+  const handleChange = (e, newValue) => {
     setValue(newValue);
   };
 
-  const handleInput = (e) => setInputVal(e.target.value);
+  const handlePostType = (n) => {
+    setPostType(n);
+  };
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setInputVal({ ...inputVal, [name]: value });
+  };
+
+  const getSubforum = () => {
+    const subforumId =
+      props.match.params.subforumId === undefined
+        ? ""
+        : props.match.params.subforumId;
+    axios.get(`/api/subforum/${subforumId}`).then((res) => {
+      setSubforum(res.data[0]);
+    });
+  };
+
+  const createPost = () => {
+    const { post_title, post_content } = inputVal;
+
+    console.log(postType, post_title, post_content);
+
+    axios
+      .post(`/api/subforums/${props.match.params.subforumId}/post`, {
+        post_title,
+        post_content,
+        postType,
+      })
+      .then((res) => {
+        props.history.push(`/subforums/${props.match.params.subforumId}`);
+      });
+  };
 
   return (
     <div className="create-post-container">
@@ -46,9 +91,24 @@ function CreatePost(props) {
                 variant="fullWidth"
                 aria-label="full width tabs example"
               >
-                <Tab label="Text" {...a11yProps(0)} />
-                <Tab label="Image & Video" {...a11yProps(1)} />
-                <Tab label="Link" {...a11yProps(2)} />
+                <Tab
+                  name="post_type"
+                  onClick={() => handlePostType(1)}
+                  label="Text"
+                  {...a11yProps(0)}
+                />
+                <Tab
+                  name="post_type"
+                  onClick={() => handlePostType(2)}
+                  label="Image & Video"
+                  {...a11yProps(1)}
+                />
+                <Tab
+                  name="post_type"
+                  onClick={() => handlePostType(3)}
+                  label="Link"
+                  {...a11yProps(2)}
+                />
               </Tabs>
             </AppBar>
             <TabPanel
@@ -63,12 +123,14 @@ function CreatePost(props) {
                   onChange={handleInput}
                   id="standard-basic"
                   label="Title"
+                  name="post_title"
                 />
               </div>
               <div className="content-container">
                 <TextField
                   className={classes.textArea}
                   onChange={handleInput}
+                  name="post_content"
                   id="outlined-multiline-static"
                   label="Content"
                   variant="outlined"
@@ -80,7 +142,11 @@ function CreatePost(props) {
                 className="submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
-                <button style={{ width: 95 }} className="signup-btn btn-style">
+                <button
+                  onClick={() => createPost()}
+                  style={{ width: 95 }}
+                  className="signup-btn btn-style"
+                >
                   Submit
                 </button>
               </div>
@@ -96,7 +162,12 @@ function CreatePost(props) {
                 className="submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
-                <button style={{ width: 95 }} className="signup-btn btn-style">
+
+                <button
+                  onClick={() => createPost()}
+                  style={{ width: 95 }}
+                  className="signup-btn btn-style"
+                >
                   Submit
                 </button>
               </div>
@@ -108,29 +179,37 @@ function CreatePost(props) {
               dir={theme.direction}
             >
               Link
-              <div
+              <span
                 className="submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
-                <button style={{ width: 95 }} className="signup-btn btn-style">
+
+                <button
+                  onClick={() => createPost()}
+                  style={{ width: 95 }}
+                  className="signup-btn btn-style"
+                >
                   Submit
                 </button>
-              </div>
+              </span>
             </TabPanel>
           </div>
           <div></div>
         </div>
       </div>
       <div className="post-info-container">
-        Post rules and subreddit info goes here
+        <ProfileBox
+          subforum_banner={subforum.subforum_banner}
+          subforum_name={subforum.subforum_name}
+          cake_day={subforum.cake_day}
+        />
+        subforum rules
       </div>
     </div>
   );
 }
 
-const mapStateToProps = (reduxState) => reduxState;
-
-export default connect(mapStateToProps, { getUser })(CreatePost);
+export default CreatePost;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -172,8 +251,8 @@ const useStyles = makeStyles((theme) => ({
     height: 500,
     borderRadius: 8,
     boxShadow: "6px 6px 6px lightgrey",
-    indicatorColor: '#0079d3',
-    textColor: '#0079d3'
+    indicatorColor: "#0079d3",
+    textColor: "#0079d3",
   },
   tabBar: {
     backgroundColor: theme.palette.background.paper,
@@ -188,10 +267,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   textArea: {
-      width: "100%"
+    width: "100%",
   },
   tabs: {
-      indicatorColor: '#0079d3',
-      textColor: '#0079d3'
-  }
+    indicatorColor: "#0079d3",
+    textColor: "#0079d3",
+  },
 }));

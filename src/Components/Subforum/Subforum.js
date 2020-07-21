@@ -58,7 +58,7 @@ function Subforum(props) {
     return (
       <div key={element.post_id}>
         {element.post_title}
-        {element.post_id}
+        {/* {element.post_id} */}
         <div className="voteTracker">
           <div>
             {element.upvote === true ? (

@@ -9,6 +9,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { useLocation } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -23,7 +25,7 @@ function TabPanel(props) {
       >
         {value === index && (
           <Box p={3}>
-            <Typography>{children}</Typography>
+            <Typography component='span'>{children}</Typography>
           </Box>
         )}
       </div>
@@ -55,44 +57,60 @@ function Search(props) {
     const [users, setUsers] = useState([]);
     const [chambers, setChambers] = useState([]);
     const [value, setValue] = useState(0);
+    const [loading, setLoading] = useState(null);
+
     const classes = useStyles();
 
-    useEffect( () => {
-      async function grabResults() {
-        await getPosts();
-        await getChambers();
-        await getUsers();
-      }
-      
-      grabResults();
-      console.log(posts)
-      console.log(chambers)
-      console.log(users)
-    }, []);
-
     const location = useLocation();
-    console.log(location.params);
-    let searchParam = location.params;
-    
-    function getPosts(){
-        axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)
-        .then((res) => {
-          setPosts(res.data);
-        })
+    let searchParam = location.search;
+
+    useEffect(() => {
+      getPosts();
+      getUsers();
+      getChambers();
+    }, [searchParam]);
+
+    async function getPosts(){
+      setPosts([])
+      setLoading(true)
+      await axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)
+      .then((res) => {
+        setPosts(res.data)
+        setLoading(false)
+      })
+      .catch((err) =>{
+        console.log('500 status if statement', err.message)
+        setLoading(false)
+      })
     }
 
-    function getChambers(){
-      axios.get(`http://localhost:4000/api/search/subforums/${searchParam}`)
+    async function getChambers(){
+      setChambers([])
+      setLoading(true)
+      await axios.get(`http://localhost:4000/api/search/subforums/${searchParam}`)
       .then((res) => {
         setChambers(res.data)
+        setLoading(false)
       })
+      .catch((err) =>{
+        console.log('500 status if statement', err.message)
+        setLoading(false)
+      })  
     }
 
-    function getUsers(){
-      axios.get(`http://localhost:4000/api/search/users/${searchParam}`)
+    async function getUsers(){
+      setUsers([])
+      setLoading(true)
+      await axios.get(`http://localhost:4000/api/search/users/${searchParam}`)
       .then((res) => {
         setUsers(res.data)
+        setLoading(false)
       })
+      .catch((err) =>{
+        console.log('500 status if statement', err.message)
+        setLoading(false)
+      })  
+      
     }
 
     const handleChange = (event, newValue) => {
@@ -111,15 +129,33 @@ function Search(props) {
             </AppBar>
 
             <TabPanel value={value} index={0}>
-            Posts
+              {loading === true ? <CircularProgress/> : posts.length === 0 ? <div>No results found.</div>
+              : posts.map((post) => (
+              <div key={post.post_id}>
+                {post.post_title}
+              </div>
+              ))
+              }
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-            Chambers
+              {loading === true ? <CircularProgress/> : chambers.length === 0 ? <div>No results found.</div>
+              : chambers.map((chamber) => (
+              <div key={chamber.subforum_id}>
+                {chamber.subforum_name}
+              </div>
+              ))
+              }
             </TabPanel>
 
             <TabPanel value={value} index={2}>
-            Users
+              {loading === true ? <CircularProgress/> : users.length === 0 ? <div>No results found.</div>
+              : users.map((user) => (
+              <div key={user.user_id}>
+                {user.username}
+              </div>
+              ))
+              }
             </TabPanel>
 
         </div>

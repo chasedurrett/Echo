@@ -36,6 +36,17 @@ module.exports = {
     }
     return res.status(200).send(subforums);
   },
+  getSingleSubforum: async (req, res) => {
+    const db = req.app.get("db");
+    const { subforumId } = req.params;
+    const subforum = await db.subforum.get_single_subforum(subforumId);
+
+    if (!subforum) {
+      res.status(500).send(`Couldn't retrieve chamber, we're fixing that!`);
+    }
+
+    res.status(200).send(subforum);
+  },
   getUserSubforums: async (req, res) => {
     const db = req.app.get("db");
     const { user_id } = req.session.user;
