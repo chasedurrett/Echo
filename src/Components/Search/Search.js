@@ -9,6 +9,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { useLocation } from 'react-router-dom';
+import ClassicPost from '../Post/ClassicPost/ClassicPost';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 
@@ -128,14 +129,20 @@ function Search(props) {
                 </Tabs>
             </AppBar>
 
+            <div className="content-container">
+
             <TabPanel value={value} index={0}>
-              {loading === true ? <CircularProgress/> : posts.length === 0 ? <div>No results found.</div>
+              <div className="post-container">
+              {loading === true ? <CircularProgress/> : posts.length === 0 ? <div className="no-post-msg">No results found.</div>
               : posts.map((post) => (
-              <div key={post.post_id}>
-                {post.post_title}
+                <ClassicPost key={post.post_id} 
+                    title={post.post_title} 
+                    chamber={post.subforum_name}
+                    username={post.username}
+                    />
+                    ))
+                  }
               </div>
-              ))
-              }
             </TabPanel>
 
             <TabPanel value={value} index={1}>
@@ -157,6 +164,18 @@ function Search(props) {
               ))
               }
             </TabPanel>
+
+            <div className='other-info-section'>
+                <ul className='other-info-list'>
+                    <li>Help</li>
+                    <li>About</li>
+                    <li>Communities</li>
+                    <li>Top Posts</li>
+                    <li>Terms</li>
+                </ul>
+            </div>
+
+            </div>
 
         </div>
     )

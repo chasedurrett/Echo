@@ -3,3 +3,53 @@
 .Search {
   margin-top: $margintop-clear-navbar-height;
 }
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  margin-left: 10%;
+  margin-right: 10%;
+  min-width: 900px;
+}
+
+.other-info-section{
+  height: 140px;
+  width: 100%;
+  max-width: 310px;
+  margin-top: 50px;
+  border-radius: $reddit-border-radius;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+.other-info-list{
+  list-style: none;
+  font-size: 13px;
+  margin: 0px;
+  padding: 0px 0px 0px 12px;
+  font-family: $reddit-font;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+}
+
+.other-info-list li {
+  cursor: pointer;
+}
+
+.post-container{
+  width: 100%;
+  height: 100%;
+  margin: 20px 10px 0px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.no-post-msg{
+  font-family: $reddit-font;
+  font-size: 30px;
+  text-align: center;
+}
