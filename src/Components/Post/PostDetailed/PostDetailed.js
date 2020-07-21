@@ -9,6 +9,9 @@ function PostDetailed(props){
 
     return(
         <div>
+            <div className='post-detailed-posts'>
+                
+            </div>
             <Comments 
                 postId={props.match.params.postId}
             />
