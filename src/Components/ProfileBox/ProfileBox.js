@@ -1,16 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './ProfileBox.scss';
 import {FaPen} from 'react-icons/fa';
 import {GiCakeSlice} from 'react-icons/gi';
 import {connect} from 'react-redux';
 import defaultImage from './default-profile-image.jpg';
+import UploadImage from '../UploadImage/UploadImage';
 
 
 function ProfileBox(props) {
+    const [uploadFormOpen, setUploadFormOpen] = useState(false);
+    const [bannerUpload, setBannerUpload] = useState(false);
+    const [profileUpload, setProfileUpload] = useState(false)
 
-    // console.log('user who is logged in', props.user.user_id)
-    // console.log('page of user trying to view', props.user_id)
+    const handleUploadFormClose = () => {
+        setUploadFormOpen(false)
+        setBannerUpload(false)
+        setProfileUpload(false)
+    }
+
     return (
+        <div>
         <div className='user-info-section'>
             {props.user_banner ? <img className='banner-image' src={props.user_banner}></img> : null }
 
@@ -18,7 +27,7 @@ function ProfileBox(props) {
             
             {/* ensure that edit btns only appear when viewing a profile page */}
             {props.user.user_id ===  props.user_id && !props.subforum_name ?
-                <div className='edit-profile-banner'>
+                <div className='edit-profile-banner' onClick={() => {setUploadFormOpen(true); setBannerUpload(true)}}>
                     <FaPen className='profile-pic-edit'/>
                 </div>
             : null } 
@@ -30,7 +39,7 @@ function ProfileBox(props) {
                 
                 
                 {props.user.user_id === props.user_id && !props.subforum_name?
-                    <div className='edit-profile-image'>
+                    <div className='edit-profile-image' onClick={() => {setUploadFormOpen(true); setProfileUpload(true)}}>
                         <FaPen className='profile-pic-edit'/>
                     </div>
                 : null } 
@@ -56,6 +65,17 @@ function ProfileBox(props) {
                     </div>
                 </div>
             </div>
+        </div>
+        {uploadFormOpen ? 
+            <UploadImage 
+                handleCloseForm={handleUploadFormClose} 
+                getUserInfo={props.getUserInfo}
+                bannerUpload={bannerUpload}
+                setBannerUpload={setBannerUpload}
+                profileUpload={profileUpload}
+                setProfileUpload={setProfileUpload}
+            /> 
+        : null}
         </div>
 
     )
