@@ -44,11 +44,16 @@ module.exports = {
   getSingleSubforumPost: async (req, res) => {
     const db = req.app.get("db");
 
-    const { subforumId, postId } = req.params;
+    const { postId } = req.params;
 
-    let post = await db.post.get_single_post(subforumId, postId);
-
-    res.status(200).send(post);
+    if(!req.session.user){
+      let post = await db.post.get_single_post_no_user(postId)
+      res.status(200).send(post);
+    } else {
+      const {user_id} = req.session.user
+      let post = await db.post.get_single_post_with_user(postId, user_id);
+      res.status(200).send(post);
+    }
   },
 
   updateSubforumPost: async (req, res) => {
