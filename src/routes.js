@@ -8,7 +8,6 @@ import PostDetailed from "./Components/Post/PostDetailed/PostDetailed";
 //protected route imports
 import ProtectedProfile from "./ProtectedRoutes/ProtectedProfile";
 import Search from "./Components/Search/Search";
-import PostImage from './Components/postImage';
 
 export default (
   <Switch>
@@ -19,6 +18,5 @@ export default (
     <Route path="/create-post" component={CreatePost} />
     <Route path="/subforums/:subforumId/posts/:postId" component={PostDetailed} />
     <Route path="/search" component={Search} />
-    <Route path="/testingpost" component={PostImage} />
   </Switch>
 );
