@@ -25,13 +25,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            .title-container, .content-container, .submit-button-container{
+            .type-1-title-container, .type-1-content-container, .type-1-submit-button-container{
                 width: 700px;
             }
-            .title-container{
+            .type-1-title-container{
                 height: 100px;
             }
-            .content-container {
+            .type-1-content-container {
                 height: 250px;
             }
         }

@@ -10,11 +10,12 @@ export default function CardPost(props) {
     post_title,
     post_content,
     post_url,
-    post_type,
+    post_type_id,
     post_time,
     subforum_id,
     subforum_name,
     subforum_img,
+    comment_count,
     author_username,
     vote_tracker,
     upvote,
@@ -99,19 +100,22 @@ export default function CardPost(props) {
       </div>
       <div className="card-content-container">
         <div className="card-content-header">
-              <h4>c/{subforum_name}</h4>
-              <h5>posted by {author_username} on {post_time}</h5>
+          <h4>c/{subforum_name}</h4>
+          <h5>
+            posted by {author_username} on {post_time}
+          </h5>
         </div>
         <div className="card-content-body">
-          <div className="card-post-title">
-                {post_title}
-          </div>
+          <div className="card-post-title">{post_title}</div>
           <div className="card-post-content">
-                {post_type === 1 ? {post_content} : null}
-                {post_type === 2 ? }
+            {post_type_id === 1 || post_type_id === null ? (
+              <span>{post_content}</span>
+            ) : null}
           </div>
         </div>
-        <div className="card-content-footer"></div>
+        <div className="card-content-footer">
+            <h5>{comment_count} comments</h5>
+        </div>
       </div>
     </div>
   );
