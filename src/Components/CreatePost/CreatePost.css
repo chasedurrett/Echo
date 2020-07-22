@@ -1,7 +1,8 @@
 .create-post-container {
   margin-top: 55px;
   height: 90vh;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12,7 +13,7 @@
 
 .create-post-container .post-form-container {
   height: 70%;
-  width: 65%;
+  width: 70%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -64,6 +65,6 @@
 
 .create-post-container .post-info-container {
   height: 70%;
-  width: 35%;
+  width: 30%;
 }
 /*# sourceMappingURL=CreatePost.css.map */

@@ -4,5 +4,7 @@
         "get",
         "get subforums",
         "subforums"
-    ]
+    ],
+    "extensions.ignoreRecommendations": true,
+    "debug.allowBreakpointsEverywhere": true,
 }

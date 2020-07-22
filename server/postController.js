@@ -7,29 +7,32 @@ module.exports = {
 
     const { subforumId } = req.params;
 
-    if(!req.session.user){
+    if (!req.session.user) {
       let posts = await db.post.get_all_subforum_posts_no_user(subforumId);
-      res.status(200).send(posts)
+      res.status(200).send(posts);
     } else {
-      const { user_id } = req.session.user
-      let posts = await db.post.get_all_subforum_posts_with_user(subforumId, user_id);
+      const { user_id } = req.session.user;
+      let posts = await db.post.get_all_subforum_posts_with_user(
+        subforumId,
+        user_id
+      );
       res.status(200).send(posts);
     }
-
   },
-
   createSubforumPost: async (req, res) => {
     const db = req.app.get("db");
 
+    console.log("creating post");
+
     const post_time = moment().format("LLL");
-    // const {post_author_id} = req.session.user
+    const { user_id } = req.session.user;
     const { subforumId } = req.params;
-    const { post_title, post_content, post_type_id, post_author_id } = req.body;
+    const { post_title, post_content, post_type_id } = req.body;
 
     let post = await db.post.create_subforum_post(
       post_title,
       post_content,
-      post_author_id,
+      user_id,
       subforumId,
       post_type_id,
       post_time
@@ -82,7 +85,7 @@ module.exports = {
   getAllPostsWithUser: async (req, res) => {
     const db = req.app.get("db");
 
-    const {user_id} = req.session.user
+    const { user_id } = req.session.user;
 
     let posts = await db.post.get_all_posts_with_user(user_id);
     res.status(200).send(posts);
@@ -93,10 +96,10 @@ module.exports = {
     const { user_id } = req.session.user;
     const { postId } = req.params;
 
-    console.log(postId)
+    console.log(postId);
 
     const hasVoted = await db.post.check_if_voted(user_id, postId);
-    let voteCount
+    let voteCount;
 
     if (hasVoted.length === 0) {
       // if user hasn't upvoted previously
@@ -113,7 +116,7 @@ module.exports = {
     }
 
     if (req.session.user) {
-      console.log(voteCount)
+      console.log(voteCount);
 
       res.status(200).send(voteCount[0]);
     }
@@ -124,11 +127,11 @@ module.exports = {
     const { postId } = req.params;
 
     const hasVoted = await db.post.check_if_voted(user_id, postId);
-    let voteCount
+    let voteCount;
 
     if (hasVoted.length === 0) {
       // if user hasn't previously downvoted
-      voteCount = await db.post.downvote_post(postId)
+      voteCount = await db.post.downvote_post(postId);
       await db.post.downvote_post_instance(user_id, postId);
     } else {
       // if user previously upvoted
@@ -150,7 +153,7 @@ module.exports = {
     const { postId } = req.params;
 
     const checkVote = await db.post.check_how_user_voted(user_id, postId);
-    let voteCount
+    let voteCount;
 
     if (checkVote.length === 0) {
       // if user had downvoted
@@ -197,10 +200,10 @@ module.exports = {
     const { commentId } = req.params;
     const { user_id } = req.session.user;
 
-    const hasVotedOnComment = await db.post.comment.check_if_voted_comment(
-      user_id,
-      commentId
-    );
+    const hasVotedOnComment = await db.post.comment.check_if_voted_comment(user_id,commentId);
+
+
+    console.log(hasVotedOnComment);
 
     if (hasVotedOnComment.length === 0) {
       // if user hasn't previously downvoted
@@ -243,14 +246,23 @@ module.exports = {
     res.sendStatus(200);
   },
 
-  getComments: async (req, res) => {
+  getAllComments: async (req, res) => {
     const db = req.app.get("db");
 
     const { postId } = req.params;
 
-    let comments = await db.post.comment.get_comments(postId);
 
-    res.status(200).send(comments);
+    if (!req.session.user) {
+      let posts = await db.post.comment.get_all_comments_no_user(postId);
+      res.status(200).send(posts);
+    } else {
+      const { user_id } = req.session.user;
+      let posts = await db.post.comment.get_all_comments_with_user(
+        postId,
+        user_id
+      );
+      res.status(200).send(posts);
+    }
   },
 
   createComment: async (req, res) => {

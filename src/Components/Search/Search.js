@@ -9,6 +9,9 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { useLocation } from 'react-router-dom';
+import ClassicPost from '../Post/ClassicPost/ClassicPost';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -23,7 +26,7 @@ function TabPanel(props) {
       >
         {value === index && (
           <Box p={3}>
-            <Typography>{children}</Typography>
+            <Typography component='span'>{children}</Typography>
           </Box>
         )}
       </div>
@@ -55,44 +58,60 @@ function Search(props) {
     const [users, setUsers] = useState([]);
     const [chambers, setChambers] = useState([]);
     const [value, setValue] = useState(0);
+    const [loading, setLoading] = useState(null);
+
     const classes = useStyles();
 
-    useEffect( () => {
-      async function grabResults() {
-        await getPosts();
-        await getChambers();
-        await getUsers();
-      }
-      
-      grabResults();
-      console.log(posts)
-      console.log(chambers)
-      console.log(users)
-    }, []);
-
     const location = useLocation();
-    console.log(location.params);
-    let searchParam = location.params;
-    
-    function getPosts(){
-        axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)
-        .then((res) => {
-          setPosts(res.data);
-        })
+    let searchParam = location.search;
+
+    useEffect(() => {
+      getPosts();
+      getUsers();
+      getChambers();
+    }, [searchParam]);
+
+    async function getPosts(){
+      setPosts([])
+      setLoading(true)
+      await axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)
+      .then((res) => {
+        setPosts(res.data)
+        setLoading(false)
+      })
+      .catch((err) =>{
+        console.log('500 status if statement', err.message)
+        setLoading(false)
+      })
     }
 
-    function getChambers(){
-      axios.get(`http://localhost:4000/api/search/subforums/${searchParam}`)
+    async function getChambers(){
+      setChambers([])
+      setLoading(true)
+      await axios.get(`http://localhost:4000/api/search/subforums/${searchParam}`)
       .then((res) => {
         setChambers(res.data)
+        setLoading(false)
       })
+      .catch((err) =>{
+        console.log('500 status if statement', err.message)
+        setLoading(false)
+      })  
     }
 
-    function getUsers(){
-      axios.get(`http://localhost:4000/api/search/users/${searchParam}`)
+    async function getUsers(){
+      setUsers([])
+      setLoading(true)
+      await axios.get(`http://localhost:4000/api/search/users/${searchParam}`)
       .then((res) => {
         setUsers(res.data)
+        setLoading(false)
       })
+      .catch((err) =>{
+        console.log('500 status if statement', err.message)
+        setLoading(false)
+      })  
+      
     }
 
     const handleChange = (event, newValue) => {
@@ -110,17 +129,79 @@ function Search(props) {
                 </Tabs>
             </AppBar>
 
+            <div className="content-container">
+
             <TabPanel value={value} index={0}>
-            Posts
+              <div className="post-container">
+                {loading === true ? <div className="loading-container"><CircularProgress/></div> : posts.length === 0 ? <div className="no-post-msg">No results found.</div>
+                : posts.map((post) => (
+                  <ClassicPost key={post.post_id} 
+                      title={post.post_title} 
+                      chamber={post.subforum_name}
+                      username={post.username}
+                  />
+                    ))
+                }
+              </div>
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-            Chambers
+              <div className="chamber-container">
+                {loading === true ? <div className="loading-container"><CircularProgress/></div> : chambers.length === 0 ? <div className="no-post-msg">No results found.</div>
+                : chambers.map((chamber) => (
+                  <div key={chamber.subforum_id} className="chamber-item">
+                    <div className="img-and-title-container">
+                      <div className="img-container">
+                        <img src={chamber.subforum_img} className="subforum-img" />
+                      </div>
+                      <p className="subforum-title">{chamber.subforum_name}</p>
+                    </div>
+                    <div className="description">
+                      <p>{chamber.description}</p>
+                    </div>
+                    <div className="join-btn-container">
+                      <button className="join-btn">JOIN</button>
+                    </div>
+
+                  </div>
+                    ))
+                }
+              </div>
             </TabPanel>
 
             <TabPanel value={value} index={2}>
-            Users
+              <div className="user-container">
+                {loading === true ? <div className="loading-container"><CircularProgress/></div> : users.length === 0 ? <div className="no-post-msg">No results found.</div>
+                : users.map((user) => (
+                  <div key={user.user_id} className="user-item">
+                    <div className="img-and-username-container">
+                      <div className="img-container">
+                        <img src={user.user_image} className="user-img" />
+                      </div>
+                      <p className="username">{user.username}</p>
+                    </div>
+                    <div className="description">
+                    </div>
+                    <div className="follow-btn-container">
+                      <button className="follow-btn">FOLLOW</button>
+                    </div>
+                  </div>
+                    ))
+                }
+              </div>
             </TabPanel>
+
+            <div className='other-info-section'>
+                <ul className='other-info-list'>
+                    <li>Help</li>
+                    <li>About</li>
+                    <li>Communities</li>
+                    <li>Top Posts</li>
+                    <li>Terms</li>
+                </ul>
+            </div>
+
+            </div>
 
         </div>
     )

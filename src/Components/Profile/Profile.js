@@ -53,6 +53,12 @@ function Profile(props){
                     title={post.post_title} 
                     chamber={post.subforum_name}
                     username={post.username}
+                    subforumId={post.subforum_id}
+                    upvote={post.upvote}
+                    downvote={post.downvote}
+                    vote_tracker={post.vote_tracker}
+                    post_id={post.post_id}
+                    getUserPosts={getUserPosts}
                     />
                  ))}
             </div>
