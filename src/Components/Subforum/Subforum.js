@@ -25,15 +25,10 @@ function Subforum(props) {
   return <div className="subforum-container">
     {posts.map(post => (
       <CardPost key={post.post_id}
-      post_id={post.post_id}
-      subforumId={post.subforum_id}
-      post_title={post.post_title}
+      post={post}
       getPosts={getPosts}
       setButtonsDisabled={setButtonsDisabled}
       buttonsDisabled={buttonsDisabled}
-      upvote={post.upvote}
-      downvote={post.downvote}
-      vote_tracker={post.vote_tracker}
       />
     ))}
   </div>;

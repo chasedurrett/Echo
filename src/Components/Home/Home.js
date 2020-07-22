@@ -2,62 +2,61 @@ import React, { useEffect, useState } from "react";
 import "./Home.scss";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/reducer";
-import HomeDashUser from "./HomeDashUser/HomeDashUser";
-import HomeDashNoUser from "./HomeDashNoUser/HomeDashNoUser";
-import axios from 'axios'
+import CardPost from "../Post/CardPost/CardPost";
+import TopCommunitiesCard from "./TopCommunitiesCard/TopCommunitiesCard";
+import axios from "axios";
 
 function Home(props) {
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    if(props.user){
-      axios.get('api/')
-    } else if (!props.user){
-      
+    props.getUser()
+    getPosts();
+  }, [props.isLoggedIn]);
+
+  const getPosts = () => {
+    if (props.isLoggedIn) {
+      axios.get("api/subforums/posts/user-feed").then((res) => {
+        setPosts(res.data);
+        setButtonsDisabled(false)
+      });
+    } else if (!props.isLoggedIn) {
+      axios.get("/api/subforums/posts/no-user").then((res) => {
+        setPosts(res.data);
+      });
     }
-  }, []);
-
-  const upVote = (postId) => {
-    setButtonsDisabled(true);
-    console.log(`upvoting`);
-    axios
-      .post(
-        `/api/subforums/${props.match.params.subforumId}/posts/${postId}/upvote`
-      )
-      .then((res) => {
-        getPosts();
-      })
-      .catch((err) => console.log(err));
   };
 
-  const downVote = (postId) => {
-    setButtonsDisabled(true);
-    console.log(`downvoting`);
-    axios
-      .post(
-        `/api/subforums/${props.match.params.subforumId}/posts/${postId}/downvote`
-      )
-      .then((res) => {
-        getPosts();
-      });
-  };
+  const allPostsMap = posts.map((e) => {
+    return (
+      <CardPost key={e.post_id}
+        buttonsDisabled={buttonsDisabled}
+        setButtonsDisabled={setButtonsDisabled}
+        getPosts={getPosts}
+        post={e}
+      />
+    );
+  });
 
-  const deleteVote = (postId) => {
-    setButtonsDisabled(true);
-    console.log(`deleting vote`);
-    axios
-      .delete(
-        `/api/subforums/${props.match.params.subforumId}/posts/${postId}/remove-vote`
-      )
-      .then((res) => {
-        getPosts();
-      });
-  };
+
+  console.log(buttonsDisabled)
 
   return (
     <div className={"home-container"}>
-      {props.isLoggedIn ? <HomeDashUser /> : <HomeDashNoUser />}
+      {/*props.isLoggedIn ? <HomeDashUser /> : <HomeDashNoUser />*/}
+      <div className="home-dashboard-container">
+        <div className="explore-subforums-container-nu">
+          <h2>Explore</h2>
+          explore chambers -- maybe a carousel of randomly generated posts?
+        </div>
+        <div className="posts-sidebar-parent-container">
+          <div className="subforum-posts-container">{allPostsMap}</div>
+          <div className="sidebar-container">
+            <TopCommunitiesCard />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

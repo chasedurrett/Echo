@@ -7,7 +7,7 @@ select
     p.post_type_id,
     s.subforum_name,
     s.subforum_img,
-    u.username
+    u.username as author_username
 from subforums s
     inner join posts p on p.subforum_id = s.subforum_id
     inner join users u on p.post_author_id = u.user_id
