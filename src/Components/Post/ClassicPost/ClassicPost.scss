@@ -4,22 +4,23 @@
     width: 100%;
     height: auto;
     border-radius: $reddit-border-radius;
-    padding: 10px 0px 10px 0px;
     background: white;
     margin-bottom: 10px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: row;
 }
 
 .post-info-container{
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     margin-left: 10px;
 }
 
 .classic-title{
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 3px;
 }
 
 .classic-chamber{
@@ -50,4 +51,22 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    padding: 5px 10px 5px 10px;
+    background: rgb(233, 233, 233);
+}
+
+.voter-arrow{
+    font-size: 14px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.vote-counter{
+    font-size: 16px;
+    height: 20px;
+}
+
+.down-arr{
+    height: 20px;
+    padding-top: 6px;
 }

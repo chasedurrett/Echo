@@ -63,6 +63,16 @@ app.post('/upload', upload.array('upl',1), function (req, res, next) {
   res.status(200).send(req.files[0].location);
 });
 
+app.get("/posts/:postId/votes", async function (req, res) {
+  console.log('get request')
+  const db = req.app.get('db')
+  const {postId} = req.params
+  const {user_id} = req.session.user
+  console.log('post id', postId)
+  let votes = await db.post.get_vote_tracker(user_id, postId)
+  console.log('votes', votes)
+  res.status(200).send(votes)
+})
 
 // Auth Endpoints
 app.get("/auth/users/current", authCtrl.currentUser);

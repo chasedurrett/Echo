@@ -9,7 +9,6 @@ import PostDetailed from "./Components/Post/PostDetailed/PostDetailed";
 import ProtectedProfile from "./ProtectedRoutes/ProtectedProfile";
 import Search from "./Components/Search/Search";
 
-
 export default (
   <Switch>
     <Route exact path="/" component={Home} />

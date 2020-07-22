@@ -8,22 +8,35 @@ import axios from 'axios'
 
 function ClassicPost(props) {
 
-    const [buttonsDisabled, setButtonsDisabled] = useState(false)
+    const [buttonsDisabled, setButtonsDisabled] = useState(false);
+    const [voteNum, setVoteNum] = useState(props.vote_tracker);
+    const [upvote, setUpVote] = useState(props.upvote);
+    const [downvote, setDownVote] = useState(props.downvote);
 
     useEffect(() => {
  
         console.log(props)
     }, [])
 
+    const getVote = () => {
+      axios.get(`/posts/${props.post_id}/votes`)
+      .then(res => {
+        console.log('get vote', res.data)
+        setVoteNum(res.data[0].vote_tracker)
+        setUpVote(res.data[0].upvote)
+        setDownVote(res.data[0].downvote)
+      })
+    }
+
     const upVote = (postId) => {
         setButtonsDisabled(true)
         console.log(`upvoting`);
         axios.post(`/api/subforums/${props.subforumId}/posts/${postId}/upvote`)
           .then(res => {
-            props.getUserPosts()
+            getVote()
+            setButtonsDisabled(false)
           })
           .catch(err => console.log(err))
-          ;
       };
     
       const downVote = (postId) => {
@@ -31,8 +44,10 @@ function ClassicPost(props) {
         console.log(`downvoting`);
         axios.post(`/api/subforums/${props.subforumId}/posts/${postId}/downvote`)
           .then(res => {
-            props.getUserPosts()
-          });
+            getVote()
+            setButtonsDisabled(false)
+          })
+          .catch(err => console.log(err))
       };
     
       const deleteVote = (postId) => {
@@ -40,40 +55,42 @@ function ClassicPost(props) {
         console.log(`deleting vote`);
         axios.delete(`/api/subforums/${props.subforumId}/posts/${postId}/remove-vote`)
           .then(res => {
-            props.getUserPosts()
-          });
+            getVote()
+            setButtonsDisabled(false)
+          })
+          .catch(err => console.log(err))
       };
 
     return (
         <div className='classic-post-container'>
             <div className='counter-container'>
               <div>
-              {props.upvote === true ? (
+              {upvote === true ? (
                 <GoArrowUp
                   alt="upvote"
-                  className="vote-arrow voted"
+                  className="voter-arrow voted"
                   onClick={() => buttonsDisabled ? null : deleteVote(props.post_id)}
                 />
               ) : (
                   <GoArrowUp
                     alt="upvote"
-                    className="vote-arrow"
+                    className="voter-arrow"
                     onClick={() => buttonsDisabled ? null :  upVote(props.post_id)}
                   />
                 )}
               </div>
-              <div className="voteCount">{props.vote_tracker}</div>
+              <div className="vote-counter">{voteNum}</div>
               <div>
-                {props.downvote === true ? (
+                {downvote === true ? (
                   <GoArrowDown
                     alt="downvote"
-                    className="vote-arrow voted"
+                    className="voter-arrow voted down-arr"
                     onClick={() => buttonsDisabled ? null :  deleteVote(props.post_id)}
                   />
                 ) : (
                     <GoArrowDown
                       alt="downvote"
-                      className="vote-arrow"
+                      className="voter-arrow down-arr"
                       onClick={() => buttonsDisabled ? null :  downVote(props.post_id)}
                     />
                   )}
