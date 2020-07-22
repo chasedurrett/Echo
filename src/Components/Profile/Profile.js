@@ -14,10 +14,13 @@ function Profile(props){
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(null);
 
+
     useEffect(() => {
         getUserInfo()
         getUserPosts()
       },[props.match.params.userId]);
+      
+
 
     const getUserInfo = () => {
         axios.get(`/api/users/${props.match.params.userId}`)
@@ -32,6 +35,7 @@ function Profile(props){
         setLoading(true)
         axios.get(`/api/users/${props.match.params.userId}/profileInfo `)
         .then(res => {
+            console.log(res.data)
             setUserPosts(res.data)
             setLoading(false)
         })
@@ -58,7 +62,6 @@ function Profile(props){
                     downvote={post.downvote}
                     vote_tracker={post.vote_tracker}
                     post_id={post.post_id}
-                    getUserPosts={getUserPosts}
                     />
                  ))}
             </div>
