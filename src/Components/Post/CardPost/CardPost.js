@@ -31,7 +31,7 @@ function CardPost(props) {
   const [theupvote, setUpVote] = useState(upvote);
   const [thedownvote, setDownVote] = useState(downvote);
 
-  const getVote = (post_id) => {
+  const getVote = () => {
     console.log('post_id', post_id)
     axios.get(`/posts/${post_id}/votes`)
     .then(res => {
@@ -50,7 +50,7 @@ function CardPost(props) {
     axios
       .post(`/api/subforums/${subforum_id}/posts/${post_id}/upvote`)
       .then((res) => {
-        getVote(post_id)
+        getVote()
       })
       .catch((err) => console.log(err));
   };
