@@ -5,18 +5,47 @@ import {GiCakeSlice} from 'react-icons/gi';
 import {connect} from 'react-redux';
 import defaultImage from './default-profile-image.jpg';
 import UploadImage from '../UploadImage/UploadImage';
+import {RiSettings4Line} from 'react-icons/ri';
+import {MdClose} from 'react-icons/md';
+import axios from 'axios';
+import { logoutUser } from "../../redux/reducer";
 
 
 function ProfileBox(props) {
     const [uploadFormOpen, setUploadFormOpen] = useState(false);
     const [bannerUpload, setBannerUpload] = useState(false);
-    const [profileUpload, setProfileUpload] = useState(false)
+    const [profileUpload, setProfileUpload] = useState(false);
+    const [deleteFormOpen, setDeleteFormOpen] = useState(false);
 
     const handleUploadFormClose = () => {
         setUploadFormOpen(false)
         setBannerUpload(false)
         setProfileUpload(false)
     }
+
+    const deleteUser = () => {
+        axios.delete(`/auth/delete/users/${props.user.user_id}`)
+        .then(res => {
+            console.log('successfully deleted user')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+
+    const logout = () => {
+        axios
+        .delete("/auth/logout")
+        .then(() => {
+            console.log("logout hit");
+            props.logoutUser();
+            window.location.reload(false);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    };
 
     return (
         <div>
@@ -65,7 +94,35 @@ function ProfileBox(props) {
                     </div>
                 </div>
             </div>
+            
+            <div className='settings-container' onClick={() => {setDeleteFormOpen(true)}}>
+                <RiSettings4Line className='settings-icons'/>
+            </div>
         </div>
+
+        {deleteFormOpen ? 
+        <div className='delete-form-container'>
+            <div className='delete-form-content'>
+            <MdClose className='upload-close-btn' onClick={() => {setDeleteFormOpen(false)}}/>
+            <div className='delete-btn-container'>
+                <div className='question'>Do you want to DELETE your account?</div>
+                <div>
+                <button className='delete-yes-btn' onClick={() => {
+                    deleteUser()
+                    logout()
+                }}>
+                    YES
+                </button>
+                <button className='delete-no-btn' onClick={() => {setDeleteFormOpen(false)}}>
+                    NO 
+                </button>
+                </div>
+            </div>
+            </div>
+        </div>
+        : null
+        }
+        
         {uploadFormOpen ? 
             <UploadImage 
                 handleCloseForm={handleUploadFormClose} 
@@ -84,4 +141,4 @@ function ProfileBox(props) {
 
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps)(ProfileBox);
+export default connect(mapStateToProps, {logoutUser})(ProfileBox);
