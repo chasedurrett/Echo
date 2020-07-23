@@ -94,5 +94,14 @@ module.exports = {
     const userInfo = await db.user.get_user_posts_info(userId)
 
     res.status(200).send(userInfo)
-  }
+  },
+
+  delete: async (req, res) => {
+    const db = req.app.get('db');
+    const {userId} = req.params;
+
+    const deleteUser = await db.user.delete_user(userId);
+
+    res.status(200).send('successful deleted user')
+}
 };
