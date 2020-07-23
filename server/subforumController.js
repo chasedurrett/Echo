@@ -47,6 +47,16 @@ module.exports = {
 
     res.status(200).send(subforum);
   },
+  getTopCommunities: async (req, res) => {
+    const db = req.app.get("db");
+    const topCommunities = await db.subforum.get_top_communities();
+
+    if (!topCommunities) {
+      res.status(500).send(`Couldn't get communities, we're fixing that!`);
+    }
+
+    res.status(200).send(topCommunities);
+  },
   getUserSubforums: async (req, res) => {
     const db = req.app.get("db");
     const { user_id } = req.session.user;

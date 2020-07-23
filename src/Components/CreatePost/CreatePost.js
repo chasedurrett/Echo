@@ -117,7 +117,7 @@ function CreatePost(props) {
               index={0}
               dir={theme.direction}
             >
-              <div className="title-container">
+              <div className="type-1-title-container">
                 <TextField
                   className={classes.textArea}
                   onChange={handleInput}
@@ -126,7 +126,7 @@ function CreatePost(props) {
                   name="post_title"
                 />
               </div>
-              <div className="content-container">
+              <div className="type-1-content-container">
                 <TextField
                   className={classes.textArea}
                   onChange={handleInput}
@@ -139,7 +139,7 @@ function CreatePost(props) {
                 />
               </div>
               <div
-                className="submit-button-container"
+                className="type-1-submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
                 <button
@@ -162,7 +162,6 @@ function CreatePost(props) {
                 className="submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
-
                 <button
                   onClick={() => createPost()}
                   style={{ width: 95 }}
@@ -183,7 +182,6 @@ function CreatePost(props) {
                 className="submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
-
                 <button
                   onClick={() => createPost()}
                   style={{ width: 95 }}
@@ -265,6 +263,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
   textArea: {
     width: "100%",

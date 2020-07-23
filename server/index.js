@@ -95,6 +95,7 @@ app.delete("/api/users/:userId", userCtrl.removeFollower);
 // Post Endpoints
 app.get("/api/subforums/:subforumId/posts", postCtrl.getAllSubforumPosts);
 app.get("/api/subforums/posts/no-user", postCtrl.getAllPostsNoUser);
+app.get('/api/subforums/posts/user-feed', postCtrl.getAllPostsWithUser)
 app.post("/api/subforums/:subforumId/post", postCtrl.createSubforumPost);
 app.get("/api/subforums/:subforumId/posts/:postId", postCtrl.getSingleSubforumPost);
 app.put("/api/subforums/:subforumId/posts/:postId", postCtrl.updateSubforumPost);
@@ -115,6 +116,7 @@ app.delete("/api/posts/:postId/comments/:commentId", postCtrl.deleteComment);
 app.get("/api/subforums", subforumCtrl.getSubforums);
 app.get('/api/subforum/:subforumId', subforumCtrl.getSingleSubforum)
 app.get('/api/subforums/users', subforumCtrl.getUserSubforums)
+app.get('/api/subforums/top-communities', subforumCtrl.getTopCommunities)
 app.post("/api/subforums", subforumCtrl.createSubforum);
 app.post("/api/subforums/:subforumId/users", subforumCtrl.addSubforumUser);
 app.delete("/api/subforums/:subforumId/users/:userId", subforumCtrl.removeSubforumUser);

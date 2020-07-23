@@ -84,7 +84,6 @@ module.exports = {
   },
   getAllPostsNoUser: async (req, res) => {
     const db = req.app.get("db");
-
     const allPosts = await db.post.get_all_posts_no_user();
     res.status(200).send(allPosts);
   },

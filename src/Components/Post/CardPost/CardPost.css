@@ -1,1 +1,188 @@
-/* No CSS *//*# sourceMappingURL=CardPost.css.map */
+.card-post-container {
+  width: 650px;
+  min-height: 100px;
+  max-height: 800px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-shadow: 3px 3px 3px rgba(65, 65, 65, 0.239);
+          box-shadow: 3px 3px 3px rgba(65, 65, 65, 0.239);
+}
+
+.card-post-container .card-vote-count-vertical {
+  min-height: 100px;
+  max-height: 800px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 7%;
+  background: whitesmoke;
+}
+
+.card-post-container .card-vote-count-vertical .card-vote-count-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-top: 20px;
+}
+
+.card-post-container .card-vote-count-vertical .card-vote-count-container .card-vote-count-body {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card-post-container .card-content-container {
+  height: 100%;
+  min-height: 100px;
+  width: 93%;
+  background: #ffffff;
+  border-radius: 0 8px 8px 0;
+}
+
+.card-post-container .card-content-container .card-content-header,
+.card-post-container .card-content-container .card-content-body,
+.card-post-container .card-content-container .card-content-footer {
+  width: 100%;
+}
+
+.card-post-container .card-content-container .card-content-header {
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  border-bottom: 1px solid rgba(172, 172, 172, 0.253);
+  border-top-right-radius: 8px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card-post-container .card-content-container .card-content-header .header-post-author-container {
+  font-size: 13px;
+  font-weight: lighter;
+  color: rgba(49, 49, 49, 0.424);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+}
+
+.card-post-container .card-content-container .card-content-header .header-seperation-dot {
+  font-size: smaller;
+  font-weight: 300;
+  padding: 0 3px;
+}
+
+.card-post-container .card-content-container .card-content-header .card-post-subforum-img {
+  width: 30px;
+  height: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.card-post-container .card-content-container .card-content-footer {
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.card-post-container .card-content-container .card-content-footer .card-content-footer-h5 {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card-post-container .card-content-container .card-content-footer .card-content-footer-h5 h5 {
+  height: 100%;
+  font-size: 15px;
+  font-weight: lighter;
+  padding: 0;
+  margin: 13px 0 0 5px;
+}
+
+.card-post-container .card-content-container .card-content-body {
+  height: 90%;
+  min-height: 70px;
+}
+
+.card-post-container .card-content-container .card-content-body .card-post-title {
+  margin-left: 5px;
+  min-height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: bold;
+}
+
+.card-post-container .card-content-container .card-content-body .card-post-content {
+  max-height: 300px;
+  overflow-y: hidden;
+  position: relative;
+  margin-left: 5px;
+}
+
+.card-post-container .card-content-container .card-content-body .card-post-content .card-post-content:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(transparent 150px, #797979);
+}
+/*# sourceMappingURL=CardPost.css.map */

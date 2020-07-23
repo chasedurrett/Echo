@@ -16,7 +16,6 @@
 .post-container {
   width: 100%;
   height: 100%;
-  border: 2px solid black;
   margin: 20px 10px 0px 0px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -70,5 +69,11 @@
 
 .other-info-list li {
   cursor: pointer;
+}
+
+.no-post-msg {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 30px;
+  text-align: center;
 }
 /*# sourceMappingURL=Profile.css.map */

@@ -22,6 +22,8 @@ function Subforum(props) {
       });
   };
 
+  console.log(posts)
+
   return <div className="subforum-container">
     
     {posts.map(post => (
