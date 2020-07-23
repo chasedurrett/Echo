@@ -153,65 +153,89 @@ function Search(props) {
 
             <div className="content-container">
 
-            <TabPanel value={value} index={0}>
-              <div className="post-container">
-                {loading === true ? <div className="loading-container"><CircularProgress/></div> : posts.length === 0 ? <div className="no-post-msg">No results found.</div>
-                : posts.map((post) => (
-                  <ClassicPost key={post.post_id} 
-                      title={post.post_title} 
-                      chamber={post.subforum_name}
-                      username={post.username}
-                  />
-                    ))
-                }
-              </div>
-            </TabPanel>
+              <div className="tabs-container">
 
-            <TabPanel value={value} index={1}>
-              <div className="chamber-container">
-                {loading === true ? <div className="loading-container"><CircularProgress/></div> : chambers.length === 0 ? <div className="no-post-msg">No results found.</div>
-                : chambers.map((chamber) => (
-                  <div key={chamber.subforum_id} className="chamber-item">
-                    <div className="img-and-title-container">
-                      <div className="img-container">
-                        <img src={chamber.subforum_img} className="subforum-img" />
-                      </div>
-                      <p className="subforum-title">{chamber.subforum_name}</p>
-                    </div>
-                    <div className="description">
-                      <p>{chamber.description}</p>
-                    </div>
-                    <div className="btn-container">
-                      { joined ? <button className="leave-btn" onClick={() => {leaveSubforum(chamber.subforum_id)}}>JOINED</button> : <button className="join-btn" onClick={() => {joinSubforum(chamber.subforum_id)}}>JOIN</button> }
-                    </div>
-
+                <TabPanel value={value} index={0}>
+                  <div className="post-container">
+                    {loading === true ? <div className="loading-container"><CircularProgress/></div> : posts.length === 0 ? <div className="no-post-msg">No results found.</div>
+                    : posts.map((post) => (
+                      <ClassicPost key={post.post_id} 
+                          title={post.post_title} 
+                          chamber={post.subforum_name}
+                          username={post.username}
+                      />
+                        ))
+                    }
                   </div>
-                    ))
-                }
-              </div>
-            </TabPanel>
+                </TabPanel>
 
-            <TabPanel value={value} index={2}>
-              <div className="user-container">
-                {loading === true ? <div className="loading-container"><CircularProgress/></div> : users.length === 0 ? <div className="no-post-msg">No results found.</div>
-                : users.map((user) => (
-                  <div key={user.user_id} className="user-item">
-                    <div className="img-and-username-container">
-                      <div className="img-container">
-                        <img src={user.user_image} className="user-img" />
+                <TabPanel value={value} index={1}>
+                  <div className="chamber-container">
+                    {loading === true ? <div className="loading-container"><CircularProgress/></div> : chambers.length === 0 ? <div className="no-post-msg">No results found.</div>
+                    : chambers.map((chamber) => (
+                      <div key={chamber.subforum_id} className="chamber-item">
+
+                        <div className="img-and-title-container">
+
+                          <div className="img-container">
+                            <img src={chamber.subforum_img} className="subforum-img" />
+                          </div>
+
+                          <div className="title-container">
+                            <p className="subforum-title">{chamber.subforum_name}</p>
+                          </div>
+
+                        </div>
+
+                        <div className="description">
+                          <p>{chamber.description}</p>
+                        </div>
+
+                        <div className="join-btn-container">
+
+                          { joined ? <button className="leave-btn" onClick={() => {leaveSubforum(chamber.subforum_id)}}>JOINED</button> : <button className="join-btn" onClick={() => {joinSubforum(chamber.subforum_id)}}>JOIN</button> }
+
+                        </div>
+
                       </div>
-                      <p className="username">{user.username}</p>
-                    </div>
-                    <div className="description">
-                    </div>
-                    <div className="follow-btn-container">
-                      <button className="follow-btn">FOLLOW</button>
-                    </div>
+                        ))
+                    }
                   </div>
-                    ))
-                }
-              </div>
-            </TabPanel>
+                </TabPanel>
+
+                <TabPanel value={value} index={2}>
+                  <div className="user-container">
+                    {loading === true ? <div className="loading-container"><CircularProgress/></div> : users.length === 0 ? <div className="no-post-msg">No results found.</div>
+                    : users.map((user) => (
+                      <div key={user.user_id} className="user-item">
+
+                        <div className="img-and-username-container">
+
+                          <div className="img-container">
+                            <img src={user.user_image} className="user-img" />
+                          </div>
+
+                          <div className="username-container">
+                            <p className="username">{user.username}</p>
+                          </div>
+
+                        </div>
+
+                        <div className="description">
+
+                        </div>
+
+                        <div className="follow-btn-container">
+                          <button className="follow-btn">FOLLOW</button>
+                        </div>
+
+                      </div>
+                        ))
+                    }
+                  </div>
+                </TabPanel>
+
+            </div>
 
             <div className='other-info-section'>
                 <ul className='other-info-list'>

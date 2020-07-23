@@ -10,7 +10,7 @@ function Comments(props) {
 
     useEffect(() => {
         getComments()
-    }, [])
+    }, [props.postId, props.loader])
 
     const getComments = () => {
         axios.get(`/api/posts/${props.postId}/comments`)
