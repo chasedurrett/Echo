@@ -33,6 +33,15 @@ function ProfileBox(props) {
         })
     }
 
+    const deleteChamber = () => {
+        axios.delete(`/api/subforums/${props.subforum_id}`)
+        .then(res => {
+            console.log('successsfully deleted subforum')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
 
     const logout = () => {
         axios
@@ -85,19 +94,24 @@ function ProfileBox(props) {
                         c/{props.subforum_name}
                     </div>
                 : null}
+           {!props.cake_day ? null :
             <div className='user-info-cake-day-container'>
-                <div className='user-info-cake-day'>
-                    <div className='cake-day'>Cake day</div>
-                    <div className='cake-day-date'>
-                        <GiCakeSlice className='cake-icon'/>
-                        {props.cake_day}
+                    <div className='user-info-cake-day'>
+                        <div className='cake-day'>Cake day</div>
+                        <div className='cake-day-date'>
+                            <GiCakeSlice className='cake-icon'/>
+                            {props.cake_day}
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div className='settings-container' onClick={() => {setDeleteFormOpen(true)}}>
-                <RiSettings4Line className='settings-icons'/>
-            </div>
+            }
+            { props.user.user_id === props.user_id || props.subforum_owner_id === props.user_id ?
+                <div className='settings-container' onClick={() => {setDeleteFormOpen(true)}}>
+                  {props.hidden ? null :  <RiSettings4Line className='settings-icons'/> }
+                </div> 
+                : null
+            }
+           
         </div>
 
         {deleteFormOpen ? 
@@ -105,18 +119,37 @@ function ProfileBox(props) {
             <div className='delete-form-content'>
             <MdClose className='upload-close-btn' onClick={() => {setDeleteFormOpen(false)}}/>
             <div className='delete-btn-container'>
-                <div className='question'>Do you want to DELETE your account?</div>
-                <div>
-                <button className='delete-yes-btn' onClick={() => {
-                    deleteUser()
-                    logout()
-                }}>
-                    YES
-                </button>
-                <button className='delete-no-btn' onClick={() => {setDeleteFormOpen(false)}}>
-                    NO 
-                </button>
+               {!props.subforum_name ?
+               <div>
+                    <div className='question'>Do you want to DELETE your Account?</div>
+                    <div>
+                        <button className='delete-yes-btn' onClick={() => {
+                            deleteChamber()
+                            logout()
+                        }}>
+                            YES
+                        </button>
+                        <button className='delete-no-btn' onClick={() => {setDeleteFormOpen(false)}}>
+                            NO 
+                        </button>
+                    </div>
                 </div>
+                :
+                <div>
+                    <div className='question'>Do you want to DELETE your Chamber?</div>
+                        <div>
+                            <button className='delete-yes-btn' onClick={() => {
+                                deleteChamber()
+                                logout()
+                            }}>
+                                YES
+                            </button>
+                            <button className='delete-no-btn' onClick={() => {setDeleteFormOpen(false)}}>
+                                NO 
+                            </button>
+                    </div>
+                </div>
+               } 
             </div>
             </div>
         </div>
