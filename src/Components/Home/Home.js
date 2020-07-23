@@ -15,6 +15,8 @@ function Home(props) {
     getPosts();
   }, [props.isLoggedIn]);
 
+  console.log(props)
+
   const getPosts = () => {
     if (props.isLoggedIn) {
       axios.get("api/subforums/posts/user-feed").then((res) => {
