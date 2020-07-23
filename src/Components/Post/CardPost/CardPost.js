@@ -31,7 +31,7 @@ function CardPost(props) {
   const [theupvote, setUpVote] = useState(upvote);
   const [thedownvote, setDownVote] = useState(downvote);
 
-  const getVote = () => {
+  const getVote = (post_id) => {
     console.log('post_id', post_id)
     axios.get(`/posts/${post_id}/votes`)
     .then(res => {
@@ -85,7 +85,7 @@ function CardPost(props) {
         <div className="card-vote-count-container">
           <div className="card-vote-count-body">
             <div>
-              {theupvote === true ? (
+              {upvote === true ? (
                 <GoArrowUp
                   alt="upvote"
                   style={{ maxWidth: 50 }}
@@ -106,7 +106,7 @@ function CardPost(props) {
             </div>
             <div className="voteCount">{voteNum}</div>
             <div>
-              {thedownvote === true ? (
+              {downvote === true ? (
                 <GoArrowDown
                   alt="upvote"
                   style={{ maxWidth: 50 }}
