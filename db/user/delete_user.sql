@@ -1,0 +1,14 @@
+delete from comment_votes where user_id = $1;
+delete from comment_votes where comment_id in (select comment_id from comments where comment_author_id = $1);
+delete from comments where comment_author_id = $1;
+delete from comments where post_id in (select post_id from posts where post_author_id = $1);
+delete from post_votes where user_id = $1;
+delete from post_votes where post_id in (select post_id from posts where post_author_id = $1);
+delete from posts where post_author_id = $1;
+delete from posts where subforum_id in (select subforum_id from subforums where subforum_owner_id = $1);
+delete from subforum_users where user_id = $1;
+delete from subforum_users where subforum_id in (select subforum_id from subforums where subforum_owner_id = $1);
+delete from subforums where subforum_owner_id = $1;
+delete from followers where user_id = $1;
+delete from followers where user_id in (select user_id from users where following_id = $1);
+delete from users where user_id = $1;
