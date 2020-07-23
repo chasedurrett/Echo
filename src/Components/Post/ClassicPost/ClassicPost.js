@@ -13,11 +13,6 @@ function ClassicPost(props) {
     const [upvote, setUpVote] = useState(props.upvote);
     const [downvote, setDownVote] = useState(props.downvote);
 
-    useEffect(() => {
- 
-        console.log(props)
-    }, [])
-
     const getVote = () => {
       axios.get(`/posts/${props.post_id}/votes`)
       .then(res => {
@@ -25,6 +20,7 @@ function ClassicPost(props) {
         setVoteNum(res.data[0].vote_tracker)
         setUpVote(res.data[0].upvote)
         setDownVote(res.data[0].downvote)
+        setButtonsDisabled(false)
       })
     }
 
@@ -34,7 +30,6 @@ function ClassicPost(props) {
         axios.post(`/api/subforums/${props.subforumId}/posts/${postId}/upvote`)
           .then(res => {
             getVote()
-            setButtonsDisabled(false)
           })
           .catch(err => console.log(err))
       };
@@ -45,7 +40,6 @@ function ClassicPost(props) {
         axios.post(`/api/subforums/${props.subforumId}/posts/${postId}/downvote`)
           .then(res => {
             getVote()
-            setButtonsDisabled(false)
           })
           .catch(err => console.log(err))
       };
@@ -56,7 +50,6 @@ function ClassicPost(props) {
         axios.delete(`/api/subforums/${props.subforumId}/posts/${postId}/remove-vote`)
           .then(res => {
             getVote()
-            setButtonsDisabled(false)
           })
           .catch(err => console.log(err))
       };
