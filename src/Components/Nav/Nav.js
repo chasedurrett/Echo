@@ -112,7 +112,9 @@ function Nav(
             {props.isLoggedIn ? (
               <div className="nav-icons-cont flex-row">
                 <BsChatDotsFill className="nav-icon" />
-                <BsPencilSquare className="nav-icon" />
+                <Link style={{textDecoration: 'none', alignSelf: 'center', color: 'black', marginTop: '3px'}} to={`/create-post/${props.match}`}>
+                  <BsPencilSquare className="nav-icon"/>
+                </Link>
               </div>
             ) : (
               <div className="login-signup-btns-cont flex-row">
