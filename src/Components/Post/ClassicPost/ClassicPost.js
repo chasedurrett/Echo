@@ -16,7 +16,6 @@ function ClassicPost(props) {
     const getVote = () => {
       axios.get(`/posts/${props.post_id}/votes`)
       .then(res => {
-        console.log('get vote', res.data)
         setVoteNum(res.data[0].vote_tracker)
         setUpVote(res.data[0].upvote)
         setDownVote(res.data[0].downvote)
@@ -26,7 +25,6 @@ function ClassicPost(props) {
 
     const upVote = (postId) => {
         setButtonsDisabled(true)
-        console.log(`upvoting`);
         axios.post(`/api/subforums/${props.subforumId}/posts/${postId}/upvote`)
           .then(res => {
             getVote()
@@ -36,21 +34,15 @@ function ClassicPost(props) {
     
       const downVote = (postId) => {
         setButtonsDisabled(true)
-        console.log(`downvoting`);
         axios.post(`/api/subforums/${props.subforumId}/posts/${postId}/downvote`)
           .then(res => {
             getVote()
-<<<<<<< HEAD
-            
-=======
->>>>>>> master
           })
           .catch(err => console.log(err))
       };
     
       const deleteVote = (postId) => {
         setButtonsDisabled(true)
-        console.log(`deleting vote`);
         axios.delete(`/api/subforums/${props.subforumId}/posts/${postId}/remove-vote`)
           .then(res => {
             getVote()

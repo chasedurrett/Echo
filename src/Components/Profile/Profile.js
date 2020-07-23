@@ -35,7 +35,6 @@ function Profile(props){
         setLoading(true)
         axios.get(`/api/users/${props.match.params.userId}/profileInfo `)
         .then(res => {
-            console.log(res.data)
             setUserPosts(res.data)
             setLoading(false)
         })
@@ -74,7 +73,6 @@ function Profile(props){
                 user_id={user.user_id} 
                 user_image={user.user_image} 
                 user_banner={user.user_banner}
-                getUserInfo={getUserInfo}
             />
 
             <div className='other-info-section'>

@@ -7,7 +7,6 @@ import TopCommunitiesCard from "./TopCommunitiesCard/TopCommunitiesCard";
 import axios from "axios";
 
 function Home(props) {
-  const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -19,7 +18,7 @@ function Home(props) {
     if (props.isLoggedIn) {
       axios.get("api/subforums/posts/user-feed").then((res) => {
         setPosts(res.data);
-        setButtonsDisabled(false)
+        console.log(res.data)
       });
     } else if (!props.isLoggedIn) {
       axios.get("/api/subforums/posts/no-user").then((res) => {
@@ -29,11 +28,8 @@ function Home(props) {
   };
 
   const allPostsMap = posts.map((e) => {
-    console.log('e being mapped', e)
     return (
       <CardPost key={e.post_id}
-        buttonsDisabled={buttonsDisabled}
-        setButtonsDisabled={setButtonsDisabled}
         getPosts={getPosts}
         post={e}
       />
@@ -41,7 +37,6 @@ function Home(props) {
   });
 
 
-  console.log(buttonsDisabled)
 
   return (
     <div className={"home-container"}>

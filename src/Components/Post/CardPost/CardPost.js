@@ -32,10 +32,8 @@ function CardPost(props) {
   const [thedownvote, setDownVote] = useState(downvote);
 
   const getVote = (post_id) => {
-    console.log('post_id', post_id)
     axios.get(`/posts/${post_id}/votes`)
     .then(res => {
-      console.log('get vote', res.data)
       setVoteNum(res.data[0].vote_tracker)
       setUpVote(res.data[0].upvote)
       setDownVote(res.data[0].downvote)
@@ -44,9 +42,7 @@ function CardPost(props) {
   }
 
   const upVote = (post_id) => {
-    console.log('upvot post_id', post_id)
     setButtonsDisabled(true)
-    console.log(`upvoting`);
     axios
       .post(`/api/subforums/${subforum_id}/posts/${post_id}/upvote`)
       .then((res) => {
@@ -57,8 +53,6 @@ function CardPost(props) {
 
   const downVote = (post_id) => {
     setButtonsDisabled(true)
-    console.log(`downvoting`);
-    console.log(subforum_id)
     axios
       .post(`/api/subforums/${subforum_id}/posts/${post_id}/downvote`)
       .then((res) => {
@@ -69,7 +63,6 @@ function CardPost(props) {
 
   const deleteVote = (post_id) => {
     setButtonsDisabled(true);
-    console.log(`deleting vote`);
     axios
       .delete(`/api/subforums/${subforum_id}/posts/${post_id}/remove-vote`)
       .then((res) => {
@@ -78,7 +71,6 @@ function CardPost(props) {
       .catch((err) => console.log(err));
   };
 
-  console.log(props.isLoggedIn);
   return (
     <div className="card-post-container">
       <div className="card-vote-count-vertical">
