@@ -60,7 +60,6 @@ function CardPost(props) {
       .catch((err) => console.log(err));
   };
 
-  console.log(props.isLoggedIn);
   return (
     <div className="card-post-container">
       <div className="card-vote-count-vertical">

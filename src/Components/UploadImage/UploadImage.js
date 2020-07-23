@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {MdClose} from 'react-icons/md';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-
     
     
 function PostImage(props) {
@@ -109,14 +108,18 @@ function PostImage(props) {
                             Uploading your {props.bannerUpload ? `banner` : `profile`} image now!
                         </div> 
                     : 
-                        <div style={{marginTop: '50px'}}>
-                            {props.bannerUpload ? <div>This is banner upload</div> : null}
-                            {props.profileUpload ? <div>This is profile upload</div> : null}
-                            {img_preview === '' ? '' : <img style={{width: '300px', height: 'auto'}} src={img_preview} alt="image preview"/>}
-                            <input type='file' onChange={handleImagePreview} />
-                            <button onClick={handleSubmitFile} style={{height: '100px'}}>
+                        <div style={{width: '100%'}}>
+                            {props.bannerUpload ? <div className='upload-title'>Upload your Banner image</div> : null}
+                            {props.profileUpload ? <div className='upload-title'>Upload your Profile image</div> : null}
+                            <div className='preview-image-container'>
+                                {img_preview === '' ? '' : <img className='preview-image' src={img_preview} alt="image preview"/>}
+                            </div>
+                            <div className='input-container'>
+                            <input type='file' onChange={handleImagePreview} className='input-selector'/>
+                            <button onClick={handleSubmitFile} className='post-image-btn'>
                                 Post Image
                             </button>
+                            </div>
                         </div>
                     }
                 </div>
