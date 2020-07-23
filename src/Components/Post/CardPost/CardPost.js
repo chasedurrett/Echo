@@ -30,7 +30,7 @@ function CardPost(props) {
   const [voteNum, setVoteNum] = useState(vote_tracker);
 
   const upVote = (post_id) => {
-    setButtonsDisabled(true);
+    props.setButtonsDisabled(true);
     axios
       .post(`/api/subforums/${subforum_id}/posts/${post_id}/upvote`)
       .then((res) => {
@@ -40,7 +40,7 @@ function CardPost(props) {
   };
 
   const downVote = (post_id) => {
-    setButtonsDisabled(true);
+    props.setButtonsDisabled(true);
     axios
       .post(`/api/subforums/${subforum_id}/posts/${post_id}/downvote`)
       .then((res) => {
@@ -50,7 +50,7 @@ function CardPost(props) {
   };
 
   const deleteVote = (post_id) => {
-    setButtonsDisabled(true);
+    props.setButtonsDisabled(true);
     console.log(`deleting vote`);
     axios
       .delete(`/api/subforums/${subforum_id}/posts/${post_id}/remove-vote`)
