@@ -29,6 +29,7 @@ function Home(props) {
   };
 
   const allPostsMap = posts.map((e) => {
+    console.log('e being mapped', e)
     return (
       <CardPost key={e.post_id}
         buttonsDisabled={buttonsDisabled}
