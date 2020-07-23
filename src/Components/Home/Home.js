@@ -11,7 +11,7 @@ function Home(props) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    props.getUser()
+    props.getUser();
     getPosts();
   }, [props.isLoggedIn]);
 
@@ -29,9 +29,10 @@ function Home(props) {
   };
 
   const allPostsMap = posts.map((e) => {
-    console.log('e being mapped', e)
+    console.log("e being mapped", e);
     return (
-      <CardPost key={e.post_id}
+      <CardPost
+        key={e.post_id}
         buttonsDisabled={buttonsDisabled}
         setButtonsDisabled={setButtonsDisabled}
         getPosts={getPosts}
@@ -40,8 +41,7 @@ function Home(props) {
     );
   });
 
-
-  console.log(buttonsDisabled)
+  console.log(buttonsDisabled);
 
   return (
     <div className={"home-container"}>
