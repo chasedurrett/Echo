@@ -1,0 +1,32 @@
+@import "../../../../scss/variables";
+
+.join-btn-container {
+    width: 100%;
+    max-width: 120px;
+    align-self: start;
+    flex-shrink: 0;
+  }
+  
+  .join-btn {
+    font-size: 12px;
+    font-family: $reddit-font;
+    line-height: 24px;
+    padding: 4px 9px 2px;
+    width: 100%;
+    font-weight: 700;
+    letter-spacing: .5px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  
+  .leave-btn {
+    font-size: 12px;
+    font-family: $reddit-font;
+    line-height: 24px;
+    padding: 4px 9px 2px;
+    width: 100%;
+    font-weight: 700;
+    letter-spacing: .5px;
+    border-radius: 4px;
+    text-decoration: none;
+  }

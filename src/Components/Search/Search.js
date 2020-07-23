@@ -11,6 +11,7 @@ import Box from '@material-ui/core/Box';
 import { useLocation } from 'react-router-dom';
 import ClassicPost from '../Post/ClassicPost/ClassicPost';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import JoinLeaveBtn from '../Subforum/JoinLeaveBtn/JoinLeaveBtn';
 
 
 function TabPanel(props) {
@@ -119,26 +120,22 @@ function Search(props) {
         setValue(newValue);
     };
 
-    function joinSubforum(subforum_id) {
-      axios.post(`/api/subforums/${subforum_id}/users`)
-      .then(() => {
-        setJoined(true)
-        console.log(`Successfully joined chamber.`)
-      })
-      .catch(err => console.log(err))
-    }
+    // function joinSubforum(subforum_id) {
+    //   axios.post(`/api/subforums/${subforum_id}/users`)
+    //   .then(() => {
+    //     setJoined(true)
+    //     console.log(`Successfully joined chamber.`)
+    //   })
+    //   .catch(err => console.log(err))
+    // }
     
-    function leaveSubforum(subforum_id){
-      axios.delete(`/api/subforums/${subforum_id}/users/${props.user.user_id}`)
-      .then(() => {
-        console.log(`Left subforum # ${subforum_id}.`)
-      })
-      .catch(err => console.log(err))
-    }
-    
-    function checkJoined(subforum_id){
-      
-    }
+    // function leaveSubforum(subforum_id){
+    //   axios.delete(`/api/subforums/${subforum_id}/users/${props.user.user_id}`)
+    //   .then(() => {
+    //     console.log(`Left subforum # ${subforum_id}.`)
+    //   })
+    //   .catch(err => console.log(err))
+    // }
 
     return (
         <div className="Search classes.root">
@@ -191,11 +188,7 @@ function Search(props) {
                           <p>{chamber.description}</p>
                         </div>
 
-                        <div className="join-btn-container">
-
-                          { joined ? <button className="leave-btn" onClick={() => {leaveSubforum(chamber.subforum_id)}}>JOINED</button> : <button className="join-btn" onClick={() => {joinSubforum(chamber.subforum_id)}}>JOIN</button> }
-
-                        </div>
+                        <JoinLeaveBtn subforumId={chamber.subforum_id} />
 
                       </div>
                         ))

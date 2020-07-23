@@ -1,2 +1,2 @@
- delete from comments
- where post_id = $1 and comment_id = $2; 
+delete from comment_votes where comment_id = $1;
+delete from comments where comment_id = $1;

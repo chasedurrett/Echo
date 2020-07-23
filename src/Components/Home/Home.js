@@ -23,7 +23,12 @@ function Home(props) {
     if (props.isLoggedIn) {
       axios.get("api/subforums/posts/user-feed").then((res) => {
         setPosts(res.data);
+<<<<<<< HEAD
         setLoading(false)
+=======
+        console.log(res.data)
+        setButtonsDisabled(false);
+>>>>>>> master
       });
     } else if (!props.isLoggedIn) {
       axios.get("/api/subforums/posts/no-user").then((res) => {
