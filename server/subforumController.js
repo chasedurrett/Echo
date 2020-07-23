@@ -47,6 +47,16 @@ module.exports = {
 
     res.status(200).send(subforum);
   },
+  getTopCommunities: async (req, res) => {
+    const db = req.app.get("db");
+    const topCommunities = await db.subforum.get_top_communities();
+
+    if (!topCommunities) {
+      res.status(500).send(`Couldn't get communities, we're fixing that!`);
+    }
+
+    res.status(200).send(topCommunities);
+  },
   getUserSubforums: async (req, res) => {
     const db = req.app.get("db");
     const { user_id } = req.session.user;
@@ -122,4 +132,17 @@ module.exports = {
     }
     return res.sendStatus(200);
   },
+
+  hasJoined: async (req, res) => {
+    const db = req.app.get("db");
+    const { subforumId } = req.params;
+    const { user_id } = req.session.user;
+    const checkJoined = await db.check_if_user_has_joined(subforumId, user_id)
+
+    if(checkJoined !== 0){
+      return res.status(500).send(`User has already joined this chamber.`)
+    } else if(checkJoined === 0){
+      return res.status(200).send(`User has not yet joined this chamber.`)
+    }
+  }
 };

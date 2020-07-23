@@ -1,8 +1,9 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAGA,AAAA,mBAAmB,CAAA;EACf,UAAU,ECMkB,IAAI;CDLnC",
     "sources": [
-        "Comment.scss"
+        "Comment.scss",
+        "../../../../../scss/_variables.scss"
     ],
     "names": [],
     "file": "Comment.css"

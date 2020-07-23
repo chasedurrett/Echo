@@ -13,11 +13,6 @@ function ClassicPost(props) {
     const [upvote, setUpVote] = useState(props.upvote);
     const [downvote, setDownVote] = useState(props.downvote);
 
-    useEffect(() => {
- 
-        console.log(props)
-    }, [])
-
     const getVote = () => {
       axios.get(`/posts/${props.post_id}/votes`)
       .then(res => {
@@ -45,7 +40,10 @@ function ClassicPost(props) {
         axios.post(`/api/subforums/${props.subforumId}/posts/${postId}/downvote`)
           .then(res => {
             getVote()
+<<<<<<< HEAD
             
+=======
+>>>>>>> master
           })
           .catch(err => console.log(err))
       };

@@ -1,1 +1,63 @@
-/* No CSS *//*# sourceMappingURL=ClassicPost.css.map */
+.classic-post-container {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  padding: 10px 0px 10px 0px;
+  background: white;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.post-info-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 10px;
+}
+
+.classic-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 3px;
+}
+
+.classic-chamber {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.dot {
+  position: relative;
+  top: 4px;
+  font-size: 15px;
+  color: #878A8C;
+}
+
+.classic-author {
+  color: #878A8C;
+  font-weight: lighter;
+}
+
+.classic-comment {
+  color: #878A8C;
+  font-size: 12px;
+  display: block;
+  margin-top: 10px;
+}
+
+.counter-container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+/*# sourceMappingURL=ClassicPost.css.map */

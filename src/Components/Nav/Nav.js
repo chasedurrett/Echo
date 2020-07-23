@@ -92,7 +92,9 @@ function Nav(
                   "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
                 }
               />
-              <span style={{ fontWeight: "bold" }}>Echo</span>
+              <Link to='/' style={{ textDecoration: 'none' }}>
+                <span style={{ fontWeight: "bold" }}>Echo</span>
+              </Link>
             </div>
 
             <div className="subforum-dropdown">
@@ -112,8 +114,13 @@ function Nav(
             {props.isLoggedIn ? (
               <div className="nav-icons-cont flex-row">
                 <BsChatDotsFill className="nav-icon" />
+<<<<<<< HEAD
                 <Link style={{textDecoration: 'none', alignSelf: 'center', color: 'black', marginTop: '3px'}} to={`/create-post/${props.match}`}>
                   <BsPencilSquare className="nav-icon"/>
+=======
+                <Link to={`/create-post`}>
+                  <BsPencilSquare className="nav-icon" />
+>>>>>>> master
                 </Link>
               </div>
             ) : (

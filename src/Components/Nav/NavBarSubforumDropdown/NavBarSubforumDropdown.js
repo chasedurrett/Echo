@@ -70,7 +70,11 @@ export default function NavBarSubforumDropdown(props) {
     })
     .map((e) => (
       <Link
-        style={{ textDecoration: "none", fontFamily: "IBM Plex Sans", zIndex: 1 }}
+        style={{
+          textDecoration: "none",
+          fontFamily: "IBM Plex Sans",
+          zIndex: 1,
+        }}
         to={`/subforums/${e.subforum_id}`}
       >
         <MenuItem
@@ -97,9 +101,7 @@ export default function NavBarSubforumDropdown(props) {
               <img
                 style={{ height: 25, width: 25, borderRadius: 50 }}
                 className="subforum-preview-img"
-                src={
-                  "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
-                }
+                src={require("../../Post/CardPost/echo_chamber_icon_2.png")}
               ></img>
             ) : (
               <img
