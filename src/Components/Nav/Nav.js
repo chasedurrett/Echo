@@ -68,6 +68,7 @@ function Nav(
       .then(() => {
         console.log("logout hit");
         props.logoutUser();
+        window.location.reload(false);
       })
       .catch((err) => {
         console.log(err);
@@ -114,7 +115,7 @@ function Nav(
             {props.isLoggedIn ? (
               <div className="nav-icons-cont flex-row">
                 <BsChatDotsFill className="nav-icon" />
-                <Link to={`/create-post`}>
+                <Link to={`/create-post`} className="profile-menu-link">
                   <BsPencilSquare className="nav-icon" />
                 </Link>
               </div>
