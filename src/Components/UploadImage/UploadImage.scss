@@ -34,11 +34,57 @@
 .upload-form-content-container{
     display: flex;
     flex-direction: row;
-    height: 100%;
+    position: relative;
     width: 100%;
 }
 
 .loading-image{
     margin-top: 100px;
     width: 100%;
+    font-size: 25px;
+    font-weight: bold;
+    align-content: center;
 }
+
+.upload-title{
+    width: 100%;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    color: $reddit-blue;
+    margin-bottom: 30px;
+}
+
+.preview-image-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.preview-image{
+    width: 300px;
+    height: auto;
+    display: block;
+}
+
+.input-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.input-selector{
+
+}
+
+.post-image-btn{
+    background: white;
+    border: 2px solid $reddit-blue;
+    border-radius: $reddit-border-radius;
+    font-family: $reddit-font;
+    font-size: 18px;
+    box-shadow: 0px 6px 12px 0px rgba(0,0,0,0.2);
+}
+

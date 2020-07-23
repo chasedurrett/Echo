@@ -19,7 +19,8 @@ function Home(props) {
     if (props.isLoggedIn) {
       axios.get("api/subforums/posts/user-feed").then((res) => {
         setPosts(res.data);
-        setButtonsDisabled(false)
+        console.log(res.data)
+        setButtonsDisabled(false);
       });
     } else if (!props.isLoggedIn) {
       axios.get("/api/subforums/posts/no-user").then((res) => {
