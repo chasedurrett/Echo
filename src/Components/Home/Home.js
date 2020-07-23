@@ -7,6 +7,7 @@ import TopCommunitiesCard from "./TopCommunitiesCard/TopCommunitiesCard";
 import axios from "axios";
 
 function Home(props) {
+  const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
