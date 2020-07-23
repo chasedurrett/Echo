@@ -110,6 +110,7 @@ app.post("/api/subforums/:subforumId/users", subforumCtrl.addSubforumUser);
 app.delete("/api/subforums/:subforumId/users/:userId", subforumCtrl.removeSubforumUser);
 app.put("/api/subforums/:subforumId/users/:userId", subforumCtrl.editSubforum);
 app.delete("/api/subforums/:subforumId/users/:userId", subforumCtrl.deleteSubforum);
+app.post("/api/joined-subforum-or-not/:subforumId", subforumCtrl.hasJoined);
 
 // Search Endpoints
 app.get("/api/search/posts", searchCtrl.getPosts);
