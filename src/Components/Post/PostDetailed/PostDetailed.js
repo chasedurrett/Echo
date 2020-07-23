@@ -5,6 +5,7 @@ import Comments from './Comments/Comment'
 import {BsDot} from 'react-icons/bs';
 import axios from 'axios'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import {Link} from 'react-router-dom'
 import '../PostDetailed/PostDetailed.scss'
 
 function PostDetailed(props){
@@ -29,6 +30,7 @@ function PostDetailed(props){
         .then(res => {
             console.log('then')
             setPost(res.data)
+            setVoteNum(res.data[0].vote_tracker)
             getVote()
             setButtonsDisabled(false)
             setLoading(false)
@@ -88,7 +90,7 @@ function PostDetailed(props){
     }
 
 
-    console.log(comment)
+    console.log(voteNum)
     console.log(post)
 
     return(
@@ -130,9 +132,13 @@ function PostDetailed(props){
                     </div>
                     <div className='detailed-post-info-container'>
                         <div className='details-links'>
-                            c/{post[0].subforum_name}
+                            <Link to={`/subforums/${post[0].subforum_id}`} style={{color: 'black'}}>
+                                c/{post[0].subforum_name}
+                            </Link>
                             <BsDot className='dot' />
-                            <span className='classic-Author'>posted by u/{post[0].author_username}</span>
+                            <Link to={`/users/${post[0].post_author_id}`} style={{color: 'black'}}>
+                                <span className='classic-Author'>posted by u/{post[0].author_username}</span>
+                            </Link>
                         </div>
                         <div className='detailed-title'>{post[0].post_title}</div>
                     </div>

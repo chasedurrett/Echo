@@ -48,6 +48,7 @@ module.exports = {
 
     if(!req.session.user){
       let post = await db.post.get_single_post_no_user(postId)
+      console.log(post)
       res.status(200).send(post);
     } else {
       const {user_id} = req.session.user
