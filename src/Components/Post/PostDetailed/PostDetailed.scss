@@ -1,5 +1,115 @@
 @import "../../../../scss/variables";
 
 .detailed-post-container{
-    margin-top: $margintop-clear-navbar-height;
+    position: absolute;
+    margin-top: $margintop-clear-navbar-height + 20px;
+    width: 40%;
+    min-width: 600px;
+    left: 10%;
+    height: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: $reddit-border-radius;
+    background: white;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: row;
+    
 }
+
+.text-area-container{
+    position: relative;
+    // display: flex;
+    // flex-direction: column;
+    width: 100%;    
+    justify-content: center;
+    align-items: center;
+}
+
+.detailed-post-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 10px;
+}
+
+.detailed-post-counter-container{
+    position: relative;
+    display: flex;
+    height: 100px;
+    flex-direction: column;
+    padding: 5px 10px 5px 10px;
+    background: rgb(233, 233, 233);
+}
+
+.comment-textarea{
+    position: relative;
+    height: auto;
+    left: 5%;
+    width: 90%;
+    max-width: 90%;
+    min-width: 90%;
+    min-height: 12vh;
+    margin-top: 3px;
+}
+
+.detailed-post{
+    position: relative;
+    width: 90%;
+    height: auto;
+    margin: 20px 5%;
+    font-size: larger;
+}
+
+.details-links{
+    position: absolute;
+    font-size: 12px;
+    top: 6px;
+    left: 7%;
+}
+
+.detailed-title{
+    position: absolute;
+    top: 30px;
+    left: 7%;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.comment-as{
+    position: relative;
+    left: 5%;
+    font-size: 12px;
+}
+
+.comment-btn {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $reddit-blue;
+    color: white;
+    border: none;
+    height: 32px;
+    width: 150px;
+    right: 5%;
+    margin-top: 5px;
+    border-radius: $reddit-border-radius;
+    padding: 3px 16px;
+    outline: none;
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    font-family: $reddit-font;
+    padding-bottom: 5px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.137);
+
+    &:hover{
+        cursor: pointer;
+        opacity: 0.9;
+        box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.294);
+    }
+  }
