@@ -7,6 +7,7 @@ import CreatePost from "./Components/CreatePost/CreatePost";
 import PostDetailed from "./Components/Post/PostDetailed/PostDetailed";
 //protected route imports
 import ProtectedProfile from "./ProtectedRoutes/ProtectedProfile";
+import ProtectedCreatePost from './ProtectedRoutes/ProtectedCreatePost';
 import Search from "./Components/Search/Search";
 
 export default (
@@ -15,7 +16,7 @@ export default (
     <Route path="/subforums/:subforumId/posts/:postId" component={PostDetailed} />
     <Route path="/subforums/:subforumId" component={Subforum} />
     <ProtectedProfile path="/users/:userId" component={Profile} />
-    <Route path="/create-post/:subforumId?" component={CreatePost} />
+    <ProtectedCreatePost path="/create-post/:subforumId?" component={CreatePost} />
     <Route path="/search" component={Search} />
   </Switch>
 );
