@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { GoArrowUp } from "react-icons/go";
 import { GoArrowDown } from "react-icons/go";
 import axios from "axios";
@@ -25,55 +25,37 @@ function CardPost(props) {
     upvote,
     downvote,
   } = props.post;
-  
+
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const [voteNum, setVoteNum] = useState(vote_tracker);
-  const [theupvote, setUpVote] = useState(upvote);
-  const [thedownvote, setDownVote] = useState(downvote);
-
-  const getVote = (post_id) => {
-    console.log('post_id', post_id)
-    axios.get(`/posts/${post_id}/votes`)
-    .then(res => {
-      console.log('get vote', res.data)
-      setVoteNum(res.data[0].vote_tracker)
-      setUpVote(res.data[0].upvote)
-      setDownVote(res.data[0].downvote)
-      setButtonsDisabled(false)
-    })
-  }
 
   const upVote = (post_id) => {
-    console.log('upvot post_id', post_id)
-    setButtonsDisabled(true)
-    console.log(`upvoting`);
+    props.setButtonsDisabled(true);
     axios
       .post(`/api/subforums/${subforum_id}/posts/${post_id}/upvote`)
       .then((res) => {
-        getVote(post_id)
+        props.getPosts();
       })
       .catch((err) => console.log(err));
   };
 
   const downVote = (post_id) => {
-    setButtonsDisabled(true)
-    console.log(`downvoting`);
-    console.log(subforum_id)
+    props.setButtonsDisabled(true);
     axios
       .post(`/api/subforums/${subforum_id}/posts/${post_id}/downvote`)
       .then((res) => {
-        getVote(post_id)
+        props.getPosts();
       })
       .catch((err) => console.log(err));
   };
 
   const deleteVote = (post_id) => {
-    setButtonsDisabled(true);
+    props.setButtonsDisabled(true);
     console.log(`deleting vote`);
     axios
       .delete(`/api/subforums/${subforum_id}/posts/${post_id}/remove-vote`)
       .then((res) => {
-        getVote(post_id)
+        props.getPosts();
       })
       .catch((err) => console.log(err));
   };
@@ -85,13 +67,13 @@ function CardPost(props) {
         <div className="card-vote-count-container">
           <div className="card-vote-count-body">
             <div>
-              {theupvote === true ? (
+              {upvote === true ? (
                 <GoArrowUp
                   alt="upvote"
                   style={{ maxWidth: 50 }}
                   className="vote-arrow voted"
                   onClick={() =>
-                    buttonsDisabled ? null : deleteVote(post_id)
+                    props.buttonsDisabled ? null : deleteVote(post_id)
                   }
                 />
               ) : (
@@ -99,20 +81,20 @@ function CardPost(props) {
                   alt="upvote"
                   className="vote-arrow"
                   onClick={() =>
-                    buttonsDisabled ? null : upVote(post_id)
+                    props.buttonsDisabled ? null : upVote(post_id)
                   }
                 />
               )}
             </div>
-            <div className="voteCount">{voteNum}</div>
+            <div className="voteCount">{vote_tracker}</div>
             <div>
-              {thedownvote === true ? (
+              {downvote === true ? (
                 <GoArrowDown
                   alt="upvote"
                   style={{ maxWidth: 50 }}
                   className="vote-arrow voted"
                   onClick={() =>
-                    buttonsDisabled ? null : deleteVote(post_id)
+                    props.buttonsDisabled ? null : deleteVote(post_id)
                   }
                 />
               ) : (
@@ -120,7 +102,7 @@ function CardPost(props) {
                   alt="downvote"
                   className="vote-arrow"
                   onClick={() =>
-                    buttonsDisabled ? null : downVote(post_id)
+                    props.buttonsDisabled ? null : downVote(post_id)
                   }
                 />
               )}

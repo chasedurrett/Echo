@@ -8,7 +8,7 @@ select
 from subforum_users su
     join subforums s on s.subforum_id = su.subforum_id
     join posts p on s.subforum_id = p.subforum_id
-    full join post_votes pv on (p.post_id = pv.post_id and pv.user_id = 10)
+    full join post_votes pv on (p.post_id = pv.post_id and pv.user_id = $1)
     left join comments c on c.post_id = p.post_id
     join users a on p.post_author_id = a.user_id
 where su.user_id = $1
