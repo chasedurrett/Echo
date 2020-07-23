@@ -109,7 +109,10 @@ function CardPost(props) {
       </div>
       <div className="card-content-container">
         <div className="card-content-header">
-          <div className="card-post-subforum-img">
+          <Link
+            to={`/subforums/${subforum_id}`}
+            className="card-post-subforum-img"
+          >
             {subforum_img === null ? (
               <img
                 style={{ height: 20, width: 20 }}
@@ -121,7 +124,7 @@ function CardPost(props) {
                 src={subforum_img}
               />
             )}
-          </div>
+          </Link>
           <div className="card-post-subforum-name-container">
             {props.location.pathname === "/" ? (
               <Link
@@ -131,7 +134,7 @@ function CardPost(props) {
                   fontSize: 13,
                   paddingLeft: 3,
                   fontWeight: 600,
-                  marginBottom: 5
+                  marginBottom: 5,
                 }}
                 to={`/subforums/${subforum_id}`}
               >
@@ -142,10 +145,10 @@ function CardPost(props) {
           <span className="header-seperation-dot">•</span>
           <div className="header-post-author-container">
             <h5 className="card-post-by-user">
-              posted by{" "}u/
+              posted by u/
               {props.isLoggedIn ? (
                 <Link
-                  style={{ textDecoration: "none", color: 'black' }}
+                  style={{ textDecoration: "none", color: "black" }}
                   to={`/users/${post_author_id}`}
                 >
                   {author_username}
@@ -157,31 +160,36 @@ function CardPost(props) {
             </h5>
           </div>
         </div>
-        <div className="card-content-body">
-          <div className="card-post-title">{post_title}</div>
-          <div className="card-post-content">
-            {post_type_id === 1 || post_type_id === null ? (
-              <span>{post_content}</span>
-            ) : null}
-            {post_type_id === 2 ? (
-              <img
-                style={{ height: "100%", width: "100%" }}
-                src={
-                  "https://echo-app-files.s3.us-west-2.amazonaws.com/1595432512948sds5305u5a873cb323330517994575.jpg"
-                }
-              />
-            ) : null}
+        <Link
+          to={`/subforums/${subforum_id}/posts/${post_id}`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <div className="card-content-body">
+            <div className="card-post-title">{post_title}</div>
+            <div className="card-post-content">
+              {post_type_id === 1 || post_type_id === null ? (
+                <span>{post_content}</span>
+              ) : null}
+              {post_type_id === 2 ? (
+                <img
+                  style={{ height: "100%", width: "100%" }}
+                  src={
+                    "https://echo-app-files.s3.us-west-2.amazonaws.com/1595432512948sds5305u5a873cb323330517994575.jpg"
+                  }
+                />
+              ) : null}
+            </div>
           </div>
-        </div>
-        <div className="card-content-footer">
-          <div className="card-content-footer-h5">
-            <h5>
-              {comment_count === 1
-                ? `${comment_count} comment`
-                : `${comment_count} comments`}
-            </h5>
+          <div className="card-content-footer">
+            <div className="card-content-footer-h5">
+              <h5>
+                {comment_count === 1
+                  ? `${comment_count} comment`
+                  : `${comment_count} comments`}
+              </h5>
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );
