@@ -11,8 +11,8 @@ from subforum_users su
     full join post_votes pv on (p.post_id = pv.post_id and pv.user_id = 10)
     left join comments c on c.post_id = p.post_id
     join users a on p.post_author_id = a.user_id
-    where su.user_id = $1
-    group by p.post_id, p.post_title,
+where su.user_id = $1
+group by p.post_id, p.post_title,
     p.post_content, p.post_url,
     p.post_author_id, a.username,
     a.user_image, p.subforum_id,

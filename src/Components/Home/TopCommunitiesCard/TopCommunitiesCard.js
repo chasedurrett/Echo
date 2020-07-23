@@ -32,7 +32,7 @@ const TopCommunitiesCard = () => {
               style={{ height: 25, width: 25, borderRadius: 50 }}
               src={
                 e.subforum_img === null
-                  ? "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
+                  ? require("../../Post/CardPost/echo_chamber_icon_2.png")
                   : e.subforum_img
               }
             />

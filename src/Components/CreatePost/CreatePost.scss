@@ -1,43 +1,43 @@
 @import "../../../scss/variables";
 
-
-
-.create-post-container{
-    margin-top: $margintop-clear-navbar-height;
-    height: 90vh;
-    width: 80%;
-    margin: 0 auto;
+.create-post-container {
+  margin-top: $margintop-clear-navbar-height;
+  height: 90vh;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  .post-form-container {
+    height: 70%;
+    width: 70%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    .post-form-container{
-        height: 70%;
-        width: 70%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        .subforum-dropdown-container{
-            width: 800px;
-            display: flex;
-            justify-content: flex-start;
-        }
-        .post-form-body{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            .type-1-title-container, .type-1-content-container, .type-1-submit-button-container{
-                width: 700px;
-            }
-            .type-1-title-container{
-                height: 100px;
-            }
-            .type-1-content-container {
-                height: 250px;
-            }
-        }
+    justify-content: space-around;
+    .subforum-dropdown-container {
+      width: 800px;
+      display: flex;
+      justify-content: flex-start;
     }
-    .post-info-container{
-        height: 70%;
-        width: 30%;
+    .post-form-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .type-1-title-container,
+      .type-1-content-container,
+      .type-1-submit-button-container {
+        width: 700px;
+      }
+      .type-1-title-container {
+        height: 100px;
+      }
+      .type-1-content-container {
+        height: 250px;
+      }
     }
+  }
+  .post-info-container {
+    height: 70%;
+    width: 30%;
+  }
 }
