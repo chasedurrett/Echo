@@ -67,13 +67,9 @@ module.exports = {
   },
   deleteSubforum: async (req, res) => {
     const db = req.app.get("db");
-    const { subforumId, userId } = req.params;
-    const { user_id } = req.session.user;
+    const { subforumId } = req.params;
     const deleteSubforum = await db.subforum.delete_subforum(subforumId);
 
-    if (user_id === userId) {
-      return res.sendStatus(200).send(deleteSubforum);
-    }
     return res.sendStatus(200);
   },
   editSubforum: async (req, res) => {

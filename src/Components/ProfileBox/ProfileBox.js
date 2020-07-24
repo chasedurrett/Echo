@@ -9,7 +9,7 @@ import {RiSettings4Line} from 'react-icons/ri';
 import {MdClose} from 'react-icons/md';
 import axios from 'axios';
 import { logoutUser } from "../../redux/reducer";
-
+import { Link} from "react-router-dom";
 
 function ProfileBox(props) {
     const [uploadFormOpen, setUploadFormOpen] = useState(false);
@@ -34,7 +34,7 @@ function ProfileBox(props) {
     }
 
     const deleteChamber = () => {
-        axios.delete(`/api/subforums/${props.subforum_id}`)
+        axios.delete(`/api/delete/subforums/${props.subforum_id}`)
         .then(res => {
             console.log('successsfully deleted subforum')
         })
@@ -55,6 +55,8 @@ function ProfileBox(props) {
             console.log(err);
         });
     };
+
+    console.log(props)
 
     return (
         <div>
@@ -81,6 +83,13 @@ function ProfileBox(props) {
                         <FaPen className='profile-pic-edit'/>
                     </div>
                 : null } 
+
+                { props.user.user_id === props.user_id || props.subforum_owner_id === props.user.user_id ?
+                    <div onClick={() => {setDeleteFormOpen(true)}}>
+                    {props.hidden ? null :  <RiSettings4Line className='settings-icons'/> }
+                    </div> 
+                : null
+                }
             </div>
             
                {props.username ? 
@@ -105,12 +114,7 @@ function ProfileBox(props) {
                     </div>
                 </div>
             }
-            { props.user.user_id === props.user_id || props.subforum_owner_id === props.user_id ?
-                <div className='settings-container' onClick={() => {setDeleteFormOpen(true)}}>
-                  {props.hidden ? null :  <RiSettings4Line className='settings-icons'/> }
-                </div> 
-                : null
-            }
+            
            
         </div>
 
@@ -122,9 +126,9 @@ function ProfileBox(props) {
                {!props.subforum_name ?
                <div>
                     <div className='question'>Do you want to DELETE your Account?</div>
-                    <div>
+                    <div className='btns-flex'>
                         <button className='delete-yes-btn' onClick={() => {
-                            deleteChamber()
+                            deleteUser()
                             logout()
                         }}>
                             YES
@@ -137,13 +141,14 @@ function ProfileBox(props) {
                 :
                 <div>
                     <div className='question'>Do you want to DELETE your Chamber?</div>
-                        <div>
+                        <div className='btns-flex'>
+                        <Link to={`/`} className="profile-menu-link">
                             <button className='delete-yes-btn' onClick={() => {
                                 deleteChamber()
-                                logout()
                             }}>
                                 YES
                             </button>
+                        </Link>
                             <button className='delete-no-btn' onClick={() => {setDeleteFormOpen(false)}}>
                                 NO 
                             </button>
