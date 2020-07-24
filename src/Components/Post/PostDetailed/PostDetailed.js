@@ -243,7 +243,7 @@ function PostDetailed(props) {
         </div>
         <div style={{ position: "absolute" }}></div>
       </div>
-      <div style={{ position: "relative", marginLeft: 900, marginTop: 75 }}>
+      <div style={{ position: "relative", marginLeft: '70%', marginTop: 75 }}>
         <ProfileBox
           subforum_banner={post.subforum_banner}
           subforum_name={post.subforum_name}

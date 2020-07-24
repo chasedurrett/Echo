@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Nav.scss";
 // import {FiSearch} from 'react-icons/fi';
+import {GrNewWindow} from 'react-icons/gr'
 import { BsPencilSquare } from "react-icons/bs";
 import { BsChatDotsFill } from "react-icons/bs";
 import { BsFillPersonFill } from "react-icons/bs";
@@ -10,6 +11,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
+import NewSubforum from '../NewSubforum/NewSubforum'
 import NavBarSubforumDropdown from "./NavBarSubforumDropdown/NavBarSubforumDropdown";
 import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import { connect } from "react-redux";
@@ -25,6 +27,7 @@ function Nav(
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginFormOpen, setLoginFormOpen] = useState(false);
   const [signupFormOpen, setSignupFormOpen] = useState(false);
+  const [newSubforumOpen, setNewSubforumFormOpen] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -42,7 +45,10 @@ function Nav(
   const handleSignupFormClose = () => {
     setSignupFormOpen(false);
   };
-
+  const handleNewSubforumClose = () => {
+    setNewSubforumFormOpen(false);
+  };
+  
   const history = useHistory();
   const location = useLocation();
   const { params } = useParams();
@@ -129,6 +135,9 @@ function Nav(
             {props.isLoggedIn ? (
               <div className="nav-icons-cont flex-row">
                 <BsChatDotsFill className="nav-icon" />
+                <GrNewWindow 
+                  onClick = {() => setNewSubforumFormOpen(true)}
+                />
                 <Link to={`/create-post`} className="profile-menu-link">
                   <BsPencilSquare className="nav-icon" />
                 </Link>
@@ -208,6 +217,11 @@ function Nav(
       )}
       {signupFormOpen ? (
         <Signup handleSignupFormClose={handleSignupFormClose} />
+      ) : (
+        ""
+      )}
+      {newSubforumOpen ? (
+        <NewSubforum handleNewSubforumClose={handleNewSubforumClose} />
       ) : (
         ""
       )}
