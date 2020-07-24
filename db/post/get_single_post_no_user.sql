@@ -2,4 +2,4 @@ select s.subforum_banner, s.subforum_img, p.post_id, p.post_title, p.post_conten
 from posts p
     full join subforums s on s.subforum_id = p.subforum_id
     full join users a on a.user_id = p.post_author_id
-where p.post_id = $1
+where p.post_id = $1;

@@ -8,13 +8,13 @@ function HomePostNav(props) {
     <div
       className="home-posts-nav"
       style={{
-        height: 150,
+        height: 80,
         width: 650,
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-around",
-        paddingBottom: 10,
-        paddingTop: 0,
+        justifyContent: "flex-start",
+        paddingBottom: 5,
+        marginTop: 13,
       }}
     >
       <div
@@ -75,14 +75,6 @@ function HomePostNav(props) {
           </div>
         </Link>
       </div>
-      <div
-        style={{
-          width: 650,
-          height: 50,
-          backgroundColor: "#ffffff",
-          borderRadius: 8,
-        }}
-      ></div>
     </div>
   );
 }
