@@ -25,7 +25,7 @@ function Nav(
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginFormOpen, setLoginFormOpen] = useState(false);
   const [signupFormOpen, setSignupFormOpen] = useState(false);
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
@@ -46,21 +46,21 @@ function Nav(
   const history = useHistory();
   const location = useLocation();
   const { params } = useParams();
-  
+
   const handleSearch = (e) => {
-    if(e.key === 'Enter' && location.pathname != '/search'){
+    if (e.key === "Enter" && location.pathname != "/search") {
       history.push({
-        pathname: '/search/',
-        search: `input=${searchInput}`
-      })
-    } else if (e.key === 'Enter' && location.pathname === '/search'){
-      const searchParam = searchInput
+        pathname: "/search/",
+        search: `input=${searchInput}`,
+      });
+    } else if (e.key === "Enter" && location.pathname === "/search") {
+      const searchParam = searchInput;
     }
   };
 
   const handleChange = (e) => {
     setSearchInput(e.target.value);
-  }
+  };
 
   const logout = () => {
     axios
@@ -80,7 +80,7 @@ function Nav(
         <div className="no-user-toolbar flex-row">
           <div className="logo-search-cont flex-row">
             <div className="logo-container flex-row">
-              <img
+              {/*<img
                 style={{
                   height: 30,
                   width: 30,
@@ -91,9 +91,18 @@ function Nav(
                 src={
                   "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnetdna.webdesignerdepot.com%2Fuploads%2F2013%2F07%2Fecho.gif&f=1&nofb=1"
                 }
-              />
-              <Link to='/' style={{ textDecoration: 'none' }}>
-                <span style={{ fontWeight: "bold" }}>Echo</span>
+              />*/}
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    color: "blue",
+                    fontSize: 20,
+                    marginLeft: 15,
+                  }}
+                >
+                  Echo
+                </span>
               </Link>
             </div>
 
@@ -106,7 +115,12 @@ function Nav(
             </div>
 
             <div className="search-bar-cont">
-              <input type="search" placeholder="Search" onKeyPress={handleSearch} onChange={handleChange}></input>
+              <input
+                type="search"
+                placeholder="Search"
+                onKeyPress={handleSearch}
+                onChange={handleChange}
+              ></input>
             </div>
           </div>
 
@@ -174,11 +188,8 @@ function Nav(
                       logout();
                     }}
                   >
-                    <Link
-                      to={`/`}
-                      className="profile-menu-link"
-                    >
-                    Logout
+                    <Link to={`/`} className="profile-menu-link">
+                      Logout
                     </Link>
                   </MenuItem>
                 </span>
