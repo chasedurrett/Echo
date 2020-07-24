@@ -33,7 +33,7 @@ function PostDetailed(props) {
       )
       .then((res) => {
         console.log("then", res.data[0].subforum_name);
-        setPost(res.data[0]);
+        setPost(res.data);
         setVoteNum(res.data[0].vote_tracker);
         getVote();
         setButtonsDisabled(false);
