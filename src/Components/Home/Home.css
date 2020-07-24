@@ -12,6 +12,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  margin-top: 55px;
 }
 
 .home-dashboard-container .explore-subforums-container-nu {

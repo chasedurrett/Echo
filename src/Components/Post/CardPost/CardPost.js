@@ -205,11 +205,11 @@ function CardPost(props) {
               <div className="card-post-title">{post_title}</div>
               <div className="card-post-content">
                 {post_type_id === 1 || post_type_id === null ? (
-                  <span>{post_content}</span>
+                  <span style={{ marginTop: 20 }}>{post_content}</span>
                 ) : null}
                 {post_type_id === 2 ? (
                   <img
-                    style={{ height: "100%", width: "100%" }}
+                    style={{ height: "100%", width: "100%", marginLeft: 0 }}
                     src={post_content}
                   />
                 ) : null}
