@@ -64,15 +64,6 @@ module.exports = {
         res.sendStatus(200);
     },
 
-    delete: async (req, res) => {
-        const db = req.app.get('db');
-        const {userId} = req.params;
-
-        const deleteUser = await db.auth.delete_user(userId);
-
-        res.status(200).send('successful deleted user')
-    },
-
     currentUser: (req, res) => {
         if (req.session.user) {
           res.status(200).send(req.session.user)

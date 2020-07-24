@@ -79,7 +79,7 @@ app.get("/auth/users/current", authCtrl.currentUser);
 app.post("/auth/register", authCtrl.register);
 app.post("/auth/login", authCtrl.login);
 app.delete("/auth/logout", authCtrl.logout);
-app.delete("/auth/users/:userId", authCtrl.delete);
+
 
 // User Endpoints
 app.get("/api/users", userCtrl.getAllUsers);
@@ -91,6 +91,7 @@ app.post("/api/users/:userId", userCtrl.addFollower);
 app.put("/api/users/:userId/profileImage", userCtrl.updateProfileImage);
 app.put("/api/users/:userId/bannerImage", userCtrl.updateBannerImage);
 app.delete("/api/users/:userId", userCtrl.removeFollower);
+app.delete("/auth/delete/users/:userId", userCtrl.delete);
 
 // Post Endpoints
 app.get("/api/subforums/:subforumId/posts", postCtrl.getAllSubforumPosts);
@@ -119,10 +120,10 @@ app.get('/api/subforums/users', subforumCtrl.getUserSubforums)
 app.get('/api/subforums/top-communities', subforumCtrl.getTopCommunities)
 app.post("/api/subforums", subforumCtrl.createSubforum);
 app.post("/api/subforums/:subforumId/users", subforumCtrl.addSubforumUser);
-app.delete("/api/subforums/:subforumId/users/:userId", subforumCtrl.removeSubforumUser);
+app.delete("/api/subforums/:subforumId/users/", subforumCtrl.removeSubforumUser);
 app.put("/api/subforums/:subforumId/users/:userId", subforumCtrl.editSubforum);
-app.delete("/api/subforums/:subforumId/users/:userId", subforumCtrl.deleteSubforum);
-app.post("/api/joined-subforum-or-not/:subforumId", subforumCtrl.hasJoined);
+app.delete("/api/subforums/:subforumId/", subforumCtrl.deleteSubforum);
+app.get("/api/joined-subforum-or-not/:subforumId", subforumCtrl.hasJoined);
 
 // Search Endpoints
 app.get("/api/search/posts", searchCtrl.getPosts);

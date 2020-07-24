@@ -29,6 +29,8 @@ function CreatePost(props) {
   const [img_file, setImgFile] = useState(null);
   const [img_preview, setImgPreview] = useState("");
   const [loading, setLoading] = useState(false);
+  const [hidden, setHidden] = useState(true);
+
 
   // Setting up useEffect() to only render on update as opposed to mount and update //
   useEffect(() => {
@@ -60,6 +62,7 @@ function CreatePost(props) {
     axios.get(`/api/subforum/${subforumId}`).then((res) => {
       setSubforum(res.data[0]);
     });
+    
   };
 
   const createPost = () => {
@@ -117,7 +120,7 @@ function CreatePost(props) {
   return (
     <div className="create-post-container">
       <div className="post-form-container">
-        <div className="subforum-dropdown-container">
+        <div className="subforum-dropdown-container" style={{marginTop: '50px', marginBottom: '50px'}}>
           <ChooseSubforumDropdown />
         </div>
         <div className="post-form-body">
@@ -279,10 +282,13 @@ function CreatePost(props) {
       </div>
       <div className="post-info-container">
         <ProfileBox
-          subforum_banner={subforum.subforum_banner}
-          subforum_name={subforum.subforum_name}
-          cake_day={subforum.cake_day}
-        />
+        subforum_banner={subforum.subforum_banner}
+        subforum_name={subforum.subforum_name}
+        cake_day={subforum.cake_day}
+        subforum_id={subforum.subforum_id}
+        subforum_owner_id={subforum.subforum_owner_id}
+        hidden={hidden}
+        /> 
         subforum rules
       </div>
     </div>

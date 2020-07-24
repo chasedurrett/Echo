@@ -5,18 +5,56 @@ import {GiCakeSlice} from 'react-icons/gi';
 import {connect} from 'react-redux';
 import defaultImage from './default-profile-image.jpg';
 import UploadImage from '../UploadImage/UploadImage';
+import {RiSettings4Line} from 'react-icons/ri';
+import {MdClose} from 'react-icons/md';
+import axios from 'axios';
+import { logoutUser } from "../../redux/reducer";
 
 
 function ProfileBox(props) {
     const [uploadFormOpen, setUploadFormOpen] = useState(false);
     const [bannerUpload, setBannerUpload] = useState(false);
-    const [profileUpload, setProfileUpload] = useState(false)
+    const [profileUpload, setProfileUpload] = useState(false);
+    const [deleteFormOpen, setDeleteFormOpen] = useState(false);
 
     const handleUploadFormClose = () => {
         setUploadFormOpen(false)
         setBannerUpload(false)
         setProfileUpload(false)
     }
+
+    const deleteUser = () => {
+        axios.delete(`/auth/delete/users/${props.user.user_id}`)
+        .then(res => {
+            console.log('successfully deleted user')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const deleteChamber = () => {
+        axios.delete(`/api/subforums/${props.subforum_id}`)
+        .then(res => {
+            console.log('successsfully deleted subforum')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const logout = () => {
+        axios
+        .delete("/auth/logout")
+        .then(() => {
+            console.log("logout hit");
+            props.logoutUser();
+            window.location.reload(false);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    };
 
     return (
         <div>
@@ -56,16 +94,68 @@ function ProfileBox(props) {
                         c/{props.subforum_name}
                     </div>
                 : null}
+           {!props.cake_day ? null :
             <div className='user-info-cake-day-container'>
-                <div className='user-info-cake-day'>
-                    <div className='cake-day'>Cake day</div>
-                    <div className='cake-day-date'>
-                        <GiCakeSlice className='cake-icon'/>
-                        {props.cake_day}
+                    <div className='user-info-cake-day'>
+                        <div className='cake-day'>Cake day</div>
+                        <div className='cake-day-date'>
+                            <GiCakeSlice className='cake-icon'/>
+                            {props.cake_day}
+                        </div>
                     </div>
                 </div>
+            }
+            { props.user.user_id === props.user_id || props.subforum_owner_id === props.user_id ?
+                <div className='settings-container' onClick={() => {setDeleteFormOpen(true)}}>
+                  {props.hidden ? null :  <RiSettings4Line className='settings-icons'/> }
+                </div> 
+                : null
+            }
+           
+        </div>
+
+        {deleteFormOpen ? 
+        <div className='delete-form-container'>
+            <div className='delete-form-content'>
+            <MdClose className='upload-close-btn' onClick={() => {setDeleteFormOpen(false)}}/>
+            <div className='delete-btn-container'>
+               {!props.subforum_name ?
+               <div>
+                    <div className='question'>Do you want to DELETE your Account?</div>
+                    <div>
+                        <button className='delete-yes-btn' onClick={() => {
+                            deleteChamber()
+                            logout()
+                        }}>
+                            YES
+                        </button>
+                        <button className='delete-no-btn' onClick={() => {setDeleteFormOpen(false)}}>
+                            NO 
+                        </button>
+                    </div>
+                </div>
+                :
+                <div>
+                    <div className='question'>Do you want to DELETE your Chamber?</div>
+                        <div>
+                            <button className='delete-yes-btn' onClick={() => {
+                                deleteChamber()
+                                logout()
+                            }}>
+                                YES
+                            </button>
+                            <button className='delete-no-btn' onClick={() => {setDeleteFormOpen(false)}}>
+                                NO 
+                            </button>
+                    </div>
+                </div>
+               } 
+            </div>
             </div>
         </div>
+        : null
+        }
+        
         {uploadFormOpen ? 
             <UploadImage 
                 handleCloseForm={handleUploadFormClose} 
@@ -84,4 +174,4 @@ function ProfileBox(props) {
 
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps)(ProfileBox);
+export default connect(mapStateToProps, {logoutUser})(ProfileBox);
