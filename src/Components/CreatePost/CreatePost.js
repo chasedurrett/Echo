@@ -20,13 +20,15 @@ function CreatePost(props) {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [inputVal, setInputVal] = useState({
-    post_title: "",
     post_content: "",
     post_url: "",
   });
-  const [postType, setPostType] = useState(1);
+  const [post_title, setPostTitle] = useState("");
+  const [post_type_id, setPostType] = useState(1);
   const [subforum, setSubforum] = useState({});
   const [img_file, setImgFile] = useState(null);
+  const [img_preview, setImgPreview] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Setting up useEffect() to only render on update as opposed to mount and update //
   useEffect(() => {
@@ -39,6 +41,10 @@ function CreatePost(props) {
 
   const handlePostType = (n) => {
     setPostType(n);
+  };
+
+  const handleTitleInput = (e) => {
+    setPostTitle(e.target.value);
   };
 
   const handleInput = (e) => {
@@ -57,57 +63,56 @@ function CreatePost(props) {
   };
 
   const createPost = () => {
-    const { post_title, post_content, post_url } = inputVal;
+    const { post_content, post_url } = inputVal;
 
-    console.log(postType, post_title, post_content);
+    console.log(post_type_id, post_title, post_content);
 
     axios
       .post(`/api/subforums/${props.match.params.subforumId}/post`, {
         post_title,
         post_content,
         post_url,
-        postType,
+        post_type_id,
       })
       .then((res) => {
         props.history.push(`/subforums/${props.match.params.subforumId}`);
       });
   };
 
-
   // Below are the functions for handling an Image post upload and submission
-
-  const handleImagePreview = (e) => {
-    let image_as_base64 = URL.createObjectURL(e.target.files[0]);
-    let image_as_files = e.target.files[0];
-    setImgPreview(image_as_base64);
-    setImgFile(image_as_files);
-  };
 
   const handleSubmitFile = async () => {
     setLoading(true);
     if (img_file !== null) {
       let formData = new FormData();
       formData.append("upl", img_file);
-      await axios
-        .post("/upload", formData, {
-          headers: {
-            "Content-type": "multipart/form-data",
-          },
-        })
-        .then((res) => {
-          if (props.bannerUpload) {
-            setUserBanner(res.data);
-          } else if (props.profileUpload) {
-            setUserImage(res.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const response = await axios.post("/upload", formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
+      createImagePost(response.data);
     }
   };
 
-  
+  const createImagePost = async (signedUrl) => {
+    const { post_content, post_url } = inputVal;
+
+    console.log(post_type_id, post_title, signedUrl, post_url);
+
+    axios
+      .post(`/api/subforums/${props.match.params.subforumId}/post`, {
+        post_title,
+        signedUrl,
+        post_url,
+        post_type_id,
+      })
+      .then((res) => {
+        props.history.push(`/subforums/${props.match.params.subforumId}`);
+      });
+  };
+
+  console.log(post_type_id, post_title);
 
   return (
     <div className="create-post-container">
@@ -160,10 +165,9 @@ function CreatePost(props) {
               <div className="type-1-title-container">
                 <TextField
                   className={classes.textArea}
-                  onChange={handleInput}
+                  onChange={handleTitleInput}
                   id="standard-basic"
                   label="Title"
-                  name="post_title"
                 />
               </div>
               <div className="type-1-content-container">
@@ -203,13 +207,16 @@ function CreatePost(props) {
               >
                 <TextField
                   className={classes.textArea}
-                  onChange={handleInput}
+                  onChange={handleTitleInput}
                   id="standard-basic"
                   label="Title"
-                  name="post_title"
                 />
               </div>
-              <CreateImagePost />
+              <CreateImagePost
+                setImgPreview={setImgPreview}
+                img_preview={img_preview}
+                setImgFile={setImgFile}
+              />
               <div
                 className="submit-button-container"
                 style={{
@@ -219,7 +226,14 @@ function CreatePost(props) {
                 }}
               >
                 <button
-                  onClick={() => createPost()}
+                  onClick={() => handleSubmitFile()}
+                  style={{ width: 95 }}
+                  className="signup-btn btn-style"
+                >
+                  Upload Image
+                </button>
+                <button
+                  onClick={() => createImagePost()}
                   style={{ width: 95 }}
                   className="signup-btn btn-style"
                 >

@@ -173,12 +173,7 @@ function CardPost(props) {
                 <span>{post_content}</span>
               ) : null}
               {post_type_id === 2 ? (
-                <img
-                  style={{ height: "100%", width: "100%" }}
-                  src={
-                    "https://echo-app-files.s3.us-west-2.amazonaws.com/1595432512948sds5305u5a873cb323330517994575.jpg"
-                  }
-                />
+                <img style={{ height: "100%", width: "100%" }} src={post_content} />
               ) : null}
             </div>
           </div>

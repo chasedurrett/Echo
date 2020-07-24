@@ -27,18 +27,18 @@ module.exports = {
     const post_time = moment().format("LLL");
     const { user_id } = req.session.user;
     const { subforumId } = req.params;
-    const { post_title, post_content, post_url, post_type_id } = req.body;
-
+    const { post_title, signedUrl, post_url, post_type_id } = req.body;
+    console.log(req.body);
     let post = await db.post.create_subforum_post(
       post_title,
-      post_content,
+      signedUrl,
       post_url,
       user_id,
       subforumId,
       post_type_id,
       post_time
     );
-
+    console.log(post);
     res.status(200).send(post);
   },
 

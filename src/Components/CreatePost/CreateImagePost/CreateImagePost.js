@@ -8,8 +8,6 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 function CreateImagePost(props) {
-  const [img_preview, setImgPreview] = useState("");
-  const [img_file, setImgFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [user_banner, setUserBanner] = useState("");
   const [user_image, setUserImage] = useState("");
@@ -22,60 +20,42 @@ function CreateImagePost(props) {
   const [profileUpload, setProfileUpload] = useState(false);
   const classes = useStyles();
 
-  const handleUploadFormClose = () => {
-    setUploadFormOpen(false);
-    setBannerUpload(false);
-    setProfileUpload(false);
-  };
-
   // Image Preview Handler
   const handleImagePreview = (e) => {
     let image_as_base64 = URL.createObjectURL(e.target.files[0]);
     let image_as_files = e.target.files[0];
-    setImgPreview(image_as_base64);
-    setImgFile(image_as_files);
+    props.setImgPreview(image_as_base64);
+    props.setImgFile(image_as_files);
   };
 
   // Image/File Submit Handler
-  const handleSubmitFile = async () => {
-    setLoading(true);
-    if (img_file !== null) {
-      let formData = new FormData();
-      formData.append("upl", img_file);
-      await axios
-        .post("/upload", formData, {
-          headers: {
-            "Content-type": "multipart/form-data",
-          },
-        })
-        .then((res) => {
-          if (props.bannerUpload) {
-            setUserBanner(res.data);
-          } else if (props.profileUpload) {
-            setUserImage(res.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
-
-
-
-  console.log(img_file)
+//   const handleSubmitFile = async () => {
+//     setLoading(true);
+//     if (img_file !== null) {
+//       let formData = new FormData();
+//       formData.append("upl", img_file);
+//       await axios
+//         .post("/upload", formData, {
+//           headers: {
+//             "Content-type": "multipart/form-data",
+//           },
+//         })
+//         .then((res) => {
+//           if (props.bannerUpload) {
+//             setUserBanner(res.data);
+//           } else if (props.profileUpload) {
+//             setUserImage(res.data);
+//           }
+//         })
+//         .catch((err) => {
+//           console.log(err);
+//         });
+//     }
+//   };
 
   return (
     <div>
       <div className="">
-        {loading ? null : (
-          <MdClose
-            className=""
-            onClick={() => {
-              props.handleCloseForm();
-            }}
-          />
-        )}
         <div className="">
           {loading ? (
             <div className="">
@@ -91,19 +71,23 @@ function CreateImagePost(props) {
                 <div className="">Upload your Profile image</div>
               ) : null}
               <div className="">
-                {img_preview === "" ? (
+                {props.img_preview === "" ? (
                   ""
                 ) : (
                   <img
                     style={{ height: 50, width: 50 }}
                     className=""
-                    src={img_preview}
+                    src={props.img_preview}
                     alt=""
                   />
                 )}
               </div>
               <div className="">
-                <input type="file" onChange={handleImagePreview} className="" />
+                <input
+                  type="file"
+                  onChange={handleImagePreview}
+                  className=""
+                />
                 {/*<button onClick={handleSubmitFile} className="">
                   Post Image
                 </button>*/}

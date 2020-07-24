@@ -20,3 +20,4 @@ values
         $7,
         0
 )
+returning *
