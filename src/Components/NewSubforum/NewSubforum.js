@@ -58,7 +58,7 @@ return(
 
                              <button className='signup-form-btn'
                                     onClick={() => {createSubforum(); setLoading(true)}}
-                                    >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>Create Subforum</span>}
+                                    >{loading ? <CircularProgress size={28} disableShrink style={{color: "white"}} /> : <span>Create Chamber</span>}
                             </button>
 
                             {/* <button 
