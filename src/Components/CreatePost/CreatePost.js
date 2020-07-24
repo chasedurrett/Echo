@@ -20,7 +20,7 @@ function CreatePost(props) {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [inputVal, setInputVal] = useState({
-    post_content: "",
+    signedUrl: "",
     post_url: "",
   });
   const [post_title, setPostTitle] = useState("");
@@ -64,14 +64,14 @@ function CreatePost(props) {
   };
 
   const createPost = () => {
-    const { post_content, post_url } = inputVal;
+    const { signedUrl, post_url } = inputVal;
 
-    console.log(post_type_id, post_title, post_content);
+    console.log(post_type_id, post_title);
 
     axios
       .post(`/api/subforums/${props.match.params.subforumId}/post`, {
         post_title,
-        post_content,
+        signedUrl,
         post_url,
         post_type_id,
       })
@@ -178,7 +178,7 @@ function CreatePost(props) {
                 <TextField
                   className={classes.textArea}
                   onChange={handleInput}
-                  name="post_content"
+                  name="signedUrl"
                   id="outlined-multiline-static"
                   label="Content"
                   variant="outlined"
