@@ -5,7 +5,7 @@ select s.subforum_img, s.subforum_banner, p.post_id, p.post_title,
 from posts p
     full join subforums s on s.subforum_id = p.subforum_id
     full join users a on a.user_id = p.post_author_id
-    full join users u on u.user_id = 10
+    full join users u on u.user_id = $2
     full join post_votes pv on (p.post_id = pv.post_id and pv.user_id =$2)
     full join comments c on c.post_id = p.post_id
 where s.subforum_id = $1
