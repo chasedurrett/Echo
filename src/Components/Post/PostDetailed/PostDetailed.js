@@ -32,8 +32,8 @@ function PostDetailed(props) {
         `/api/subforums/${props.match.params.subforumId}/posts/${props.match.params.postId}`
       )
       .then((res) => {
-        console.log("then");
-        setPost(res.data);
+        console.log("then", res.data[0].subforum_name);
+        setPost(res.data[0]);
         setVoteNum(res.data[0].vote_tracker);
         getVote();
         setButtonsDisabled(false);
@@ -104,7 +104,7 @@ function PostDetailed(props) {
 
   console.log(voteNum);
   console.log(post);
-  console.log(post[0])
+  console.log('post at [0]', post[0])
 
   return (
     <div>
