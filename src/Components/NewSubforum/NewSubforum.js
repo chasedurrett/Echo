@@ -16,7 +16,9 @@ function NewSubforum(props){
         let subforum_name = subforumName
         axios.post(`/api/subforums`, {subforum_name, description})
         .then(res => {
-
+            setLoading(false)
+            props.handleNewSubforumClose()
+            window.location.reload(false)
         })
         .catch(err => console.log(err))
     }
