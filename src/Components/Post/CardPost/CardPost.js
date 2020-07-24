@@ -179,11 +179,15 @@ function CardPost(props) {
                   alignItems: "flex-start",
                   marginTop: 10,
                   marginLeft: 20,
+                  width: "50%",
                 }}
               >
                 {post_title}
               </div>
-              <div className="card-post-content" style={{ margin: "auto" }}>
+              <div
+                className="card-post-content"
+                style={{ margin: "auto", width: "50%" }}
+              >
                 <Microlink
                   url={post_url}
                   size="large"

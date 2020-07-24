@@ -7,6 +7,7 @@ import axios from 'axios'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import {Link} from 'react-router-dom'
 import '../PostDetailed/PostDetailed.scss'
+import Microlink from "@microlink/react";
 
 function PostDetailed(props){
 
