@@ -291,7 +291,7 @@ function CreatePost(props) {
           subforum_owner_id={subforum.subforum_owner_id}
           hidden={hidden}
         />
-        subforum rules
+        {/* subforum rules */}
       </div>
     </div>
   );
