@@ -32,7 +32,7 @@ return(
                 <img className='reddit-img' src={reddit} alt='login-art'/>
                 {/* {signupNext ?  */}
                     <div className='signup-form-content'>
-                            <div className='signup-title'>Choose your Subforum name</div>
+                            <div className='signup-title'>Choose your Chamber name</div>
                             <div className='username-signup-text'>
                                 Your Chamber name is how other community members will find you.
                             </div>

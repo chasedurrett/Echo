@@ -57,8 +57,8 @@ function Signup(props) {
                         <div className='signup-form-content'>
                                 <div className='signup-title'>Choose your username</div>
                                 <div className='username-signup-text'>
-                                    Your username is how other community members will see you. 
-                                    This name will be used to credit you for things you share on Reddit. What should we call you?
+                                    Your Username is how other community members will see you. 
+                                    This name will be used to credit you for things you share on Echo! What should we call you?
                                 </div>
                                 <hr/>
 
