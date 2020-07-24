@@ -194,6 +194,8 @@ function CardPost(props) {
                   style={{
                     height: 200,
                     width: 250,
+                    maxWidth: 250,
+                    overflow: "hidden",
                     borderRadius: 8,
                     margin: "auto auto",
                   }}

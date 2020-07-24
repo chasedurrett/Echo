@@ -12,7 +12,6 @@ import Microlink from "@microlink/react";
 
 function PostDetailed(props) {
   const [post, setPost] = useState({});
-  const [subforumInfo, setSubforumInfo] = useState([])
   const [loading, setLoading] = useState(true);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const [voteNum, setVoteNum] = useState();
@@ -35,7 +34,6 @@ function PostDetailed(props) {
       .then((res) => {
         console.log("then");
         setPost(res.data);
-        setSubforumInfo(res.data)
         setVoteNum(res.data[0].vote_tracker);
         getVote();
         setButtonsDisabled(false);
@@ -249,7 +247,7 @@ function PostDetailed(props) {
         <ProfileBox
           subforum_banner={post.subforum_banner}
           subforum_name={post.subforum_name}
-          subforum_image={subofb[0].subforum_img}
+          subforum_image={post.subforum_img}
           subforum_id={post.subforum_id}
           style={{ position: "absolute", top: 55, left: 800 }}
         />

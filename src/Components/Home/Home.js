@@ -73,6 +73,15 @@ function Home(props) {
           </div>
           <div className="sidebar-container">
             <TopCommunitiesCard />
+            <div className="other-info-section">
+              <ul className="other-info-list">
+                <li>Help</li>
+                <li>About</li>
+                <li>Communities</li>
+                <li>Top Posts</li>
+                <li>Terms</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
