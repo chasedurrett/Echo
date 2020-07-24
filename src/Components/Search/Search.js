@@ -203,25 +203,45 @@ function Search(props) {
                 chambers.map((chamber) => (
                   <div key={chamber.subforum_id} className="chamber-item">
                     <div className="img-and-title-container">
-                      <div className="img-container">
+                      <div
+                        className="img-container"
+                        style={{ display: "flex", alignItems: "center" }}
+                      >
                         <img
                           src={chamber.subforum_img}
                           className="subforum-img"
                         />
                       </div>
 
-                      <div className="title-container">
+                      <div
+                        style={{ display: "flex", alignItems: "center" }}
+                        className="title-container"
+                      >
                         <p className="subforum-title">
                           {chamber.subforum_name}
                         </p>
                       </div>
                     </div>
 
-                    <div className="description">
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginTop: 5,
+                      }}
+                      className="description"
+                    >
                       <p>{chamber.description}</p>
                     </div>
 
-                    <div className="join-btn-container">
+                    <div
+                      style={{
+                        height: 60,
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                      className="join-btn-container"
+                    >
                       {chamber.user_id === currentUser.user_id ? (
                         <button
                           className="leave-btn"
