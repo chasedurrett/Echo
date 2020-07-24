@@ -27,17 +27,18 @@ module.exports = {
     const post_time = moment().format("LLL");
     const { user_id } = req.session.user;
     const { subforumId } = req.params;
-    const { post_title, post_content, post_type_id } = req.body;
-
+    const { post_title, signedUrl, post_url, post_type_id } = req.body;
+    console.log(req.body);
     let post = await db.post.create_subforum_post(
       post_title,
-      post_content,
+      signedUrl,
+      post_url,
       user_id,
       subforumId,
       post_type_id,
       post_time
     );
-
+    console.log(post);
     res.status(200).send(post);
   },
 
@@ -46,12 +47,12 @@ module.exports = {
 
     const { postId } = req.params;
 
-    if(!req.session.user){
-      let post = await db.post.get_single_post_no_user(postId)
-      console.log(post)
+    if (!req.session.user) {
+      let post = await db.post.get_single_post_no_user(postId);
+      console.log(post);
       res.status(200).send(post);
     } else {
-      const {user_id} = req.session.user
+      const { user_id } = req.session.user;
       let post = await db.post.get_single_post_with_user(postId, user_id);
       res.status(200).send(post);
     }
@@ -205,8 +206,10 @@ module.exports = {
     const { commentId } = req.params;
     const { user_id } = req.session.user;
 
-    const hasVotedOnComment = await db.post.comment.check_if_voted_comment(user_id,commentId);
-
+    const hasVotedOnComment = await db.post.comment.check_if_voted_comment(
+      user_id,
+      commentId
+    );
 
     console.log(hasVotedOnComment);
 
@@ -255,7 +258,6 @@ module.exports = {
     const db = req.app.get("db");
 
     const { postId } = req.params;
-
 
     if (!req.session.user) {
       let posts = await db.post.comment.get_all_comments_no_user(postId);

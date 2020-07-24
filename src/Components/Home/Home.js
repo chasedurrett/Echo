@@ -48,8 +48,6 @@ function Home(props) {
     );
   });
 
-  console.log(buttonsDisabled);
-
   return (
     <div className={"home-container"}>
       {/*props.isLoggedIn ? <HomeDashUser /> : <HomeDashNoUser />*/}
