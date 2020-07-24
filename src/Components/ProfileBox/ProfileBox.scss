@@ -120,10 +120,10 @@ font-family: $reddit-font;
 color: $reddit-gray
 }
 
-.settings-container{
+.settings-icons{
     position: relative;
-    top: 55px;
-    left: 280px;
+    top: 215px;
+    left: 275px;
     font-size: 20px;
     color: $reddit-blue;
     cursor: pointer;
@@ -158,6 +158,13 @@ color: $reddit-gray
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+}
+
+.btns-flex{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .delete-yes-btn{

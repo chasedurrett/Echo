@@ -68,7 +68,6 @@ function Nav(
       .then(() => {
         console.log("logout hit");
         props.logoutUser();
-        window.location.reload(false);
       })
       .catch((err) => {
         console.log(err);
@@ -175,7 +174,12 @@ function Nav(
                       logout();
                     }}
                   >
+                    <Link
+                      to={`/`}
+                      className="profile-menu-link"
+                    >
                     Logout
+                    </Link>
                   </MenuItem>
                 </span>
               ) : (
