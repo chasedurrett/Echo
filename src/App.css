@@ -3,5 +3,6 @@
 }
 
 body {
-  background: #DAE0E6
+  background: #DAE0E6;
+  overflow-x:hidden;
 }

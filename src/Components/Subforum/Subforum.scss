@@ -2,6 +2,10 @@
 
 .subforum-container {
   margin-top: $margintop-clear-navbar-height;
+  display: flex;
+  flex-direction: row;
+  min-width: 900px;
+  justify-content: space-around;
 }
 
 .vote-arrow {
@@ -14,4 +18,20 @@
 
 .voted {
   color: $reddit-blue;
+}
+
+.subforum-posts-map{
+  width: 30%;
+  height: 100%;
+  margin: 20px 10px 0px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.subforum-profile-box-section{
+  width: 20%;
+  height: 100%;
+  margin: 20px 0px 0px 10px;
+  display: flex;
+  flex-direction: column;
 }
