@@ -9,6 +9,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 
 
+
 function Profile(props){
     const [userPosts, setUserPosts] = useState([]);
     const [user, setUser] = useState({});
@@ -64,7 +65,7 @@ function Profile(props){
                     />
                  ))}
             </div>
-
+            {loading ? null : 
            <div className='user-info-container'> 
             
             <ProfileBox 
@@ -74,7 +75,7 @@ function Profile(props){
                 user_image={user.user_image} 
                 user_banner={user.user_banner}
             />
-
+            
             <div className='other-info-section'>
                 <ul className='other-info-list'>
                     <li>Help</li>
@@ -85,7 +86,7 @@ function Profile(props){
                 </ul>
             </div>
            </div>
-           
+            }
             
         </div>
     )

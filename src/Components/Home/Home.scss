@@ -8,11 +8,12 @@
   justify-content: center;
   .explore-subforums-container-nu {
     width: 100%;
-    height: 200px;
+    height: 120px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 20px;
   }
   .posts-sidebar-parent-container {
     display: flex;
@@ -25,5 +26,19 @@
     .sidebar-container {
       width: 30%;
     }
+  }
+
+  .explore-title{
+    font-size: 40px;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+
+  .empty-msg{
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-family: $reddit-font;
+    text-align: center;
   }
 }

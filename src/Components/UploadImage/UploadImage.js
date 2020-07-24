@@ -105,7 +105,7 @@ function PostImage(props) {
                     {loading ? 
                         <div className='loading-image'>
                             <LinearProgress />
-                            Uploading your {props.bannerUpload ? `banner` : `profile`} image now!
+                            <div style={{width: '100%', textAlign: 'center', marginTop: '50px', fontSize: '40px'}}>Uploading your {props.bannerUpload ? `banner` : `profile`} image now!</div>
                         </div> 
                     : 
                         <div style={{width: '100%'}}>

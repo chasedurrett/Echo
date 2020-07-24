@@ -175,7 +175,12 @@ function Nav(
                       logout();
                     }}
                   >
+                    <Link
+                      to={`/`}
+                      className="profile-menu-link"
+                    >
                     Logout
+                    </Link>
                   </MenuItem>
                 </span>
               ) : (

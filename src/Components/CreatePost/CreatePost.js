@@ -13,17 +13,24 @@ import ChooseSubforumDropdown from "./ChooseSubforumDropdown/ChooseSubforumDropd
 import TextField from "@material-ui/core/TextField";
 import ProfileBox from "../ProfileBox/ProfileBox";
 import axios from "axios";
+import CreateImagePost from "./CreateImagePost/CreateImagePost";
 
 function CreatePost(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [inputVal, setInputVal] = useState({
-    post_title: "",
     post_content: "",
+    post_url: "",
   });
-  const [postType, setPostType] = useState(1);
+  const [post_title, setPostTitle] = useState("");
+  const [post_type_id, setPostType] = useState(1);
   const [subforum, setSubforum] = useState({});
+  const [img_file, setImgFile] = useState(null);
+  const [img_preview, setImgPreview] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [hidden, setHidden] = useState(true);
+
 
   // Setting up useEffect() to only render on update as opposed to mount and update //
   useEffect(() => {
@@ -36,6 +43,10 @@ function CreatePost(props) {
 
   const handlePostType = (n) => {
     setPostType(n);
+  };
+
+  const handleTitleInput = (e) => {
+    setPostTitle(e.target.value);
   };
 
   const handleInput = (e) => {
@@ -51,28 +62,65 @@ function CreatePost(props) {
     axios.get(`/api/subforum/${subforumId}`).then((res) => {
       setSubforum(res.data[0]);
     });
+    
   };
 
   const createPost = () => {
-    const { post_title, post_content } = inputVal;
+    const { post_content, post_url } = inputVal;
 
-    console.log(postType, post_title, post_content);
+    console.log(post_type_id, post_title, post_content);
 
     axios
       .post(`/api/subforums/${props.match.params.subforumId}/post`, {
         post_title,
         post_content,
-        postType,
+        post_url,
+        post_type_id,
       })
       .then((res) => {
         props.history.push(`/subforums/${props.match.params.subforumId}`);
       });
   };
 
+  // Below are the functions for handling an Image post upload and submission
+
+  const handleSubmitFile = async () => {
+    setLoading(true);
+    if (img_file !== null) {
+      let formData = new FormData();
+      formData.append("upl", img_file);
+      const response = await axios.post("/upload", formData, {
+        headers: {
+          "Content-type": "multipart/form-data",
+        },
+      });
+      createImagePost(response.data);
+    }
+  };
+
+  const createImagePost = async (signedUrl) => {
+    const { post_content, post_url } = inputVal;
+
+    console.log(post_type_id, post_title, signedUrl, post_url);
+
+    axios
+      .post(`/api/subforums/${props.match.params.subforumId}/post`, {
+        post_title,
+        signedUrl,
+        post_url,
+        post_type_id,
+      })
+      .then((res) => {
+        props.history.push(`/subforums/${props.match.params.subforumId}`);
+      });
+  };
+
+  console.log(post_type_id, post_title);
+
   return (
     <div className="create-post-container">
       <div className="post-form-container">
-        <div className="subforum-dropdown-container">
+        <div className="subforum-dropdown-container" style={{marginTop: '50px', marginBottom: '50px'}}>
           <ChooseSubforumDropdown />
         </div>
         <div className="post-form-body">
@@ -100,7 +148,7 @@ function CreatePost(props) {
                 <Tab
                   name="post_type"
                   onClick={() => handlePostType(2)}
-                  label="Image & Video"
+                  label="Image"
                   {...a11yProps(1)}
                 />
                 <Tab
@@ -120,10 +168,9 @@ function CreatePost(props) {
               <div className="type-1-title-container">
                 <TextField
                   className={classes.textArea}
-                  onChange={handleInput}
+                  onChange={handleTitleInput}
                   id="standard-basic"
                   label="Title"
-                  name="post_title"
                 />
               </div>
               <div className="type-1-content-container">
@@ -157,13 +204,32 @@ function CreatePost(props) {
               index={1}
               dir={theme.direction}
             >
-              Image & Video
+              <div
+                style={{ display: "flex", justifyContent: "center" }}
+                className="type-1-title-container"
+              >
+                <TextField
+                  className={classes.textArea}
+                  onChange={handleTitleInput}
+                  id="standard-basic"
+                  label="Title"
+                />
+              </div>
+              <CreateImagePost
+                setImgPreview={setImgPreview}
+                img_preview={img_preview}
+                setImgFile={setImgFile}
+              />
               <div
                 className="submit-button-container"
-                style={{ display: "flex", justifyContent: "flex-end" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  flexWrap: "wrap",
+                }}
               >
                 <button
-                  onClick={() => createPost()}
+                  onClick={() => handleSubmitFile()}
                   style={{ width: 95 }}
                   className="signup-btn btn-style"
                 >
@@ -177,9 +243,28 @@ function CreatePost(props) {
               index={2}
               dir={theme.direction}
             >
-              Link
-              <span
-                className="submit-button-container"
+              <div className="type-1-title-container">
+                <TextField
+                  className={classes.textArea}
+                  onChange={handleTitleInput}
+                  id="standard-basic"
+                  label="Title"
+                />
+              </div>
+              <div className="type-1-content-container">
+                <TextField
+                  className={classes.textArea}
+                  onChange={handleInput}
+                  name="post_url"
+                  id="outlined-multiline-static"
+                  label="Url"
+                  variant="outlined"
+                  multiline
+                  rows={8}
+                />
+              </div>
+              <div
+                className="type-1-submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
                 <button
@@ -189,7 +274,7 @@ function CreatePost(props) {
                 >
                   Submit
                 </button>
-              </span>
+              </div>
             </TabPanel>
           </div>
           <div></div>
@@ -197,10 +282,13 @@ function CreatePost(props) {
       </div>
       <div className="post-info-container">
         <ProfileBox
-          subforum_banner={subforum.subforum_banner}
-          subforum_name={subforum.subforum_name}
-          cake_day={subforum.cake_day}
-        />
+        subforum_banner={subforum.subforum_banner}
+        subforum_name={subforum.subforum_name}
+        cake_day={subforum.cake_day}
+        subforum_id={subforum.subforum_id}
+        subforum_owner_id={subforum.subforum_owner_id}
+        hidden={hidden}
+        /> 
         subforum rules
       </div>
     </div>

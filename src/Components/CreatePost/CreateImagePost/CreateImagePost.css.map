@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "CreateImagePost.scss",
+        "../../../../scss/_variables.scss"
+    ],
+    "names": [],
+    "file": "CreateImagePost.css"
+}
