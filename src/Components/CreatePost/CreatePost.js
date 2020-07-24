@@ -230,13 +230,6 @@ function CreatePost(props) {
                   style={{ width: 95 }}
                   className="signup-btn btn-style"
                 >
-                  Upload Image
-                </button>
-                <button
-                  onClick={() => createImagePost()}
-                  style={{ width: 95 }}
-                  className="signup-btn btn-style"
-                >
                   Submit
                 </button>
               </div>
@@ -247,9 +240,28 @@ function CreatePost(props) {
               index={2}
               dir={theme.direction}
             >
-              Link
-              <span
-                className="submit-button-container"
+              <div className="type-1-title-container">
+                <TextField
+                  className={classes.textArea}
+                  onChange={handleTitleInput}
+                  id="standard-basic"
+                  label="Title"
+                />
+              </div>
+              <div className="type-1-content-container">
+                <TextField
+                  className={classes.textArea}
+                  onChange={handleInput}
+                  name="post_url"
+                  id="outlined-multiline-static"
+                  label="Url"
+                  variant="outlined"
+                  multiline
+                  rows={8}
+                />
+              </div>
+              <div
+                className="type-1-submit-button-container"
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
                 <button
@@ -259,7 +271,7 @@ function CreatePost(props) {
                 >
                   Submit
                 </button>
-              </span>
+              </div>
             </TabPanel>
           </div>
           <div></div>

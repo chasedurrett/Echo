@@ -29,29 +29,29 @@ function CreateImagePost(props) {
   };
 
   // Image/File Submit Handler
-//   const handleSubmitFile = async () => {
-//     setLoading(true);
-//     if (img_file !== null) {
-//       let formData = new FormData();
-//       formData.append("upl", img_file);
-//       await axios
-//         .post("/upload", formData, {
-//           headers: {
-//             "Content-type": "multipart/form-data",
-//           },
-//         })
-//         .then((res) => {
-//           if (props.bannerUpload) {
-//             setUserBanner(res.data);
-//           } else if (props.profileUpload) {
-//             setUserImage(res.data);
-//           }
-//         })
-//         .catch((err) => {
-//           console.log(err);
-//         });
-//     }
-//   };
+  //   const handleSubmitFile = async () => {
+  //     setLoading(true);
+  //     if (img_file !== null) {
+  //       let formData = new FormData();
+  //       formData.append("upl", img_file);
+  //       await axios
+  //         .post("/upload", formData, {
+  //           headers: {
+  //             "Content-type": "multipart/form-data",
+  //           },
+  //         })
+  //         .then((res) => {
+  //           if (props.bannerUpload) {
+  //             setUserBanner(res.data);
+  //           } else if (props.profileUpload) {
+  //             setUserImage(res.data);
+  //           }
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
+  //     }
+  //   };
 
   return (
     <div>
@@ -70,12 +70,19 @@ function CreateImagePost(props) {
               {props.profileUpload ? (
                 <div className="">Upload your Profile image</div>
               ) : null}
-              <div className="">
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  minHeight: 200,
+                }}
+                className=""
+              >
                 {props.img_preview === "" ? (
                   ""
                 ) : (
                   <img
-                    style={{ height: 50, width: 50 }}
+                    style={{ height: 200, width: 300 }}
                     className=""
                     src={props.img_preview}
                     alt=""
@@ -83,11 +90,7 @@ function CreateImagePost(props) {
                 )}
               </div>
               <div className="">
-                <input
-                  type="file"
-                  onChange={handleImagePreview}
-                  className=""
-                />
+                <input type="file" onChange={handleImagePreview} className="" />
                 {/*<button onClick={handleSubmitFile} className="">
                   Post Image
                 </button>*/}

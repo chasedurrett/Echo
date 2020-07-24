@@ -6,6 +6,7 @@ import "../CardPost/CardPost.css";
 import { withRouter, Link } from "react-router-dom";
 import { getUser } from "../../../redux/reducer";
 import { connect } from "react-redux";
+import Microlink from "@microlink/react";
 
 function CardPost(props) {
   const {
@@ -166,17 +167,63 @@ function CardPost(props) {
           to={`/subforums/${subforum_id}/posts/${post_id}`}
           style={{ textDecoration: "none", color: "black" }}
         >
-          <div className="card-content-body">
-            <div className="card-post-title">{post_title}</div>
-            <div className="card-post-content">
-              {post_type_id === 1 || post_type_id === null ? (
-                <span>{post_content}</span>
-              ) : null}
-              {post_type_id === 2 ? (
-                <img style={{ height: "100%", width: "100%" }} src={post_content} />
-              ) : null}
+          {post_type_id === 3 ? (
+            <div
+              className="card-content-body"
+              style={{ display: "flex", minHeight: 220 }}
+            >
+              <div
+                className="card-post-title"
+                style={{
+                  display: "flex",
+                  alignItems: "flex-start",
+                  marginTop: 10,
+                  marginLeft: 20,
+                }}
+              >
+                {post_title}
+              </div>
+              <div className="card-post-content" style={{ margin: "auto" }}>
+                <Microlink
+                  url={post_url}
+                  size="large"
+                  style={{
+                    height: 200,
+                    width: 250,
+                    borderRadius: 8,
+                    margin: "auto auto",
+                  }}
+                />
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="card-content-body">
+              <div className="card-post-title">{post_title}</div>
+              <div className="card-post-content">
+                {post_type_id === 1 || post_type_id === null ? (
+                  <span>{post_content}</span>
+                ) : null}
+                {post_type_id === 2 ? (
+                  <img
+                    style={{ height: "100%", width: "100%" }}
+                    src={post_content}
+                  />
+                ) : null}
+                {post_type_id === 3 ? (
+                  <Microlink
+                    url={post_url}
+                    size="large"
+                    style={{
+                      height: 200,
+                      width: 500,
+                      borderRadius: 8,
+                      margin: "0 auto",
+                    }}
+                  />
+                ) : null}
+              </div>
+            </div>
+          )}
           <div className="card-content-footer">
             <div className="card-content-footer-h5">
               <h5>
