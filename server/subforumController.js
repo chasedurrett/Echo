@@ -137,8 +137,8 @@ module.exports = {
     const db = req.app.get("db");
     const { subforum_id } = req.params;
     const { user_id } = req.session.user;
-    const checkJoined = await db.check_if_user_has_joined(user_id, subforum_id)
 
+    const checkJoined = await db.subforum.check_if_user_has_joined(user_id, subforum_id)
     if(checkJoined.length !== 0){
       return res.status(500).send(`User has already joined this chamber.`)
     }
@@ -146,6 +146,5 @@ module.exports = {
     if(checkJoined.length === 0){
       return res.status(200).send(`User has not yet joined this chamber.`)
     }
-    return res.sendStatus(200);
   }
 };

@@ -53,6 +53,7 @@ TabPanel.propTypes = {
       backgroundColor: theme.palette.background.paper,
     },
   }));
+ 
 
 function Search(props) {
     const [posts, setPosts] = useState([]);
@@ -90,8 +91,10 @@ function Search(props) {
     async function getChambers(){
       setChambers([])
       setLoading(true)
+      console.log('breaking here?')
       await axios.get(`http://localhost:4000/api/search/subforums/${searchParam}`)
       .then((res) => {
+        console.log(res.data)
         setChambers(res.data)
         setLoading(false)
       })
@@ -216,10 +219,6 @@ function Search(props) {
 
                         <div className="description">
 
-                        </div>
-
-                        <div className="follow-btn-container">
-                          <button className="follow-btn">FOLLOW</button>
                         </div>
 
                       </div>
