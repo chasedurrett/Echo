@@ -74,7 +74,6 @@ function Profile(props){
                 user_id={user.user_id} 
                 user_image={user.user_image} 
                 user_banner={user.user_banner}
-                getUserInfo={getUserInfo}
             />
             
             <div className='other-info-section'>

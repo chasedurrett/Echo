@@ -116,32 +116,29 @@ module.exports = {
   },
   removeSubforumUser: async (req, res) => {
     const db = req.app.get("db");
-    const { subforumId, userId } = req.params;
+    const { subforumId } = req.params;
     const { user_id } = req.session.user;
-    const removeUser = db.subforum.remove_subforum_user(user_id, subforumId);
+    let removeUser = db.subforum.remove_subforum_user(user_id, subforumId);
 
-    if (user_id === userId) {
-      return res.sendStatus(200).send(removeUser);
+    if (req.session.user) {
+      return res.status(200).send(removeUser);
     }
     if (!removeUser) {
       return res.status(500).send(`Unable to leave subforum, try again later!`);
     }
-    return res.sendStatus(200);
   },
 
   hasJoined: async (req, res) => {
     const db = req.app.get("db");
     const { subforum_id } = req.params;
     const { user_id } = req.session.user;
-    const checkJoined = await db.check_if_user_has_joined(user_id, subforum_id)
 
-    if(checkJoined.length !== 0){
-      return res.status(500).send(`User has already joined this chamber.`)
-    }
+    const checkJoined = await db.subforum.check_if_user_has_joined(user_id, subforum_id)
     
     if(checkJoined.length === 0){
       return res.status(200).send(`User has not yet joined this chamber.`)
+    } else {
+        return res.status(500).send(`User has already joined this chamber.`)
     }
-    return res.sendStatus(200);
   }
 };

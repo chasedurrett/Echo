@@ -21,9 +21,9 @@ function JoinLeaveBtn(props) {
     function checkJoined(subforum_id){
         axios.get(`/api/joined-subforum-or-not/${subforum_id}`)
         .then((res) => {
-          if(res.status === 200){
+          if(res.statusCode === 200){
             console.log(`User may join chamber. Showing JOIN button.`)
-          } else if (res.status === 500) {
+          } else if (res.statusCode === 500) {
             setHasJoined(true)
             console.log(`User has already joined this chamber. Showing JOINED button.`)
           }

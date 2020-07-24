@@ -17,13 +17,27 @@ module.exports = {
     getSubforums: async (req, res) => {
         const db = req.app.get('db')
         let val = req.query.input
-
-        const data = await db.search.get_search_subforums(val)
-
-        if(data.length === 0){
-            res.status(500).send(`Couldn't get any Chambers, we're fixing that!`)
+        
+        if(!req.session.user){
+            const data = await db.search.get_search_subforums_no_user(val)
+            
+            if(data.length === 0){
+                res.status(500).send(`Couldn't get any Chambers, we're fixing that!`)
+            }
+            res.status(200).send(data)
+        } else {
+            let {user_id} = req.session.user
+            console.log(user_id)
+            const data = await db.search.get_search_subforums(val, user_id)
+            console.log(data)
+            
+            if(data.length === 0){
+                res.status(500).send(`Couldn't get any Chambers, we're fixing that!`)
+            }
+            res.status(200).send(data)
         }
-        res.status(200).send(data)
+
+
     },
 
     getUsers: async (req, res) => {
