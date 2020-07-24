@@ -179,17 +179,23 @@ function CardPost(props) {
                   alignItems: "flex-start",
                   marginTop: 10,
                   marginLeft: 20,
+                  width: "50%",
                 }}
               >
                 {post_title}
               </div>
-              <div className="card-post-content" style={{ margin: "auto" }}>
+              <div
+                className="card-post-content"
+                style={{ margin: "auto", width: "50%" }}
+              >
                 <Microlink
                   url={post_url}
                   size="large"
                   style={{
                     height: 200,
                     width: 250,
+                    maxWidth: 250,
+                    overflow: "hidden",
                     borderRadius: 8,
                     margin: "auto auto",
                   }}
@@ -201,11 +207,11 @@ function CardPost(props) {
               <div className="card-post-title">{post_title}</div>
               <div className="card-post-content">
                 {post_type_id === 1 || post_type_id === null ? (
-                  <span>{post_content}</span>
+                  <span style={{ marginTop: 20 }}>{post_content}</span>
                 ) : null}
                 {post_type_id === 2 ? (
                   <img
-                    style={{ height: "100%", width: "100%" }}
+                    style={{ height: "100%", width: "100%", marginLeft: 0 }}
                     src={post_content}
                   />
                 ) : null}

@@ -9,15 +9,12 @@ select
     s.subforum_id,
     u.username,
     u.user_id,
-    pv.upvote,
-    pv.downvote,
     p.vote_tracker,
     count(distinct c.comment_id)
 from subforums s
     inner join posts p on p.subforum_id = s.subforum_id
     inner join users u on p.post_author_id = u.user_id
     left join comments c on p.post_id = c.post_id
-    full join post_votes pv on (p.post_id = pv.post_id and pv.user_id =$2)
 where p.post_title
 ilike '%' || $1 || '%'
 group by 
@@ -31,7 +28,5 @@ p.post_id,
     s.subforum_id,
     u.username,
     u.user_id,
-    pv.upvote,
-    pv.downvote,
     p.vote_tracker
 order by p.post_id desc

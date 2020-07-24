@@ -6,6 +6,7 @@
   -webkit-box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.082);
           box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.082);
   background-color: #ffffff;
+  margin-top: 10px;
 }
 
 .top-communities-card-container .top-communities-banner {

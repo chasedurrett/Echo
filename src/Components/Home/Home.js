@@ -5,8 +5,8 @@ import { getUser } from "../../redux/reducer";
 import CardPost from "../Post/CardPost/CardPost";
 import TopCommunitiesCard from "./TopCommunitiesCard/TopCommunitiesCard";
 import axios from "axios";
-import LinearProgress from '@material-ui/core/LinearProgress';
-
+import LinearProgress from "@material-ui/core/LinearProgress";
+import HomePostNav from "./HomePostsNav/HomePostNav";
 
 function Home(props) {
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
@@ -19,18 +19,18 @@ function Home(props) {
   }, [props.isLoggedIn]);
 
   const getPosts = () => {
-    setLoading(true)
+    setLoading(true);
     if (props.isLoggedIn) {
       axios.get("api/subforums/posts/user-feed").then((res) => {
         setPosts(res.data);
-        setLoading(false)
-        console.log(res.data)
+        setLoading(false);
+        console.log(res.data);
         setButtonsDisabled(false);
       });
     } else if (!props.isLoggedIn) {
       axios.get("/api/subforums/posts/no-user").then((res) => {
         setPosts(res.data);
-        setLoading(false)
+        setLoading(false);
       });
     }
   };
@@ -52,16 +52,36 @@ function Home(props) {
     <div className={"home-container"}>
       {/*props.isLoggedIn ? <HomeDashUser /> : <HomeDashNoUser />*/}
       <div className="home-dashboard-container">
-        <div className="explore-subforums-container-nu">
-          <div className='explore-title'>Explore</div>
-        </div>
-        {loading ? <div style={{width: '100%', marginTop: '10px', marginBottom: '10px'}}><LinearProgress /></div> : null}
+        {/*<div className="explore-subforums-container-nu">
+          <div className="explore-title"></div>
+  </div>*/}
+        {loading ? (
+          <div
+            style={{ width: "100%", marginTop: "10px", marginBottom: "10px" }}
+          >
+            <LinearProgress />
+          </div>
+        ) : null}
         <div className="posts-sidebar-parent-container">
           <div className="subforum-posts-container">
-            {posts[0] || loading === true ? allPostsMap : <div className='empty-msg'>Join Chambers to fill your feed!!</div>}
+            {loading === true ? null : <HomePostNav />}
+            {posts[0] || loading === true ? (
+              allPostsMap
+            ) : (
+              <div className="empty-msg">Join Chambers to fill your feed!!</div>
+            )}
           </div>
           <div className="sidebar-container">
             <TopCommunitiesCard />
+            <div className="other-info-section">
+              <ul className="other-info-list">
+                <li>Help</li>
+                <li>About</li>
+                <li>Communities</li>
+                <li>Top Posts</li>
+                <li>Terms</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
