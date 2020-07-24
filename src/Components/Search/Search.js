@@ -53,8 +53,10 @@ TabPanel.propTypes = {
       backgroundColor: theme.palette.background.paper,
     },
   }));
+ 
 
 function Search(props) {
+    const [currentUser, setCurrentUser] = useState([])
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
     const [chambers, setChambers] = useState([]);
@@ -68,15 +70,23 @@ function Search(props) {
     let searchParam = location.search;
 
     useEffect(() => {
+      getCurrentUser();
       getPosts();
       getUsers();
       getChambers();
     }, [searchParam]);
 
+    function getCurrentUser() {
+      axios.get('/auth/users/current')
+      .then((res) => {
+          setCurrentUser(res.data)
+      }).catch(err => console.log(err))
+  }
+
     async function getPosts(){
       setPosts([])
       setLoading(true)
-      await axios.get(`http://localhost:4000/api/search/posts/${searchParam}`)
+      await axios.get(`/api/search/posts/${searchParam}`)
       .then((res) => {
         setPosts(res.data)
         setLoading(false)
@@ -90,8 +100,10 @@ function Search(props) {
     async function getChambers(){
       setChambers([])
       setLoading(true)
-      await axios.get(`http://localhost:4000/api/search/subforums/${searchParam}`)
+      console.log('breaking here?')
+      await axios.get(`/api/search/subforums/${searchParam}`)
       .then((res) => {
+        console.log(res.data)
         setChambers(res.data)
         setLoading(false)
       })
@@ -104,7 +116,7 @@ function Search(props) {
     async function getUsers(){
       setUsers([])
       setLoading(true)
-      await axios.get(`http://localhost:4000/api/search/users/${searchParam}`)
+      await axios.get(`/api/search/users/${searchParam}`)
       .then((res) => {
         setUsers(res.data)
         setLoading(false)
@@ -120,22 +132,23 @@ function Search(props) {
         setValue(newValue);
     };
 
-    // function joinSubforum(subforum_id) {
-    //   axios.post(`/api/subforums/${subforum_id}/users`)
-    //   .then(() => {
-    //     setJoined(true)
-    //     console.log(`Successfully joined chamber.`)
-    //   })
-    //   .catch(err => console.log(err))
-    // }
+    function joinSubforum(subforum_id) {
+      axios.post(`/api/subforums/${subforum_id}/users`)
+      .then(() => {
+        setJoined(true)
+        console.log(`Successfully joined chamber.`)
+      })
+      .catch(err => console.log(err))
+    }
     
-    // function leaveSubforum(subforum_id){
-    //   axios.delete(`/api/subforums/${subforum_id}/users/${props.user.user_id}`)
-    //   .then(() => {
-    //     console.log(`Left subforum # ${subforum_id}.`)
-    //   })
-    //   .catch(err => console.log(err))
-    // }
+    function leaveSubforum(subforum_id){
+      axios.delete(`/api/subforums/${subforum_id}/users`)
+      .then(() => {
+        setJoined(false)
+        console.log(`Left subforum # ${subforum_id}.`)
+      })
+      .catch(err => console.log(err))
+    }
 
     return (
         <div className="Search classes.root">
@@ -188,7 +201,11 @@ function Search(props) {
                           <p>{chamber.description}</p>
                         </div>
 
-                        <JoinLeaveBtn subforumId={chamber.subforum_id} />
+                        <div className="join-btn-container">
+
+                          { chamber.user_id === currentUser.user_id ? <button className="leave-btn" onClick={() => {leaveSubforum(chamber.subforum_id)}}>JOINED</button> : <button className="join-btn" onClick={() => {joinSubforum(chamber.subforum_id)}}>JOIN</button> }
+
+                        </div>
 
                       </div>
                         ))
@@ -216,10 +233,6 @@ function Search(props) {
 
                         <div className="description">
 
-                        </div>
-
-                        <div className="follow-btn-container">
-                          <button className="follow-btn">FOLLOW</button>
                         </div>
 
                       </div>
