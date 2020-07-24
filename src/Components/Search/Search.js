@@ -60,7 +60,6 @@ function Search(props) {
   const [chambers, setChambers] = useState([]);
   const [value, setValue] = useState(0);
   const [loading, setLoading] = useState(null);
-  const [joined, setJoined] = useState(false);
 
   const classes = useStyles();
 
@@ -138,7 +137,7 @@ function Search(props) {
     axios
       .post(`/api/subforums/${subforum_id}/users`)
       .then(() => {
-        setJoined(true);
+        getChambers();
         console.log(`Successfully joined chamber.`);
       })
       .catch((err) => console.log(err));
@@ -148,7 +147,7 @@ function Search(props) {
     axios
       .delete(`/api/subforums/${subforum_id}/users`)
       .then(() => {
-        setJoined(false);
+        getChambers();
         console.log(`Left subforum # ${subforum_id}.`);
       })
       .catch((err) => console.log(err));
