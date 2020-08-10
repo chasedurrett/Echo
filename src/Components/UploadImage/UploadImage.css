@@ -1,0 +1,116 @@
+.upload-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 10;
+}
+
+.upload-form-container {
+  max-width: 850px;
+  width: 100%;
+  height: 650px;
+  background: white;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 8px 16px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 8px rgba(0, 0, 0, 0.2);
+}
+
+.upload-close-btn {
+  color: #878A8C;
+  cursor: pointer;
+  float: right;
+  margin: 10px 10px 0px 0px;
+  font-size: 30px;
+}
+
+.upload-form-content-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: relative;
+  width: 100%;
+}
+
+.loading-image {
+  margin-top: 100px;
+  width: 100%;
+  font-size: 25px;
+  font-weight: bold;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.upload-title {
+  width: 100%;
+  font-size: 35px;
+  font-weight: bold;
+  text-align: center;
+  color: #0079d3;
+  margin-bottom: 30px;
+}
+
+.preview-image-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 40px;
+}
+
+.preview-image {
+  width: 300px;
+  height: auto;
+  display: block;
+}
+
+.input-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.post-image-btn {
+  background: white;
+  border: 2px solid #0079d3;
+  border-radius: 4px;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 18px;
+  -webkit-box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.2);
+}
+/*# sourceMappingURL=UploadImage.css.map */

@@ -16,6 +16,7 @@ nav.Nav {
       -ms-flex-align: center;
           align-items: center;
   background: #ffffff;
+  z-index: 10;
 }
 
 .flex-row {
@@ -88,6 +89,9 @@ nav.Nav {
   width: 100%;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .nav-icon {
@@ -159,5 +163,7 @@ nav.Nav {
 .profile-menu-link {
   text-decoration: none;
   color: black;
+  top: 5px;
+  position: relative;
 }
 /*# sourceMappingURL=Nav.css.map */

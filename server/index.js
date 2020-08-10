@@ -39,6 +39,8 @@ app.use(
   })
 );
 
+app.use( express.static( `${__dirname}/../build` ) );
+
 var upload = multer({
   storage: multerS3({
       s3: s3,

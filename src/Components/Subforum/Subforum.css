@@ -1,5 +1,15 @@
 .subforum-container {
   margin-top: 55px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  min-width: 900px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .vote-arrow {
@@ -13,5 +23,31 @@
 
 .voted {
   color: #0079d3;
+}
+
+.subforum-posts-map {
+  width: 30%;
+  height: 100%;
+  margin: 20px 10px 0px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.subforum-profile-box-section {
+  width: 20%;
+  height: 100%;
+  margin: 20px 0px 0px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 /*# sourceMappingURL=Subforum.css.map */
